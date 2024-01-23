@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Headers from "../../../hooks/useHeader";
 import { FaUser } from "react-icons/fa";
 import Modal from "../../../components/Ui/Modal";
-import useAvatar from "../../../hooks/useAvatar";
+import useAvatar from "../../../hook/useAvatar";
 
 const ProfileCard = () => {
   const { profileData, updateAvatar } = useAvatar();
