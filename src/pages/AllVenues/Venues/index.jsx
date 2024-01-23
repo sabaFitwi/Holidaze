@@ -1,5 +1,5 @@
 import React from "react";
-import VenueCard from "./Venue";
+
 //import { useApi } from "../../../hooks/useApi";
 import Loading from "../../../components/Ui/Loading";
 import { BsMap } from "react-icons/bs";
@@ -9,7 +9,7 @@ import useApi from "../../../hooks/useApi";
 import noImage from "../../../assets/noPic.jpg";
 
 const CardVenue = () => {
-  const { data: rooms, isLoading, isError } = useApi(getAllVenues);
+  const { data: rooms, isLoading } = useApi(getAllVenues);
   console.log(rooms);
   if (isLoading) {
     return (
@@ -30,13 +30,13 @@ const CardVenue = () => {
                   {room.media && room.media[0] ? (
                     <img
                       src={room.media[0]}
-                      alt={room.name}
+                      alt={`Room ${room.name}`}
                       className="w-full h-full object-cover"
                     />
                   ) : (
                     <img
                       src={noImage}
-                      alt="no image found"
+                      alt="preview"
                       className="w-full h-full object-cover"
                     />
                   )}

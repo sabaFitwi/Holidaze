@@ -59,6 +59,7 @@ const List = () => {
                 selectedEndDate >= bookingEndDate
               );
             });
+          console.log(isAvailable);
 
           const isWithinPriceRange = price === "" || property.price <= price;
 

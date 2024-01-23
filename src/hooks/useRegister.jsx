@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { registerUser } from "../services/auth/Register";
-import {
-  saveToLocalStorage,
-  loadFromLocalStorage,
-  removeFromLocalStorage,
-} from "../context/localStorage";
+// import {
+//   saveToLocalStorage,
+//   loadFromLocalStorage,
+//   removeFromLocalStorage,
+// } from "../context/localStorage";
 
 const useRegister = () => {
   const [selectedOption, setSelectedOption] = useState(null);

@@ -1,6 +1,6 @@
 // Banner.js
 import React from "react";
-import bannerVideo from "../../../assets/cont/bannerVideo.mp4";
+//import bannerVideo from "../../../assets/cont/bannerVideo.mp4";
 import SearchByName from "../../../components/Search/SearchByName";
 
 const Banner = () => {
