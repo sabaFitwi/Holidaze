@@ -1,5 +1,5 @@
 import React from "react";
-import useRegister from "../../hook/useRegister";
+import useRegister from "../../hooks/useRegister";
 
 const Register = () => {
   const {
