@@ -1,25 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import imageBrand from "../../../assets/2.jpg";
-//import { FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import LogOut from "../../LogOut";
 import useAvatar from "../../../hooks/useAvatar";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { profileData, loading } = useAvatar(); // Using the useAvatar hook
+  const [isVenueManager, setIsVenueManager] = useState(false);
+  const { profileData, loading } = useAvatar();
+  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    LogOut();
-    setIsLoggedIn(false);
+  const updateAuthStatus = () => {
+    const userIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    setIsLoggedIn(userIsLoggedIn);
+
+    const venueManager = localStorage.getItem("isVenueManager") === "true";
+    setIsVenueManager(venueManager);
   };
 
   useEffect(() => {
-    const userIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    setIsLoggedIn(userIsLoggedIn);
+    updateAuthStatus();
   }, []);
+
+  const handleLogout = () => {
+    LogOut();
+    updateAuthStatus();
+    navigate("/");
+  };
 
   const handleNav = () => {
     setNav(!nav);
@@ -90,26 +100,28 @@ function Navbar() {
                     to="/profile"
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     onClick={() => {
-                      setNav(false);
+                      handleNav();
                       document.body.style.overflow = "scroll";
                     }}
                   >
                     Profile
                   </Link>
-                  <Link
-                    to="/create"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 whitespace-nowrap"
-                    onClick={() => {
-                      setNav(false);
-                      document.body.style.overflow = "scroll";
-                    }}
-                  >
-                    Create Venue
-                  </Link>
+                  {isVenueManager && (
+                    <Link
+                      to="/create"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100 whitespace-nowrap"
+                      onClick={() => {
+                        handleNav();
+                        document.body.style.overflow = "scroll";
+                      }}
+                    >
+                      Create Venue
+                    </Link>
+                  )}
                   <button
                     onClick={() => {
                       handleLogout();
-                      setNav(false);
+                      handleNav();
                       document.body.style.overflow = "scroll";
                     }}
                     className="block px-4 py-2 text-gray-800 hover.bg-gray-100  whitespace-nowrap"

@@ -92,8 +92,8 @@ const CreateVenueForm = () => {
           type === "checkbox"
             ? checked
             : type === "number"
-            ? parseFloat(value)
-            : value,
+              ? parseFloat(value)
+              : value,
       }));
     }
   };

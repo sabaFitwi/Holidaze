@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { loginUser } from "../services/auth/Login";
-//import { saveToLocalStorage } from "../context/localStorage";
 import { getProfile } from "./useProfile";
+import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [loginStatus, setLoginStatus] = useState(false);
   const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +35,7 @@ const useLogin = () => {
   }, [loginData]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const resp = await loginUser({ email, password });
+
     const resp = await loginUser({
       email: loginData.email,
       password: loginData.password,
@@ -44,39 +46,19 @@ const useLogin = () => {
     if ("accessToken" in resp) {
       localStorage.setItem("Token", resp["accessToken"]);
       localStorage.setItem("UserData", JSON.stringify(resp));
+
       localStorage.setItem("isLoggedIn", true);
 
       const profileCall = await getProfile();
+      localStorage.setItem("isVenueManager", profileCall.venueManager);
+
       localStorage.setItem("UserData", JSON.stringify(profileCall));
-      window.location.href = "/profile";
+      navigate("/profile");
+      window.location.reload();
     } else {
-      setLoginStatus(true);
+      setLoginStatus("failure");
     }
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const data = await loginUser(loginData);
-
-  //     console.log(data);
-
-  //     if (data.success) {
-  //       setLoginStatus(true);
-  //     } else {
-  //       console.error("Login failed:", data.message);
-  //       setLoginStatus("failure");
-  //     }
-  //     saveToLocalStorage("accessToken", data.accessToken);
-  //     saveToLocalStorage("name", data.name);
-  //     saveToLocalStorage("venueManager", data.venueManager);
-  //     window.location.href = "/";
-  //   } catch (error) {
-  //     console.error("Error during login:", error);
-  //     setLoginStatus("failure");
-  //   }
-  // };
 
   return {
     loginStatus,

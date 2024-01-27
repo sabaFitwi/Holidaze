@@ -1,10 +1,15 @@
-import React, { useState } from "react";
-//import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import BookingsCards from "../../Cards/MyBookings";
 import VenuesCards from "../../Cards/MyVenues";
+import { updateAuthStatus } from "../../utils/authUtils";
 
 const Tabs = ({ onTabChange }) => {
   const [activeTab, setActiveTab] = useState("My Booking");
+  const [isVenueManager, setIsVenueManager] = useState(false);
+
+  useEffect(() => {
+    updateAuthStatus(setIsVenueManager);
+  }, []);
 
   const changeTab = (tab) => {
     setActiveTab(tab);
@@ -25,16 +30,18 @@ const Tabs = ({ onTabChange }) => {
         >
           My Bookings
         </button>
-        <button
-          className={`${
-            activeTab === "My Venue"
-              ? "bg-black text-white"
-              : "bg-gray-300 text-gray-700"
-          } p-2 px-4 my-4 rounded-t-lg`}
-          onClick={() => changeTab("My Venue")}
-        >
-          My Venues
-        </button>
+        {isVenueManager && (
+          <button
+            className={`${
+              activeTab === "My Venue"
+                ? "bg-black text-white"
+                : "bg-gray-300 text-gray-700"
+            } p-2 px-4 my-4 rounded-t-lg`}
+            onClick={() => changeTab("My Venue")}
+          >
+            My Venues
+          </button>
+        )}
       </div>
 
       <div className="bg-white p-4 rounded-b-lg -z-0">

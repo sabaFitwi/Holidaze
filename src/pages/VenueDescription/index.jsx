@@ -88,12 +88,12 @@ function VenueDescription() {
             <h1 className=" h1 mb-2 leading-tight tracking-tight font-bold text-gray-800 ">
               {name}
             </h1>
-            {/* <p className="text-gray-500 text-sm">
+            <p className="text-gray-500 text-sm">
               By
               <a href="#" className="text-indigo-600 hover:underline">
                 ABC Company
               </a>
-            </p> */}
+            </p>
             <div className="flex items-center space-x-4 my-4">
               <div>
                 <div className="rounded-lg bg-gray-100 flex py-2 px-3">

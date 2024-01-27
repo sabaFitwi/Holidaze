@@ -44,9 +44,9 @@ const ProfileCard = () => {
   };
 
   return (
-    <div className="flex justify-between items-center lg:items-start lg:min-h-screen p-4 mt-2">
+    <div className="flex justify-around items-center lg:items-start lg:min-h-screen p-4 mt-2">
       {profileData && (
-        <div className="flex flex-row lg:flex-col justify-center max-w-40 p-6 shadow-lg sticky top-40 rounded-xl sm:px-12">
+        <div className="flex-col md:flex-row lg:flex-col justify-center  sm:max-w-1/3 p-6 shadow-lg sticky top-40 rounded-xl sm:px-12">
           {profileData.avatar ? (
             <img
               src={profileData.avatar}
