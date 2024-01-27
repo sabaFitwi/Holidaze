@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { updateAuthStatus } from "../utils/authUtils";
 
 function BookingCard({
   id,
@@ -24,6 +25,11 @@ function BookingCard({
   onDeleteClick,
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isVenueManager, setIsVenueManager] = useState(false);
+
+  useEffect(() => {
+    updateAuthStatus(setIsVenueManager);
+  }, []);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -55,12 +61,14 @@ function BookingCard({
 
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 py-2 bg-white border rounded shadow-lg">
-                <Link
-                  to={`/venueBookings/${id}`}
-                  className=" block whitespace-nowrap text-sm px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  Venue Bookings
-                </Link>
+                {isVenueManager && (
+                  <Link
+                    to={`/venueBookings/${id}`}
+                    className=" block whitespace-nowrap text-sm px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    Venue Bookings
+                  </Link>
+                )}
                 <button
                   onClick={onEditClick}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

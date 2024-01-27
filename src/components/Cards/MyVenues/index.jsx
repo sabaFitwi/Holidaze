@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BookingCard from "../../Card";
 import { getProfile } from "../../../hooks/useProfile";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useDeleteApi from "../../../hooks/useDelete";
 import ConfirmationModal from "../../DeleteModal/DeleteConfirm";
 
@@ -14,7 +14,6 @@ function VenuesCards() {
   const navigate = useNavigate();
   const { loading, error, deleteCard: deleteVenue } = useDeleteApi("booking");
 
-  console.log(error);
   const handleEditClick = (venueId) => {
     const updateRoute = `/update/${venueId}`;
     navigate(updateRoute);

@@ -13,7 +13,7 @@ function BookingsCards() {
 
   const navigate = useNavigate();
   const { loading, error, deleteCard } = useDeleteApi();
-  console.log(error);
+
   const handleEditClick = (bookingId) => {
     const updateRoute = `/updatebooking/${bookingId}`;
     navigate(updateRoute);
