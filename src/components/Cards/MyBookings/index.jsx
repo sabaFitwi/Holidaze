@@ -10,9 +10,10 @@ function BookingsCards() {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [error, setError] = useState(null); // Define error state
 
   const navigate = useNavigate();
-  const { loading, error, deleteCard } = useDeleteApi();
+  const { isLoading, deleteCard } = useDeleteApi();
 
   const handleEditClick = (bookingId) => {
     const updateRoute = `/updatebooking/${bookingId}`;
@@ -42,19 +43,25 @@ function BookingsCards() {
       }, 4000);
     } catch (error) {
       console.error("Error deleting booking:", error);
+      setError(error); // Set error state when an error occurs
     }
   };
 
   useEffect(() => {
     getProfile()
       .then((data) => setMyBookingsData(data.bookings))
-      .catch((error) => console.error("Error fetching profile data:", error));
+      .catch((error) => {
+        console.error("Error fetching profile data:", error);
+        setError(error); // Set error state when an error occurs
+      });
   }, []);
 
-  if (loading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
-
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
   return (
     <div>
       <div className="mx-auto grid w-full">

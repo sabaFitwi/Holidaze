@@ -1,7 +1,7 @@
 import React from "react";
 //import ContinentFilter from "../../../components/ContinentFilter";
 import SearchInput from "./Search";
-import Filter from "./Filter";
+//import Filter from "./Filter";
 import CardVenue from "./Venues";
 
 import Filters from "./ContinentsFilter/filterIcons";

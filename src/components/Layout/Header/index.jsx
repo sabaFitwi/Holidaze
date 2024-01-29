@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import imageBrand from "../../../assets/2.jpg";
-import { FaUser } from "react-icons/fa";
+//import { FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import LogOut from "../../LogOut";
 import useAvatar from "../../../hooks/useAvatar";

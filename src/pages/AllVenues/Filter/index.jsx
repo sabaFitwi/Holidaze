@@ -7,7 +7,7 @@ import Headers from "../../../hooks/useHeader";
 import CostContext from "../../../context/CostContext";
 import Button from "../../../components/Ui/Button";
 import Input from "../../../components/Ui/Input";
-import { isBefore, isAfter, isEqual } from "date-fns";
+//import { isBefore, isAfter, isEqual } from "date-fns";
 
 import { useFetchData } from "../../../hooks/useGetData";
 
@@ -23,8 +23,7 @@ function Filter({ onUpdate, price }) {
 
   const venueUrl = `https://api.noroff.dev/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true`;
 
-  const { data, error, loading } = useFetchData(venueUrl);
-  console.log(data);
+  const { data } = useFetchData(venueUrl);
 
   const existingBookings = data && data.bookings ? data.bookings : [];
 
@@ -60,13 +59,11 @@ function Filter({ onUpdate, price }) {
       return;
     }
 
-    // Continue with the booking submission logic
     const bookingData = {
       dateFrom: startDate.toISOString(),
       dateTo: endDate.toISOString(),
       guests: guests,
       venueId: id,
-      // Add other booking details as needed
     };
 
     try {

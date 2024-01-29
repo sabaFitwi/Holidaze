@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BookingCard from "../../Card";
 import { getProfile } from "../../../hooks/useProfile";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useDeleteApi from "../../../hooks/useDelete";
 import ConfirmationModal from "../../DeleteModal/DeleteConfirm";
 
@@ -55,6 +55,9 @@ function VenuesCards() {
 
   if (!hostingData) {
     return <div>{loading}</div>;
+  }
+  if (error) {
+    return <div>Error: {error.message}</div>;
   }
   return (
     <div>

@@ -7,7 +7,7 @@ const useAvatar = () => {
     venueManager: "",
     name: "",
   });
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -16,10 +16,10 @@ const useAvatar = () => {
         const storedUserData =
           JSON.parse(localStorage.getItem("UserData")) || {};
         setProfileData((prevData) => ({ ...prevData, ...storedUserData }));
-        setLoading(false);
+        setIsLoading(false);
       } catch (error) {
         setError(error);
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -33,7 +33,7 @@ const useAvatar = () => {
     }));
   };
 
-  return { profileData, loading, error, updateAvatar };
+  return { profileData, isLoading, error, updateAvatar };
 };
 
 export default useAvatar;

@@ -10,10 +10,11 @@ const usePOST = () => {
     body: JSON.stringify(data),
   });
 
-  const [loading, setLoading] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   const postRequest = async (url, data, accessToken = null) => {
-    setLoading(true);
+    setIsLoading(true);
+    setIsError(false);
 
     try {
       const response = await fetch(url, options(data, accessToken));
@@ -29,13 +30,14 @@ const usePOST = () => {
 
       return { success: true, results };
     } catch (error) {
+      setIsError(true);
       return { success: false, error: error.message };
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  return { loading, postRequest };
+  return { isLoading, isError, postRequest };
 };
 
 export default usePOST;

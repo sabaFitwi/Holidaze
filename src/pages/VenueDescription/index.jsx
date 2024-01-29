@@ -19,13 +19,13 @@ function VenueDescription() {
     setTotalCost(cost);
   };
 
-  const { data, error, loading } = useFetchData(
+  const { data, error, isLoading } = useFetchData(
     `https://api.noroff.dev/api/v1/holidaze/venues/${id}`,
   );
 
   const [isImageFullscreen, setIsImageFullscreen] = useState(false);
 
-  if (loading) {
+  if (isLoading) {
     return <div className="container">Loading...</div>;
   }
 
@@ -88,12 +88,7 @@ function VenueDescription() {
             <h1 className=" h1 mb-2 leading-tight tracking-tight font-bold text-gray-800 ">
               {name}
             </h1>
-            <p className="text-gray-500 text-sm">
-              By
-              <a href="#" className="text-indigo-600 hover:underline">
-                ABC Company
-              </a>
-            </p>
+
             <div className="flex items-center space-x-4 my-4">
               <div>
                 <div className="rounded-lg bg-gray-100 flex py-2 px-3">

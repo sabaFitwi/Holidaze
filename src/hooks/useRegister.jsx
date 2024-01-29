@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { registerUser } from "../services/auth/Register";
-import { useNavigate } from "react-router-dom";
+
+//import { useNavigate } from "react-router-dom";
 import usePOST from "./UsePost";
 import { registerUrl } from "../services/api";
 
@@ -15,10 +15,10 @@ const useRegister = () => {
     avatar: "",
   });
   const [errors, setErrors] = useState({});
-  const [sharedErrors, setSharedErrors] = useState({});
+
   const [touchedFields, setTouchedFields] = useState({});
-  const navigate = useNavigate();
-  const { loading, postRequest } = usePOST();
+  //const navigate = useNavigate();
+  const { isLoading, isError, postRequest } = usePOST();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -83,9 +83,8 @@ const useRegister = () => {
       }
 
       setErrors(newErrors);
-      setSharedErrors(newErrors);
     }
-  }, [registrationData, touchedFields, selectedOption]);
+  }, [registrationData, errors, touchedFields, selectedOption]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,10 +93,9 @@ const useRegister = () => {
       setRegistrationStatus("failure");
       return;
     }
-    try {
-      const data = await postRequest(registerUrl, registrationData); // Use postRequest from usePOST, pass registerUrl and registrationData
-      console.log(data);
 
+    try {
+      const data = await postRequest(registerUrl, registrationData);
       if (data.success) {
         setRegistrationStatus("success");
         console.log(data.success);
@@ -109,6 +107,10 @@ const useRegister = () => {
     } catch (error) {
       console.error("Error during registration:", error);
       setRegistrationStatus("failure");
+      if (isError) {
+        // Handle error states here
+        console.error("An error occurred during POST request:", error);
+      }
     }
   };
 
@@ -118,10 +120,9 @@ const useRegister = () => {
     registrationStatus,
     registrationData,
     errors,
-    sharedErrors,
     handleInputChange,
     handleSubmit,
-    loading,
+    isLoading,
   };
 };
 

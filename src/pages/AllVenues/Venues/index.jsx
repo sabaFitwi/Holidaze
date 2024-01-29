@@ -1,6 +1,4 @@
 import React from "react";
-import VenueCard from "./Venue";
-//import { useApi } from "../../../hooks/useApi";
 import Loading from "../../../components/Ui/Loading";
 import { BsMap } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -15,6 +13,15 @@ const CardVenue = () => {
     return (
       <div className="align-middle">
         <Loading />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div>
+        <h2>Error fetching data.</h2>
+        <p>Please try again later.</p>
       </div>
     );
   }
@@ -35,7 +42,7 @@ const CardVenue = () => {
                 ) : (
                   <img
                     src={noImage}
-                    alt="no image found"
+                    alt="ImagePreview"
                     className="w-full h-full object-cover"
                   />
                 )}

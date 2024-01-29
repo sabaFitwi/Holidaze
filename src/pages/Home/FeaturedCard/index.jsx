@@ -4,10 +4,9 @@ import { createVenueUrl } from "../../../services/api";
 import HomeCard from "./HomeCard";
 
 const FeaturedCards = () => {
-  const { data: rooms, loading } = useFetchData(createVenueUrl);
+  const { data: rooms, isLoading } = useFetchData(createVenueUrl);
 
-  if (loading) {
-    // Handle loading state
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 

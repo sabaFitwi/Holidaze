@@ -143,8 +143,8 @@ const UpdateVenue = () => {
           type === "checkbox"
             ? checked
             : type === "number"
-            ? parseFloat(value)
-            : value,
+              ? parseFloat(value)
+              : value,
       }));
     }
   };
@@ -318,7 +318,7 @@ const UpdateVenue = () => {
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-600">
-            Amenities:
+            Amenities
           </label>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex items-center">

@@ -2,11 +2,11 @@ import { useState } from "react";
 import Headers from "./useHeader";
 
 const useDeleteApi = () => {
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const deleteCard = async (id) => {
-    setLoading(true);
+    setIsLoading(true);
     setError(null);
 
     try {
@@ -24,11 +24,11 @@ const useDeleteApi = () => {
     } catch (error) {
       setError(error.message);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  return { loading, error, deleteCard };
+  return { isLoading, error, deleteCard };
 };
 
 export default useDeleteApi;
