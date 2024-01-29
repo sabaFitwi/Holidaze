@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { registerUser } from "../services/auth/Register";
-import {
-  saveToLocalStorage,
-  loadFromLocalStorage,
-  removeFromLocalStorage,
-} from "../context/localStorage";
+import { useNavigate } from "react-router-dom";
+import usePOST from "./UsePost";
+import { registerUrl } from "../services/api";
 
 const useRegister = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -18,6 +16,9 @@ const useRegister = () => {
   });
   const [errors, setErrors] = useState({});
   const [sharedErrors, setSharedErrors] = useState({});
+  const [touchedFields, setTouchedFields] = useState({});
+  const navigate = useNavigate();
+  const { loading, postRequest } = usePOST();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,6 +26,12 @@ const useRegister = () => {
       ...registrationData,
       [name]: value,
     });
+    // Mark the field as touched
+    setTouchedFields({
+      ...touchedFields,
+      [name]: true,
+    });
+    // Clear the error message when the user starts typing
     setErrors({
       ...errors,
       [name]: "",
@@ -37,41 +44,48 @@ const useRegister = () => {
   };
 
   useEffect(() => {
-    // Validation checks
-    const newErrors = {};
+    // Validation checks only if the field has been touched
+    if (Object.keys(errors).length > 0) {
+      const newErrors = {};
 
-    if (
-      !registrationData.name ||
-      !/^[a-zA-Z0-9_]+$/.test(registrationData.name)
-    ) {
-      newErrors.name =
-        "Name must only contain letters, numbers, and underscores";
+      if (
+        touchedFields.name &&
+        (!registrationData.name ||
+          !/^[a-zA-Z0-9_]+$/.test(registrationData.name))
+      ) {
+        newErrors.name =
+          "Name must only contain letters, numbers, and underscores";
+      }
+
+      if (
+        touchedFields.email &&
+        (!registrationData.email ||
+          (!registrationData.email.endsWith("stud.noroff.no") &&
+            !registrationData.email.endsWith("noroff.no")))
+      ) {
+        newErrors.email =
+          "Email must be a valid stud.noroff.no or noroff.no address";
+      }
+
+      if (
+        touchedFields.password &&
+        (!registrationData.password || registrationData.password.length < 8)
+      ) {
+        newErrors.password = "Password must be at least 8 characters long";
+      }
+
+      if (
+        touchedFields.avatar &&
+        registrationData.avatar &&
+        !isValidURL(registrationData.avatar)
+      ) {
+        newErrors.avatar = "Avatar URL must be a valid URL";
+      }
+
+      setErrors(newErrors);
+      setSharedErrors(newErrors);
     }
-
-    if (
-      !registrationData.email ||
-      (!registrationData.email.endsWith("stud.noroff.no") &&
-        !registrationData.email.endsWith("noroff.no"))
-    ) {
-      newErrors.email =
-        "Email must be a valid stud.noroff.no or noroff.no address";
-    }
-
-    if (!registrationData.password || registrationData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters long";
-    }
-
-    if (registrationData.avatar && !isValidURL(registrationData.avatar)) {
-      newErrors.avatar = "Avatar URL must be a valid URL";
-    }
-
-    if (selectedOption === "venueManager") {
-      registrationData.venueManager = true;
-    }
-
-    setErrors(newErrors);
-    setSharedErrors(newErrors);
-  }, [registrationData, selectedOption]);
+  }, [registrationData, touchedFields, selectedOption]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,16 +94,16 @@ const useRegister = () => {
       setRegistrationStatus("failure");
       return;
     }
-
     try {
-      const data = await registerUser(registrationData);
-
+      const data = await postRequest(registerUrl, registrationData); // Use postRequest from usePOST, pass registerUrl and registrationData
       console.log(data);
 
       if (data.success) {
         setRegistrationStatus("success");
+        console.log(data.success);
+        // Navigate or perform any actions after successful registration
       } else {
-        console.error("Registration failed:", data.message);
+        console.error("Registration failed:", data.error);
         setRegistrationStatus("failure");
       }
     } catch (error) {
@@ -107,6 +121,7 @@ const useRegister = () => {
     sharedErrors,
     handleInputChange,
     handleSubmit,
+    loading,
   };
 };
 

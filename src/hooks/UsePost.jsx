@@ -1,10 +1,12 @@
 import { useState } from "react";
-import Headers from "./useHeader";
 
 const usePOST = () => {
-  const options = (data) => ({
+  const options = (data, accessToken) => ({
     method: "POST",
-    headers: Headers("application/json"),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
     body: JSON.stringify(data),
   });
 
