@@ -1,5 +1,5 @@
 import Headers from "../hooks/useHeader";
-import { baseUrl } from "../services/api";
+import { baseUrl } from "../api";
 
 export async function getProfile(users) {
   const Url = baseUrl;

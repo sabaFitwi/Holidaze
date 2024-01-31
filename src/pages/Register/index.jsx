@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useRegister from "../../hooks/useRegister";
 import Button from "../../components/Ui/Button";
 import { Link } from "react-router-dom";
@@ -11,6 +11,11 @@ const Register = () => {
     handleInputChange,
     handleSubmit,
   } = useRegister();
+  const [isVenueManager, setIsVenueManager] = useState(false);
+
+  const handleVenueManagerToggle = () => {
+    setIsVenueManager(!isVenueManager);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -28,20 +33,21 @@ const Register = () => {
                 id="venueManager"
                 name="venueManager"
                 checked={registrationData.venueManager}
-                onChange={(e) =>
+                onChange={(e) => {
                   handleInputChange({
                     target: {
                       name: "venueManager",
                       value: e.target.checked,
                     },
-                  })
-                }
+                  });
+                  handleVenueManagerToggle();
+                }}
                 className="switch-checkbox visually-hidden"
               />
               <label
                 htmlFor="venueManager"
                 className={`switch-label ${
-                  registrationData.venueManager ? "bg-green-500" : "bg-gray-300"
+                  registrationData.venueManager ? "bg-primary" : "bg-gray-300"
                 }`}
               >
                 <span
@@ -52,7 +58,11 @@ const Register = () => {
                   }`}
                 ></span>
               </label>
-              <div className="ml-2 text-gray-700">Venue Manager</div>
+              <div className="ml-2 text-gray-700">
+                {isVenueManager
+                  ? "Register as Venue Manager"
+                  : "Register as Customer"}
+              </div>
             </div>
           </div>
 

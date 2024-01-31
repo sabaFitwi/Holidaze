@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 //import { useNavigate } from "react-router-dom";
 import usePOST from "./UsePost";
-import { registerUrl } from "../services/api";
+import { registerUrl } from "../api";
 
 const useRegister = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -108,7 +108,6 @@ const useRegister = () => {
       console.error("Error during registration:", error);
       setRegistrationStatus("failure");
       if (isError) {
-        // Handle error states here
         console.error("An error occurred during POST request:", error);
       }
     }
