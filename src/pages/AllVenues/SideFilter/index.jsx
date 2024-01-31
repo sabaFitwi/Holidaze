@@ -53,19 +53,12 @@ const List = () => {
               const bookingEndDate = new Date(booking.dateTo);
               const selectedStartDate = new Date(startDate);
               const selectedEndDate = new Date(endDate);
-              console.log(
-                format(selectedStartDate, "dd/MM/yyyy"),
-                format(selectedEndDate, "dd/MM/yyyy"),
 
-                format(bookingStartDate, "dd/MM/yyyy"),
-                format(bookingEndDate, "dd/MM/yyyy"),
-              );
               return (
                 selectedStartDate <= bookingStartDate ||
                 selectedEndDate >= bookingEndDate
               );
             });
-          console.log(isAvailable);
 
           const isWithinPriceRange = price === "" || property.price <= price;
 
@@ -87,7 +80,7 @@ const List = () => {
   };
 
   return (
-    <div className="  justify-center px-4 sticky top-10  mb-4 flex ">
+    <div className="  justify-center px-4  mb-4 flex ">
       <div className="flex-1  rounded-md">
         <h1 className="text-lg font-semibold text-gray-700 mb-4">Search</h1>
         <div className="flex flex-col gap-4 mb-4">
@@ -149,7 +142,7 @@ const List = () => {
           />
         </div>
         <Button
-          className="button  py-2 border-none w-full font-semibold cursor-pointer"
+          className="py-2 border bg-black w-full font-semibold cursor-pointer"
           onClick={handleSearch}
         >
           Search
