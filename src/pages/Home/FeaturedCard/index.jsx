@@ -1,13 +1,21 @@
 import React from "react";
 import { useFetchData } from "../../../hooks/useGetData";
-import { createVenueUrl } from "../../../services/api";
 import HomeCard from "./HomeCard";
+import { createVenueUrl, getAllVenues } from "../../../api";
 
 const FeaturedCards = () => {
-  const { data: rooms, isLoading } = useFetchData(createVenueUrl);
+  const { data: rooms, isLoading, isError } = useFetchData(createVenueUrl);
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+  if (isError) {
+    return (
+      <div>
+        <h2>Error fetching data.</h2>
+        <p>Please try again later.</p>
+      </div>
+    );
   }
 
   const filterCriteria = {
@@ -26,7 +34,7 @@ const FeaturedCards = () => {
   return (
     <div>
       <div className="flex space-x-6 overflow-scroll scrollbar-hide">
-        {filteredRooms?.map((room) => (
+        {rooms?.map((room) => (
           <div key={room.id}>
             <HomeCard
               id={room.id}
