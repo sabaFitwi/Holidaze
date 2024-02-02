@@ -1,23 +1,19 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-//import Home from "./pages/UnRegisteredUser/Home";
 import Register from "./pages/Register";
 import AllVenues from "./pages/AllVenues";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
-
 import VenueDescription from "./pages/VenueDescription";
 import PageNotFound from "./pages/PageNotFound";
 import CustomProgressBar from "./components/utils/ProgressBar.jsx";
 import Profile from "./pages/Profile";
 import CreateVenueForm from "./pages/CreateVenue";
-
 import UpdateBooking from "./pages/Updates/UpdateBooking";
 import UpdateVenue from "./pages/Updates/UpdateVenue";
 import Tabs from "./components/Ui/Tabs";
 import MyVenueBooking from "./components/Cards/MyVenueBookings";
-import Sort from "./pages/Sort";
 
 function App() {
   return (
@@ -27,7 +23,6 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="register" element={<Register />} />
-          <Route path="sort" element={<Sort />} />
           <Route path="login" element={<Login />} />
           <Route path="venues" element={<AllVenues />} />
           <Route path="/venue/:id" element={<VenueDescription />} />
