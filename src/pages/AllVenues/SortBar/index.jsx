@@ -1,31 +1,31 @@
+// Sort.js
 import React from "react";
 
-const SortBar = ({ handlePriceSortChange, handleNameSortChange }) => {
+function Sort({ sortBy, setSortBy, sortOrder, setSortOrder }) {
   return (
-    <div className="bg-black text-white p-4 flex justify-between">
-      <div className="flex items-center">
-        <select
-          className="bg-black text-white text-xs border-white border rounded p-1"
-          onChange={handlePriceSortChange}
-        >
-          <option value="price">Price</option>
-          <option value="highToLow">High to Low</option>
-          <option value="lowToHigh">Low to High</option>
-        </select>
-      </div>
-
-      <div className="flex items-center">
-        <select
-          className="bg-black text-white border-white text-xs border rounded p-1"
-          onChange={handleNameSortChange}
-        >
-          <option value="name">Name</option>
-          <option value="aToZ">A to Z</option>
-          <option value="zToA">Z to A</option>
-        </select>
-      </div>
+    <div className="flex items-center">
+      <select
+        name="sortBy"
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+        className="bg-black text-white text-xs border-white border rounded p-1"
+      >
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+        <option value="date">Date</option>
+        <option value="maxGuests">Max Guests</option>
+      </select>
+      <select
+        name="sortOrder"
+        value={sortOrder}
+        onChange={(e) => setSortOrder(e.target.value)}
+        className="bg-black text-white text-xs border-white border rounded p-1 ml-2"
+      >
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
     </div>
   );
-};
+}
 
-export default SortBar;
+export default Sort;

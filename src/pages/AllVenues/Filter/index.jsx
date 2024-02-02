@@ -7,8 +7,6 @@ import Headers from "../../../hooks/useHeader";
 import CostContext from "../../../context/CostContext";
 import Button from "../../../components/Ui/Button";
 import Input from "../../../components/Ui/Input";
-//import { isBefore, isAfter, isEqual } from "date-fns";
-
 import { useFetchData } from "../../../hooks/useGetData";
 
 function Filter({ onUpdate, price }) {
