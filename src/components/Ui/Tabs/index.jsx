@@ -19,7 +19,7 @@ const Tabs = ({ onTabChange }) => {
   return (
     <div>
       <div className="flex justify-center max-w-full space-x-5 sticky top-24 z-10 py-10 bg-gray-50">
-        <button
+        <h3
           className={`${
             activeTab === "My Booking"
               ? "bg-black text-white"
@@ -28,10 +28,10 @@ const Tabs = ({ onTabChange }) => {
            rounded-t-lg`}
           onClick={() => changeTab("My Booking")}
         >
-          My Bookings
-        </button>
+          Your Bookings
+        </h3>
         {isVenueManager && (
-          <button
+          <h3
             className={`${
               activeTab === "My Venue"
                 ? "bg-black text-white"
@@ -39,18 +39,14 @@ const Tabs = ({ onTabChange }) => {
             } p-2 px-4 my-4 rounded-t-lg`}
             onClick={() => changeTab("My Venue")}
           >
-            My Venues
-          </button>
+            Your Venues
+          </h3>
         )}
       </div>
 
       <div className="bg-white p-4 rounded-b-lg -z-0">
         {activeTab === "My Booking" && <BookingsCards />}
-        {activeTab === "My Venue" && (
-          <div>
-            <VenuesCards />
-          </div>
-        )}
+        {activeTab === "My Venue" && <VenuesCards />}
       </div>
     </div>
   );

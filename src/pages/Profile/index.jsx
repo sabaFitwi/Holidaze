@@ -18,8 +18,8 @@ function Profile() {
       <div className="flex flex-col lg:flex-row">
         <ProfileCard />
 
-        <div className="container mx-auto sticky top-5 lg:top-20 bg-white p-4">
-          <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="w-full mx-auto sticky top-5 lg:top-20 bg-white p-4">
+          <div className="bg-white p-6 ">
             <Tabs onTabChange={handleTabChange} />
           </div>
         </div>

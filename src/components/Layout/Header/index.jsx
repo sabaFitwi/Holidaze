@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import imageBrand from "../../../assets/2.jpg";
-//import { FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import LogOut from "../../LogOut";
 import useAvatar from "../../../hooks/useAvatar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowRightFromBracket,
+  faArrowRightToBracket,
+} from "@fortawesome/free-solid-svg-icons";
+import Button from "../../Ui/Button";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
@@ -53,19 +58,17 @@ function Navbar() {
         />
       </Link>
 
-      <div className="flex justify-end items-center space-x-4">
+      <div className="flex justify-end items-center space-x-1 sm:space-x-4">
         <Link to={"./../venues"} className="text-gray-600 hover:text-gray-900">
-          Hosts
+          Browse
         </Link>
-        <Link to="./../contact" className="text-gray-600 hover:text-gray-900">
-          contact
-        </Link>
+
         {isLoggedIn && profileData && profileData.avatar && !loading ? (
           <div className="flex justify-center border-2 rounded-full shadow-sm bg-gray-100">
             <img
               src={profileData.avatar}
               alt={profileData.name}
-              className="rounded-full w-10 h-10"
+              className="hidden xs:flex rounded-full w-10 h-10"
             />
           </div>
         ) : isLoggedIn ? (
@@ -106,40 +109,59 @@ function Navbar() {
                   >
                     Profile
                   </Link>
-                  {isVenueManager && (
-                    <Link
-                      to="/create"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100 whitespace-nowrap"
-                      onClick={() => {
-                        handleNav();
-                        document.body.style.overflow = "scroll";
-                      }}
-                    >
-                      Create Venue
-                    </Link>
-                  )}
-                  <button
-                    onClick={() => {
-                      handleLogout();
-                      handleNav();
-                      document.body.style.overflow = "scroll";
-                    }}
-                    className="block px-4 py-2 text-gray-800 hover.bg-gray-100  whitespace-nowrap"
-                  >
-                    Sign out
-                  </button>
+                  <div className=" space-y-4 divide-y divide-gray-500 text-center ">
+                    {isVenueManager && (
+                      <Link
+                        to="/create"
+                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100 whitespace-nowrap"
+                        onClick={() => {
+                          handleNav();
+                          document.body.style.overflow = "scroll";
+                        }}
+                      >
+                        Create Venue
+                      </Link>
+                    )}
+
+                    <div className=" relative flex items-center">
+                      <div className="absolute right-4">
+                        <FontAwesomeIcon
+                          icon={faArrowRightFromBracket}
+                          className="text-gray-400"
+                        />
+                      </div>
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          handleNav();
+                          document.body.style.overflow = "scroll";
+                        }}
+                        className=" block px-4 py-2 text-gray-800 hover.bg-gray-100  whitespace-nowrap"
+                      >
+                        Sign out
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </>
         ) : (
           <>
-            <Link
-              to={"./../Login"}
-              className="text-gray-600 hover:text-gray-900 ml-4"
-            >
-              Sign in
-            </Link>
+            <button className="px-4 py-2 flex items-center">
+              <Link
+                to={"./../Login"}
+                className="text-gray-600 hover:text-gray-900 ml-4"
+              >
+                Sign in
+              </Link>
+              <div className="ml-2">
+                <FontAwesomeIcon
+                  icon={faArrowRightToBracket}
+                  className="text-gray-400"
+                />
+              </div>
+            </button>
             <Link
               to="./../Register"
               className="text-gray-600 hover:text-gray-900 ml-4"
