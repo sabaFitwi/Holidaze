@@ -59,6 +59,9 @@ function Navbar() {
       </Link>
 
       <div className="flex justify-end items-center space-x-1 sm:space-x-4">
+        <Link to="/" className="text-gray-600 hover:text-gray-900 ml-4">
+          Home
+        </Link>
         <Link to={"./../venues"} className="text-gray-600 hover:text-gray-900">
           Browse
         </Link>
@@ -148,7 +151,13 @@ function Navbar() {
           </>
         ) : (
           <>
-            <button className="px-4 py-2 flex items-center">
+            <Link
+              to="./../Register"
+              className="text-gray-600 hover:text-gray-900 ml-4"
+            >
+              Register
+            </Link>
+            <Button className="px-4 py-2 flex items-center">
               <Link
                 to={"./../Login"}
                 className="text-gray-600 hover:text-gray-900 ml-4"
@@ -161,13 +170,7 @@ function Navbar() {
                   className="text-gray-400"
                 />
               </div>
-            </button>
-            <Link
-              to="./../Register"
-              className="text-gray-600 hover:text-gray-900 ml-4"
-            >
-              Register
-            </Link>
+            </Button>
           </>
         )}
       </div>
