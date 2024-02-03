@@ -53,7 +53,7 @@ function Navbar() {
       >
         <img
           src={imageBrand}
-          alt=""
+          alt="brand"
           className="absolute  w-30 h-12 object-contain object-left"
         />
       </Link>

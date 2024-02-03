@@ -138,7 +138,7 @@ const SearchByName = () => {
           </div>
           <div className="flex">
             <Button
-              className="bg-blue-500 text-white font-semibold px-10 py-2"
+              className="bg-black text-white font-semibold px-10 py-2"
               onClick={handleSearch}
             >
               Search
