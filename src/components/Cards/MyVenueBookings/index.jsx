@@ -6,22 +6,19 @@ function MyVenueBooking() {
   const { id } = useParams();
 
   useEffect(() => {
-    // Fetch bookings data for the specific venue directly from the API
     fetch(
       `https://api.noroff.dev/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true`,
     )
       .then((response) => response.json())
       .then((venueData) => {
-        // Count the bookings for the specific venue directly from the API response
         const bookingsCount = venueData.bookings.length;
 
-        // Set the bookings length to state
         setBookingsLength(bookingsCount);
       })
       .catch((error) => {
         console.error("Error fetching venue data:", error);
       });
-  }, [id]); // Include id in the dependency array to re-run the effect when id changes
+  }, [id]);
 
   return (
     <div className="container mx-auto mt-8">

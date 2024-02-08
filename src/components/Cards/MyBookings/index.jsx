@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import BookingCard from "../../Card";
+import BookingCard from "../../Card/BookingCard";
 import { getProfile } from "../../../hooks/useProfile";
 import { useNavigate } from "react-router-dom";
 import useDeleteApi from "../../../hooks/useDelete";
 import ConfirmationModal from "../../DeleteModal/DeleteConfirm";
 
 function BookingsCards() {
-  const [MyBookingsData, setMyBookingsData] = useState([]);
+  const [myBookingsData, setMyBookingsData] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [error, setError] = useState(null); // Define error state
+  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(""); // State for search term
+  const [showActiveBookings, setShowActiveBookings] = useState(true);
 
   const navigate = useNavigate();
   const { isLoading, deleteCard } = useDeleteApi();
@@ -40,10 +42,10 @@ function BookingsCards() {
 
       setTimeout(() => {
         setShowSuccess(false);
-      }, 4000);
+      }, 2000);
     } catch (error) {
       console.error("Error deleting booking:", error);
-      setError(error); // Set error state when an error occurs
+      setError(error);
     }
   };
 
@@ -52,7 +54,7 @@ function BookingsCards() {
       .then((data) => setMyBookingsData(data.bookings))
       .catch((error) => {
         console.error("Error fetching profile data:", error);
-        setError(error); // Set error state when an error occurs
+        setError(error);
       });
   }, []);
 
@@ -62,24 +64,94 @@ function BookingsCards() {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+
+  const filteredBookings = myBookingsData.filter((booking) =>
+    booking.venue.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  // Format date function
+  const formatDate = (dateString) => {
+    const options = { day: "numeric", month: "short", year: "numeric" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options);
+  };
+
   return (
     <div>
+      <div className="flex justify-between mb-4">
+        <button
+          onClick={() => setShowActiveBookings(true)}
+          className={`px-4 py-2 ${
+            showActiveBookings ? "bg-blue-500 text-white" : "bg-gray-300"
+          }`}
+        >
+          Active Bookings
+        </button>
+        <button
+          onClick={() => setShowActiveBookings(false)}
+          className={`px-4 py-2 ${
+            !showActiveBookings ? "bg-blue-500 text-white" : "bg-gray-300"
+          }`}
+        >
+          Expired Bookings
+        </button>
+      </div>
+
+      <input
+        type="text"
+        placeholder="Search bookings..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="w-full align-center p-2 border-2 mb-4"
+      />
+
       <div className="mx-auto grid w-full">
-        {MyBookingsData.map((MyBookings) => (
-          <div key={MyBookings.id}>
-            <BookingCard
-              id={MyBookings.id}
-              media={MyBookings.venue.media[0]}
-              title={MyBookings.venue.name}
-              price={MyBookings.venue.price}
-              onEditClick={() => handleEditClick(MyBookings.id)}
-              onDeleteClick={() => {
-                setSelectedBooking(MyBookings.id);
-                setIsModalOpen(true);
-              }}
-            />
-          </div>
-        ))}
+        {showActiveBookings &&
+          filteredBookings.map((booking) => (
+            <div key={booking.id}>
+              <BookingCard
+                id={booking.id}
+                media={booking.venue.media[0]}
+                title={booking.venue.name}
+                price={booking.venue.price}
+                dateFrom={formatDate(booking.dateFrom)}
+                dateTo={formatDate(booking.dateTo)}
+                guests={booking.guests}
+                country={booking.venue.location.country}
+                continent={booking.venue.location.continent}
+                city={booking.venue.location.city}
+                onEditClick={() => handleEditClick(booking.id)}
+                onDeleteClick={() => {
+                  setSelectedBooking(booking.id);
+                  setIsModalOpen(true);
+                }}
+              />
+            </div>
+          ))}
+
+        {!showActiveBookings &&
+          filteredBookings.map((booking) => (
+            <div key={booking.id}>
+              <BookingCard
+                id={booking.id}
+                media={booking.venue.media[0]}
+                title={booking.venue.name}
+                price={booking.venue.price}
+                dateFrom={formatDate(booking.dateFrom)}
+                dateTo={formatDate(booking.dateTo)}
+                guests={booking.guests}
+                country={booking.venue.location.country}
+                continent={booking.venue.location.continent}
+                city={booking.venue.location.city}
+                onEditClick={() => handleEditClick(booking.id)}
+                onDeleteClick={() => {
+                  setSelectedBooking(booking.id);
+                  setIsModalOpen(true);
+                }}
+                isExpired={true}
+              />
+            </div>
+          ))}
       </div>
       <ConfirmationModal
         isOpen={isModalOpen}
