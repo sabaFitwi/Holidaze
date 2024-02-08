@@ -18,7 +18,7 @@ const Tabs = ({ onTabChange }) => {
 
   return (
     <div>
-      <div className="flex justify-center max-w-full space-x-5 sticky top-24 z-10 py-10 bg-gray-50">
+      <div className="flex justify-center max-w-full space-x-5 py-10 bg-gray-50">
         <h3
           className={`${
             activeTab === "My Booking"

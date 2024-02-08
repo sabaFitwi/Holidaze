@@ -1,21 +1,39 @@
-// DateInput.js
-
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 
 const DateInput = ({ value, onChange, placeholder, existingBookings }) => {
   const [openDate, setOpenDate] = useState(false);
+  const dateRangeRef = useRef(null);
 
-  const selectedRang = {
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dateRangeRef.current &&
+        !dateRangeRef.current.contains(event.target)
+      ) {
+        setOpenDate(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const selectedRange = {
     startDate: value.startDate,
     endDate: value.endDate,
     key: "selection",
   };
-  const formattedStartDate =
-    value && value.startDate ? format(value.startDate, "dd/MM/yyyy") : "";
-  const formattedEndDate =
-    value && value.endDate ? format(value.endDate, "dd/MM/yyyy") : "";
+
+  const formattedStartDate = value.startDate
+    ? format(value.startDate, "dd/MM/yyyy")
+    : "";
+  const formattedEndDate = value.endDate
+    ? format(value.endDate, "dd/MM/yyyy")
+    : "";
 
   const disabledDates = existingBookings.reduce((acc, booking) => {
     const start = new Date(booking.dateFrom);
@@ -31,25 +49,27 @@ const DateInput = ({ value, onChange, placeholder, existingBookings }) => {
   }, []);
 
   return (
-    <div className="relative">
-      <span
-        className="h-10 px-2 bg-white flex items-center cursor-pointer"
-        onClick={() => setOpenDate(!openDate)}
-      >
-        {formattedStartDate && formattedEndDate
-          ? `${formattedStartDate} to ${formattedEndDate}`
-          : placeholder}
-      </span>
-      {openDate && (
-        <DateRange
-          onChange={(item) => onChange(item.selection)}
-          minDate={new Date()}
-          ranges={[selectedRang]}
-          rangeColors={["#18766a"]}
-          showDateDisplay={false}
-          disabledDates={disabledDates.map((date) => new Date(date))}
-        />
-      )}
+    <div className="flex item-center relative">
+      <div ref={dateRangeRef}>
+        <span
+          className="h-10 px-2 ml-2 bg-white border w-full whitespace-nowrap text-sm flex items-center cursor-pointer"
+          onClick={() => setOpenDate(!openDate)}
+        >
+          {formattedStartDate && formattedEndDate
+            ? `${formattedStartDate} to ${formattedEndDate}`
+            : placeholder}
+        </span>
+        {openDate && (
+          <DateRange
+            onChange={(item) => onChange(item.selection)}
+            minDate={new Date()}
+            ranges={[selectedRange]}
+            rangeColors={["#18766a"]}
+            showDateDisplay={false}
+            disabledDates={disabledDates.map((date) => new Date(date))}
+          />
+        )}
+      </div>
     </div>
   );
 };

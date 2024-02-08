@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Breadcrumb = ({ pathSegments, activeTab, currentPage }) => {
   return (
-    <div className="bg-gray-200 p-2 sticky top-24 w-full z-50">
+    <div className="bg-gray-200 p-2 w-full z-50">
       <div className="container mx-auto">
         {pathSegments.map((segment, index) => (
           <React.Fragment key={segment}>

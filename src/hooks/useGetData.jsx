@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
 export function useFetchData(apiEndpoint) {
-  const [data, setData] = useState([]); // Initialize to an empty array
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,11 +15,12 @@ export function useFetchData(apiEndpoint) {
       } catch (error) {
         console.error("Error fetching data:", error);
         setIsLoading(false);
+        setIsError(true);
       }
     };
 
     fetchData();
   }, [apiEndpoint]);
 
-  return { data, isLoading };
+  return { data, isLoading, isError };
 }
