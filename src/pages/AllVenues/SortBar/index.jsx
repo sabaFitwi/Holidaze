@@ -14,6 +14,7 @@ function Sort({ sortBy, setSortBy, sortOrder, setSortOrder }) {
         <option value="price">Price</option>
         <option value="date">Date</option>
         <option value="maxGuests">Max Guests</option>
+        <option value="rating">Rating</option>
       </select>
       <select
         name="sortOrder"

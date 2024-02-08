@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-//import Button from "../../components/Ui/Button";
 import Input from "../../../components/Ui/Input";
 import { useParams } from "react-router-dom";
 import Button from "../../../components/Ui/Button";
+import useApi from "../../../hooks/useApi";
+import { useFetchData } from "../../../hooks/useGetData";
 
 const UpdateVenue = () => {
-  const { id } = useParams(); // Assuming you have the venue ID in the route params
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -38,47 +39,36 @@ const UpdateVenue = () => {
     "Europe",
     "Australia",
   ];
+  const {
+    data: venueData,
+    isLoading,
+    isError,
+  } = useFetchData(`https://api.noroff.dev/api/v1/holidaze/venues/${id}`);
 
   useEffect(() => {
-    const fetchVenueData = async () => {
-      try {
-        const accessToken = localStorage.getItem("Token");
-        const response = await fetch(
-          `https://api.noroff.dev/api/v1/holidaze/venues/${id}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          },
-        );
+    if (!isLoading && venueData) {
+      const updatedMeta = {
+        wifi: venueData.meta.wifi,
+        parking: venueData.meta.parking,
+        breakfast: venueData.meta.breakfast,
+        pets: venueData.meta.pets,
+      };
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+      setFormData((prevData) => ({
+        ...prevData,
+        ...venueData,
+        meta: updatedMeta,
+      }));
+    }
+  }, [venueData, isLoading, isError]);
 
-        const venueData = await response.json();
-        console.log(venueData);
-        const updatedMeta = {
-          wifi: venueData.meta.wifi,
-          parking: venueData.meta.parking,
-          breakfast: venueData.meta.breakfast,
-          pets: venueData.meta.pets,
-        };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-        setFormData((prevData) => ({
-          ...prevData,
-          ...venueData,
-          meta: updatedMeta,
-        }));
-      } catch (error) {
-        console.error("Error:", error);
-        // Handle error fetching venue data
-      }
-    };
-
-    fetchVenueData();
-  }, [id]);
+  if (isError) {
+    return <div>Error fetching data</div>;
+  }
 
   const handleImageChange = (index, value) => {
     const newImages = [...formData.media];

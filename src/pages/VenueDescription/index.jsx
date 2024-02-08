@@ -1,29 +1,128 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useFetchData } from "../../hooks/useGetData";
-import Filter from "../AllVenues/Filter";
-import Modal from "react-modal";
-//import DateInput from "../../components/ui/DateInput";
-import CostContext from "../../context/CostContext";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import Headers from "../../hooks/useHeader";
+import Button from "../../components/Ui/Button";
 import Input from "../../components/Ui/Input";
+import { useFetchData } from "../../hooks/useGetData";
+import { createVenueUrl } from "../../api";
+import StarRating from "../../components/RatingStars";
 
-Modal.setAppElement("#root");
+import DateInput from "../../components/Ui/DateInput";
 
-function VenueDescription() {
+import VenueImages from "./VenueImages";
+import VenueAmenities from "./VenueAmenities";
+import { FaCalendarDay, FaUsers } from "react-icons/fa";
+import { daysSincePosted } from "../../components/utils/DateSincePost";
+
+function VenueDescription({ onUpdate }) {
   const { id } = useParams();
-  const [image, setImage] = useState(0);
-  //const [checkInDate, setCheckInDate] = useState("");
+  const navigate = useNavigate();
   const [totalCost, setTotalCost] = useState(0);
+  const [guests, setGuests] = useState(1);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [validationMessage, setValidationMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [active, setActive] = useState(null);
+  const [totalNights, setTotalNights] = useState(0);
 
-  const updateTotalCost = (cost) => {
-    setTotalCost(cost);
-  };
-
-  const { data, error, isLoading } = useFetchData(
-    `https://api.noroff.dev/api/v1/holidaze/venues/${id}`,
+  const { data, isLoading, error } = useFetchData(
+    createVenueUrl + `/${id}?_bookings=true&_owner=true`,
   );
 
-  const [isImageFullscreen, setIsImageFullscreen] = useState(false);
+  const existingBookings = data && data.bookings ? data.bookings : [];
+
+  useEffect(() => {
+    if (data && data.media && data.media.length > 0) {
+      setActive(data.media[0]);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    calculateTotalCost();
+  }, [startDate, endDate, guests]);
+
+  const calculateTotalCost = () => {
+    const pricePerNight = data.price || 0;
+
+    const startTime = startDate.getTime();
+    const endTime = endDate.getTime();
+
+    const differenceInTime = endTime - startTime;
+
+    const nightCount = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+
+    const totalNights = nightCount + 1;
+    setTotalNights(totalNights);
+
+    const newTotalCost = pricePerNight * totalNights * guests;
+    setTotalCost(newTotalCost.toFixed(2));
+  };
+
+  const maxGuests = data.maxGuests || 0;
+
+  const handleGuestChange = (e) => {
+    let newGuests = parseInt(e.target.value, 10);
+
+    if (newGuests > maxGuests) {
+      setValidationMessage(`Maximum ${maxGuests} guests allowed`);
+
+      newGuests = maxGuests;
+    } else if (newGuests < 1) {
+      setGuests(guests);
+      setValidationMessage("Minimum 1 guest required");
+
+      newGuests = 1;
+    } else {
+      setGuests(newGuests);
+      setValidationMessage("");
+    }
+  };
+
+  const handleFiltersSubmit = async () => {
+    if (!startDate || !endDate || !id || !guests) {
+      alert("Please fill out all fields");
+      return;
+    }
+
+    const bookingData = {
+      dateFrom: startDate.toISOString(),
+      dateTo: endDate.toISOString(),
+      guests: guests,
+      venueId: id,
+    };
+
+    try {
+      const response = await fetch(
+        "https://api.noroff.dev/api/v1/holidaze/bookings",
+        {
+          method: "POST",
+          headers: Headers("application/json"),
+          body: JSON.stringify(bookingData),
+        },
+      );
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log("Booking successful", responseData);
+        setSuccessMessage("Booking successful!");
+        setTimeout(() => {
+          setSuccessMessage("");
+          navigate("/profile");
+        }, 1000);
+
+        if (onUpdate) {
+          onUpdate();
+        }
+      } else {
+        console.error("Error during booking", response.statusText);
+        setValidationMessage("Error during booking. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error during booking", error.message);
+      setValidationMessage("Error during booking. Please try again.");
+    }
+  };
 
   if (isLoading) {
     return <div className="container">Loading...</div>;
@@ -33,146 +132,135 @@ function VenueDescription() {
     return <p>Something went wrong: {error}</p>;
   }
 
-  const { media, name, price, description, wifi, breakfast, parking, pet } =
-    data;
-
-  const openImageFullscreen = (index) => {
-    setImage(index);
-    setIsImageFullscreen(true);
-  };
-
-  const closeImageFullscreen = () => {
-    setIsImageFullscreen(false);
-  };
-
   return (
-    <CostContext.Provider value={{ onUpdateTotalCost: updateTotalCost }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24">
-        <div className="flex flex-col md:flex-row -mx-4">
-          <div className="md:flex-1 px-4">
-            <div className="h-64 md:h-80 rounded-lg bg-gray-100 mb-4">
-              {media.map((imageUrl, index) => (
-                <div
-                  key={index}
-                  className={`h-64 md:h-80 rounded-lg bg-gray-100 mb-4 flex items-center justify-center ${
-                    index === image ? "block" : "hidden"
-                  }`}
-                  onClick={() => openImageFullscreen(index)}
-                >
-                  <img
-                    src={imageUrl}
-                    alt={name}
-                    className={`object-cover h-full w-full cursor-pointer`}
-                  />
-                </div>
-              ))}
-            </div>
-
-            <div className="flex -mx-2 mt-14 mb-4">
-              {media.map((imageUrl, index) => (
-                <div key={index} className="flex px-2">
-                  <div
-                    onClick={() => setImage(index)}
-                    className={`focus:outline-none rounded-lg w-16 h-16 md:w-24 md:h-24 bg-gray-100 flex items-center justify-start ${
-                      image === index ? "ring-2 ring-indigo-300 ring-inset" : ""
-                    }`}
-                  >
-                    <img src={imageUrl} alt={name} className="object-cover " />
-                  </div>
-                </div>
-              ))}
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-24">
+      <h1 className="h1 mb-4 font-bold text-gray-800 capitalize md:hidden">
+        {data.name}
+      </h1>
+      <div className="flex flex-col md:flex-row -mx-4">
+        <div className="w-full md:w-[60%] divide-y">
+          <div className="md:flex-1 px-4 divide-y">
+            <div className="grid gap-4">
+              <img
+                className="h-auto w-full max-w-full rounded-lg object-cover object-center md:h-[480px]"
+                src={active}
+                alt="venueImage"
+              />
+              <VenueImages images={data.media} setActive={setActive} />
             </div>
           </div>
-
-          <div className="md:flex-1 px-4">
-            <h1 className=" h1 mb-2 leading-tight tracking-tight font-bold text-gray-800 ">
-              {name}
-            </h1>
-
-            <div className="flex items-center space-x-4 my-4">
-              <div>
-                <div className="rounded-lg bg-gray-100 flex py-2 px-3">
-                  <span className="text-indigo-400 mr-1 mt-1">$</span>
-                  <span className="font-bold text-indigo-600 text-3xl">
-                    {price}
-                  </span>
-                </div>
-              </div>
-              <div className="flex-1">
-                <p p className="text-green-500 text-xl font-semibold">
-                  Save 12%
-                </p>
-                <p className="text-gray-400 text-sm">Inclusive of all Taxes.</p>
-              </div>
-            </div>
-            <p className="text-gray-500">{description}</p>
-            <Filter
-              venueId={id}
-              isUpdateMode={true}
-              onUpdateTotalCost={updateTotalCost}
-              price={price}
-              data={data}
+          <div className="flex items-center py-4 mt-4 ">
+            <img
+              className="w-20 h-20 rounded-full m-4"
+              src={data.owner?.avatar}
+              alt="Avatar of Writer"
             />
-            <div className="mb-4">
-              <label className="block text-gray-600">Amenities:</label>
-              <div className="flex flex-col items-start">
-                <label className="flex items-center">
-                  <Input type="checkbox" checked={wifi} className="mr-2" />
-                  Wi-Fi
-                </label>
-                <label className="flex items-center">
-                  <Input type="checkbox" checked={pet} className="mr-2" />
-                  Pets
-                </label>
-                <label className="flex items-center">
-                  <Input
-                    type="checkbox"
-                    checked={breakfast}
-                    className="mr-2 "
-                  />
-                  Breakfast
-                </label>
-                <label className="flex items-center">
-                  <Input type="checkbox" checked={parking} className="mr-2" />
-                  Parking
-                </label>
+            <div className="text-sm ">
+              <h4 className="text-gray-900  text-sm">
+                Hosted by
+                <span className="font-bold mx-2">{data.owner?.name}</span>
+              </h4>
+              <p className="text-gray-600 text-xs">
+                Posted. {daysSincePosted(data.updated)} ago
+              </p>
+              <div className="flex items-center pb-2">
+                <StarRating rating={data.rating} />
+                <span className="ml-1 text-sm">({data.rating})</span>
               </div>
             </div>
-
-            <div className="flex items-center space-x-4 my-4">
-              <div>
-                <div className="rounded-lg bg-gray-100 flex py-2 px-3">
-                  <span className="text-indigo-400 mr-1 mt-1">$</span>
-                  <span className="font-bold text-indigo-600 text-3xl">
-                    {price}
-                  </span>
-                </div>
-              </div>
-              <div className="flex-1">
-                {/* Display the total cost */}
-                <p className="text-green-500 text-xl font-semibold">{`Total Cost: $${totalCost}`}</p>
-                <p className="text-gray-400 text-sm">Inclusive of all Taxes.</p>
-              </div>
+          </div>
+          <div className=" divide-y">
+            <VenueAmenities data={data} />
+            <div className="flex my-4 ml-4 py-4">
+              <FaUsers className="text-gray-800 mr-2" />
+              <span className="text-sm">Maximum Guests {data.maxGuests}</span>
             </div>
           </div>
         </div>
 
-        <Modal
-          isOpen={isImageFullscreen}
-          onRequestClose={closeImageFullscreen}
-          contentLabel="Image Modal"
-          overlayClassName="fixed top-0 left-0 w-full h-full bg-black opacity-95"
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-          shouldCloseOnOverlayClick={true}
-        >
-          <img
-            src={media[image]}
-            alt={name}
-            className="object-contain mt-14 max-h-screen"
-          />
-        </Modal>
+        <div className=" w-full md:w-[40%]  px-4">
+          <h1 className="h1 mb-4 font-bold text-gray-800 capitalize hidden md:block">
+            {data.name}
+          </h1>
+          <p className="text-gray-700">{data.description}</p>
+
+          <div className="flex items-center space-x-4 my-4">
+            <div className="rounded-lg bg-gray-100 flex items-end py-2 px-3 ">
+              <span className="font-bold text-primary text-xl">
+                {data.price} kr
+              </span>
+
+              <span className=" mx-2 text-sm">/Night</span>
+            </div>
+          </div>
+          <div>
+            <div className="my-4">
+              <div className="flex items-center mb-1">
+                <FaCalendarDay />
+                <p className="ml-2 text-sm font-semibold">CheckIn - Checkout</p>
+              </div>
+
+              <DateInput
+                label="Check-In"
+                value={{ startDate, endDate }}
+                onChange={(date) => {
+                  setStartDate(date.startDate);
+                  setEndDate(date.endDate);
+                }}
+                placeholder="Choose a date"
+                existingBookings={existingBookings}
+                className="text-sm mt-1"
+              />
+            </div>
+
+            <div className=" my-4 ">
+              <div className="flex item-center mb-1">
+                <FaUsers />
+                <p className="ml-2  font-semibold text-sm">Guests</p>
+              </div>
+
+              <Input
+                type="number"
+                placeholder="Number of guests"
+                value={guests}
+                onChange={handleGuestChange}
+                className=" border text-sm mt-1 "
+              />
+              {validationMessage && (
+                <div className="text-red-500 text-sm mt-2 divide-y">
+                  {validationMessage}
+                </div>
+              )}
+            </div>
+            {successMessage && (
+              <div className="text-green-500 text-sm mt-2">
+                {successMessage}
+              </div>
+            )}
+
+            <div className="flex-1 text-right border-b border-t ">
+              <p>Night(s): {totalNights}</p>
+              <p className=" text-xl font-semibold">
+                Total Price: {totalCost} kr
+              </p>
+            </div>
+
+            <div className="mt-4 text-center">
+              <Button
+                type="button"
+                onClick={handleFiltersSubmit}
+                className={`bg-primary w-full text-gray-100 hover:bg-gray-700 ${
+                  successMessage ? "cursor-not-allowed" : ""
+                }`}
+                disabled={successMessage ? true : false}
+              >
+                Book Now
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
-    </CostContext.Provider>
+    </main>
   );
 }
 

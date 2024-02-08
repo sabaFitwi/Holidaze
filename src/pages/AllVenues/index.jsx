@@ -39,20 +39,20 @@ function AllVenues() {
       return sortOrder === "asc"
         ? a.maxGuests - b.maxGuests
         : b.maxGuests - a.maxGuests;
+    } else if (sortBy === "rating") {
+      return sortOrder === "asc" ? a.rating - b.rating : b.rating - a.rating;
     }
+    return 0;
   });
 
-  // Function to handle continent filter selection
   const handleContinentFilter = (continent) => {
     setSelectedContinent(continent);
   };
 
-  // Effect to clear search query on continent change
   useEffect(() => {
     setSearchQuery("");
   }, [selectedContinent]);
 
-  // Loading and error handling
   if (isLoading) {
     return <div className="align-middle">Loading...</div>;
   }

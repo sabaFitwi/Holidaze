@@ -1,10 +1,10 @@
 import React from "react";
 import { useFetchData } from "../../../hooks/useGetData";
 import HomeCard from "./HomeCard";
-import { createVenueUrl, getAllVenues } from "../../../api";
+import { getAllVenues } from "../../../api";
 
 const FeaturedCards = () => {
-  const { data: rooms, isLoading, isError } = useFetchData(createVenueUrl);
+  const { data: rooms, isLoading, isError } = useFetchData(getAllVenues);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -34,7 +34,7 @@ const FeaturedCards = () => {
   return (
     <div>
       <div className="flex space-x-6 overflow-scroll scrollbar-hide">
-        {rooms?.map((room) => (
+        {filteredRooms?.map((room) => (
           <div key={room.id}>
             <HomeCard
               id={room.id}
