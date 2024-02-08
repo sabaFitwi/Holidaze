@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "../../components/Ui/Button";
 import Input from "../../components/Ui/Input";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
 
 const CreateVenueForm = () => {
   const [formData, setFormData] = useState({
@@ -450,6 +451,7 @@ const CreateVenueForm = () => {
           Submit
         </Button>
       </form>
+      <ScrollToTopButton />
     </div>
   );
 };

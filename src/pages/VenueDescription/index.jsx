@@ -13,6 +13,7 @@ import VenueImages from "./VenueImages";
 import VenueAmenities from "./VenueAmenities";
 import { FaCalendarDay, FaUsers } from "react-icons/fa";
 import { daysSincePosted } from "../../components/utils/DateSincePost";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
 
 function VenueDescription({ onUpdate }) {
   const { id } = useParams();
@@ -260,6 +261,7 @@ function VenueDescription({ onUpdate }) {
           </div>
         </div>
       </div>
+      <ScrollToTopButton />
     </main>
   );
 }

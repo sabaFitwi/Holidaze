@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ProfileCard from "./ProfileCard";
 import Tabs from "../../components/Ui/Tabs";
 import Breadcrumb from "../../components/Ui/Breadcrumbs";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
 
 function Profile() {
   const pathSegments = ["Home", "Profile"];
@@ -24,6 +25,7 @@ function Profile() {
           </div>
         </div>
       </div>
+      <ScrollToTopButton />
     </div>
   );
 }

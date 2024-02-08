@@ -7,6 +7,7 @@ import Sort from "./SortBar";
 import Search from "./Search";
 import ContinentFilter from "./ContinentsFilter";
 import Venues from "./Venues";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
 
 function AllVenues() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -94,6 +95,7 @@ function AllVenues() {
       <section className="w-full flex flex-col lg:flex-row py-4">
         <Venues sortedVenues={sortedVenues} />
       </section>
+      <ScrollToTopButton />
     </main>
   );
 }

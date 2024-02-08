@@ -5,6 +5,7 @@ import Banner from "./Banner";
 
 import SmallCard from "./SortByContinent";
 import FeaturedCards from "./FeaturedCard";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
 const Home = () => {
   return (
     <div>
@@ -30,6 +31,7 @@ const Home = () => {
           <FeaturedCards />
         </section>
       </main>
+      <ScrollToTopButton />
     </div>
   );
 };

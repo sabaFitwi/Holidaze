@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // Import the styles for react-date-range
 import "react-date-range/dist/theme/default.css";
+import ScrollToTopButton from "../../../components/ScrollToTopButton";
 
 const UpdateBooking = () => {
   const { id } = useParams();
@@ -140,6 +141,7 @@ const UpdateBooking = () => {
           Update
         </Button>
       </form>
+      <ScrollToTopButton />
     </div>
   );
 };

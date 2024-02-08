@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Button from "../../../components/Ui/Button";
 import useApi from "../../../hooks/useApi";
 import { useFetchData } from "../../../hooks/useGetData";
+import ScrollToTopButton from "../../../components/ScrollToTopButton";
 
 const UpdateVenue = () => {
   const { id } = useParams();
@@ -535,6 +536,7 @@ const UpdateVenue = () => {
           Update
         </Button>
       </form>
+      <ScrollToTopButton />
     </div>
   );
 };
