@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { updateAuthStatus } from "../../utils/authUtils";
+import React, { useState } from "react";
 import ScrollToTopButton from "../../ScrollToTopButton";
 
 function BookingCard({
@@ -35,7 +33,7 @@ function BookingCard({
       <div className="w-full md:w-[60%] flex flex-col flex-grow p-4">
         <div className="flex justify-between items-start">
           <p className="font-semibold text mb-2">
-            Title: <span className="ml-1 font-normal">{title}</span>
+            Title: <span className="ml-1 font-normal text">{title}</span>
           </p>
 
           <div className="relative">
@@ -64,23 +62,23 @@ function BookingCard({
           </div>
         </div>
         <p
-          className={`font-semibold whitespace-nowrap pb-2 ${isExpired ? "text-red-500" : ""}`}
+          className={`font-semibold  text pb-2 ${isExpired ? "text-red-500" : ""}`}
         >
           Booked date:
           <span className="ml-1 font-normal">
             {dateFrom} - {dateTo}
           </span>
         </p>
-        <p className="font-semibold pb-2">
+        <p className="font-semibold text pb-2">
           Price: <span className="ml-2 font-normal">{price} kr/night</span>
         </p>
-        <p className=" font-semibold pb-2">
+        <p className=" font-semibold text pb-2">
           Guests:
           <span className="text-gray-700 ml-2 font-normal">
             {guests} Guests
           </span>
         </p>
-        <p className=" font-semibold pb-2">
+        <p className=" font-semibold  text">
           Location:
           <span className="text-gray-700 ml-2 font-normal">
             {continent}, {country}, {city}

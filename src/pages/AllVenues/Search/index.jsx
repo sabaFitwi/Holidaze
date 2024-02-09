@@ -8,7 +8,7 @@ function Search({ searchQuery, setSearchQuery }) {
       placeholder="Search venues..."
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
-      className="bg-black text-white border-white border rounded p-1 ml-2"
+      className="bg-black text-white border-white border  text rounded p-1 ml-2"
     />
   );
 }

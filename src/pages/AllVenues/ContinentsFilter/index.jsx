@@ -11,7 +11,7 @@ function ContinentFilter({
         <div
           key={index}
           onClick={() => handleContinentFilter(obj.name)}
-          className={`flex items-center m-2 whitespace-nowrap space-x-4 cursor-pointer border rounded-full pl-3 pr-6 py-2 xl:py-0 hover:shadow-lg transition transform duration-100 ease-out ${
+          className={`flex items-center m-2 whitespace-nowrap space-x-4 text cursor-pointer border rounded-full pl-3 pr-6 py-2 xl:py-0 hover:shadow-lg transition transform duration-100 ease-out ${
             selectedContinent === obj.name ||
             (index === 0 && !selectedContinent)
               ? "bg-gray-900 text-white"
@@ -27,7 +27,7 @@ function ContinentFilter({
               />
             )}
           </div>
-          <div className="text-center xs:text-xs">
+          <div className="text-center text">
             <h2>{obj.name}</h2>
           </div>
         </div>

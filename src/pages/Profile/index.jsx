@@ -20,7 +20,7 @@ function Profile() {
         <ProfileCard />
 
         <div className="w-full mx-auto ">
-          <div className="bg-white p-2 md:p-6 ">
+          <div className="bg-white p-0 md:p-6 ">
             <Tabs onTabChange={handleTabChange} />
           </div>
         </div>

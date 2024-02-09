@@ -40,7 +40,7 @@ function VenueCard({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row border cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out ease my-2">
+    <div className=" text flex flex-col sm:flex-row border cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out ease my-2">
       <div className="relative w-full md:w-[40%] h-60 ">
         <img
           src={media}
@@ -48,7 +48,7 @@ function VenueCard({
           className="w-full h-full object-cover py-2"
         />
       </div>
-      <div className="w-full md:w-[60%] flex flex-col flex-grow p-4">
+      <div className="w-full md:w-[60%] flex flex-col flex-grow p-2 px-4">
         <div className="flex justify-between items-start">
           <p className="font-semibold mb-2">
             Title: <span className="ml-1 font-normal">{title}</span>
@@ -132,7 +132,7 @@ function VenueCard({
             {continent}, {country}, {city}
           </span>
         </p>
-        <p className=" font-semibold pb-2">
+        <p className=" font-semibold ">
           Created:
           <span className="text-gray-700 ml-1 font-normal">
             {daysSincePosted(updated)} ago

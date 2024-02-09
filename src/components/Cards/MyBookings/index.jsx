@@ -69,7 +69,6 @@ function BookingsCards() {
     booking.venue.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  // Format date function
   const formatDate = (dateString) => {
     const options = { day: "numeric", month: "short", year: "numeric" };
     const date = new Date(dateString);
@@ -78,10 +77,10 @@ function BookingsCards() {
 
   return (
     <div>
-      <div className="flex justify-between mb-4">
+      <div className="flex justify-between m-4">
         <button
           onClick={() => setShowActiveBookings(true)}
-          className={`px-4 py-2 ${
+          className={`px-2 text py-2 ${
             showActiveBookings ? "bg-blue-500 text-white" : "bg-gray-300"
           }`}
         >
@@ -89,7 +88,7 @@ function BookingsCards() {
         </button>
         <button
           onClick={() => setShowActiveBookings(false)}
-          className={`px-4 py-2 ${
+          className={`px-2 text py-2 ${
             !showActiveBookings ? "bg-blue-500 text-white" : "bg-gray-300"
           }`}
         >
@@ -102,7 +101,7 @@ function BookingsCards() {
         placeholder="Search bookings..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full align-center p-2 border-2 mb-4"
+        className="w-full align-center text p-2 border-2 mb-4 text"
       />
 
       <div className="mx-auto grid w-full">

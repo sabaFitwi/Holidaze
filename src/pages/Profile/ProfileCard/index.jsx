@@ -66,19 +66,19 @@ const ProfileCard = () => {
           )}
           <div className="space-y-4 text-center divide-y divide-gray-700">
             <div className="my-2 space-y-1">
-              <h2 className="text-sm lg:text-xl font-semibold sm:text-2xl">
+              <h2 className="font-semibold text capitalize">
                 {profileData.name}
               </h2>
-              <p className="px-5 text-xs sm:text-base">
+              <p className="px-5 text">
                 {profileData.venueManager
                   ? "You are a Venue Manager"
                   : "You are a Customer"}
               </p>
             </div>
             <div className="flex justify-center pt-2 space-x-4 divide-x divide-gray-700 align-center">
-              <button className="whitespace-nowrap">Send me email</button>
+              <button className="whitespace-nowrap text">Send me email</button>
               <button
-                className="whitespace-nowrap pl-3"
+                className="whitespace-nowrap text pl-3"
                 onClick={() => setIsModalOpen(true)}
               >
                 Edit profile

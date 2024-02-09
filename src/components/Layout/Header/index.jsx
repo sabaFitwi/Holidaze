@@ -46,7 +46,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 grid grid-cols-2 bg-white p-5 md:px-10 shadow-md">
+    <nav className="sticky top-0 z-50 grid grid-cols-2 bg-white p-5 md:px-10 shadow-md text">
       <Link
         to="/"
         className="relative  flex items-center cursor-pointer my-auto"
@@ -59,10 +59,13 @@ function Navbar() {
       </Link>
 
       <div className="flex justify-end items-center space-x-1 sm:space-x-4">
-        <Link to="/" className="text-gray-600 hover:text-gray-900 ml-4">
+        <Link to="/" className="text-gray-600 hover:text-gray-900">
           Home
         </Link>
-        <Link to={"./../venues"} className="text-gray-600 hover:text-gray-900">
+        <Link
+          to={"./../venues"}
+          className="text-gray-600 pl-1 sm:pl-2 hover:text-gray-900"
+        >
           Browse
         </Link>
 
@@ -71,7 +74,7 @@ function Navbar() {
             <img
               src={profileData.avatar}
               alt={profileData.name}
-              className="hidden xs:flex rounded-full w-10 h-10"
+              className="hidden sm:block rounded-full w-10 h-10"
             />
           </div>
         ) : isLoggedIn ? (

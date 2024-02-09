@@ -18,13 +18,13 @@ const Tabs = ({ onTabChange }) => {
 
   return (
     <div>
-      <div className="flex justify-center max-w-full space-x-5 py-10 bg-gray-50">
+      <div className="flex justify-center max-w-full space-x-5 py-4 bg-gray-300">
         <h3
           className={`${
             activeTab === "My Booking"
               ? "bg-black text-white"
-              : "bg-gray-300 text-gray-700"
-          } p-2 px-4 my-4
+              : "bg-gray-200 text-gray-400"
+          } p-2 text  my-4
            rounded-t-lg`}
           onClick={() => changeTab("My Booking")}
         >
@@ -35,8 +35,8 @@ const Tabs = ({ onTabChange }) => {
             className={`${
               activeTab === "My Venue"
                 ? "bg-black text-white"
-                : "bg-gray-300 text-gray-700"
-            } p-2 px-4 my-4 rounded-t-lg`}
+                : "bg-gray-200 text-gray-400"
+            } p-2 text  my-4 rounded-t-lg`}
             onClick={() => changeTab("My Venue")}
           >
             Your Venues
@@ -44,7 +44,7 @@ const Tabs = ({ onTabChange }) => {
         )}
       </div>
 
-      <div className="bg-white p-4 rounded-b-lg -z-0">
+      <div className="bg-white p-0 md:p-4 rounded-b-lg -z-0">
         {activeTab === "My Booking" && <BookingsCards />}
         {activeTab === "My Venue" && <VenuesCards />}
       </div>
