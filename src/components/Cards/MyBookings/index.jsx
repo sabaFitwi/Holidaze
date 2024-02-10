@@ -4,6 +4,7 @@ import { getProfile } from "../../../hooks/useProfile";
 import { useNavigate } from "react-router-dom";
 import useDeleteApi from "../../../hooks/useDelete";
 import ConfirmationModal from "../../DeleteModal/DeleteConfirm";
+import { bookingUrl } from "../../../api";
 
 function BookingsCards() {
   const [myBookingsData, setMyBookingsData] = useState([]);
@@ -15,12 +16,12 @@ function BookingsCards() {
   const [showActiveBookings, setShowActiveBookings] = useState(true);
 
   const navigate = useNavigate();
-  const { isLoading, deleteCard } = useDeleteApi();
+  const { isLoading, deleteCard: deleteBooking } = useDeleteApi();
 
-  const handleEditClick = (bookingId) => {
-    const updateRoute = `/updatebooking/${bookingId}`;
+  const handleEditClick = (id) => {
+    const updateRoute = `/updatebooking/${id}`;
     navigate(updateRoute);
-    console.log(`Edit button clicked for booking ID: ${bookingId}`);
+    console.log(`Edit button clicked for booking ID: ${id}`);
   };
 
   const handleCloseModal = () => {
@@ -29,11 +30,11 @@ function BookingsCards() {
     setShowSuccess(false);
   };
 
-  const handleBookingDelete = async (bookingId) => {
+  const handleBookingDelete = async (id) => {
     try {
-      await deleteCard(bookingId);
+      await deleteBooking(bookingUrl + "/" + id);
       setMyBookingsData((prevData) =>
-        prevData.filter((booking) => booking.id !== bookingId),
+        prevData.filter((booking) => booking.id !== id),
       );
       setIsModalOpen(false);
       setSelectedBooking(null);
@@ -153,6 +154,7 @@ function BookingsCards() {
                 dateFrom={formatDate(booking.dateFrom)}
                 dateTo={formatDate(booking.dateTo)}
                 guests={booking.guests}
+                updated={booking.updated}
                 country={booking.venue.location.country}
                 continent={booking.venue.location.continent}
                 city={booking.venue.location.city}
@@ -166,10 +168,14 @@ function BookingsCards() {
             </div>
           ))}
       </div>
+
       <ConfirmationModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onConfirm={() => handleBookingDelete(selectedBooking)}
+        message="Are you sure you want to delete this item?"
+        confirmText="Delete Permanently"
+        cancelText="Cancel"
       />
       {showSuccess && (
         <div className="fixed inset-0 flex items-center justify-center">

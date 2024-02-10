@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../../components/Ui/Button";
 import Input from "../../../components/Ui/Input";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // Import the styles for react-date-range
 import "react-date-range/dist/theme/default.css";
@@ -13,6 +13,7 @@ import usePut from "../../../hooks/usePut";
 const UpdateBooking = () => {
   const { id } = useParams();
   const { updateItem, isUpdating, isError, errorMessage } = usePut();
+  const navigate = useNavigate();
 
   const [date, setDate] = useState([
     {
@@ -23,11 +24,10 @@ const UpdateBooking = () => {
   ]);
 
   const [guests, setGuests] = useState(0);
-  const {
-    data,
-    isLoading,
-    isError: bookingError,
-  } = useApi(`${bookingUrl}/${id}`);
+  const [showModal, setShowModal] = useState(false); // State for modal visibility
+  const [isLoading, setIsLoading] = useState(false);
+  const [bookingError, setBookingError] = useState(false);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     if (!isLoading && !bookingError && data) {
@@ -56,8 +56,10 @@ const UpdateBooking = () => {
     setGuests(parseInt(e.target.value, 10));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
+      setIsLoading(true);
       const response = await updateItem(`${bookingUrl}/${id}`, null, {
         dateFrom: date[0].startDate.toISOString(),
         dateTo: date[0].endDate.toISOString(),
@@ -69,11 +71,21 @@ const UpdateBooking = () => {
       }
 
       console.log("Success:", response);
-      alert("Booking updated successfully!");
+      setIsLoading(false);
+      setShowModal(true); // Set showModal state to true to display the modal
     } catch (error) {
       console.error("Error:", error);
-      alert("Error updating booking. Please try again.");
+      setIsLoading(false);
+      setBookingError(true);
     }
+  };
+
+  const handleGoToProfile = () => {
+    navigate("/profile");
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false); // Set showModal state to false to close the modal
   };
 
   return (
@@ -113,10 +125,23 @@ const UpdateBooking = () => {
           />
         </div>
 
-        <Button type="button" onClick={handleSubmit}>
-          Update
+        <Button type="button" onClick={handleSubmit} disabled={isLoading}>
+          {isLoading ? "Updating..." : "Update"}
         </Button>
       </form>
+
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg">
+            <p className="mb-4">Booking updated successfully!</p>
+            <div className="flex justify-end">
+              <Button onClick={handleGoToProfile}>Go to Profile</Button>
+              <Button onClick={handleCloseModal}>Cancel</Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <ScrollToTopButton />
     </div>
   );

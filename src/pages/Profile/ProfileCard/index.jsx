@@ -52,7 +52,7 @@ const ProfileCard = () => {
   };
 
   return (
-    <div className="flex justify-around items-center lg:items-start lg:min-h-screen p-4 mt-2">
+    <div className="flex justify-around items-center bg-white lg:items-start lg:min-h-screen p-4 mt-2">
       {profileData && (
         <div className="flex flex-col  sm:flex-row lg:flex-col justify-center  sm:max-w-1/3 p-6 shadow-lg sticky top-40 rounded-xl sm:px-12">
           {profileData.avatar ? (

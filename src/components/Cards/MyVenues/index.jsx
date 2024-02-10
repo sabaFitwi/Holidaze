@@ -4,18 +4,19 @@ import { getProfile } from "../../../hooks/useProfile";
 import { useNavigate } from "react-router-dom";
 import useDeleteApi from "../../../hooks/useDelete";
 import ConfirmationModal from "../../DeleteModal/DeleteConfirm";
+import { createVenueUrl } from "../../../api";
 
 function VenuesCards() {
   const [hostingData, setHostingData] = useState([]);
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [searchTerm, setSearchTerm] = useState(""); // State for search term
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  const { loading, error, deleteCard: deleteVenue } = useDeleteApi("booking");
+  const { isLoading, error, deleteCard: deleteVenue } = useDeleteApi();
 
-  const handleEditClick = (venueId) => {
-    const updateRoute = `/update/${venueId}`;
+  const handleEditClick = (id) => {
+    const updateRoute = `/update/${id}`;
     navigate(updateRoute);
   };
   const handleCloseModal = () => {
@@ -24,12 +25,12 @@ function VenuesCards() {
     setShowSuccess(false);
   };
 
-  const handleVenueDelete = async (venueId) => {
+  const handleVenueDelete = async (id) => {
     try {
-      await deleteVenue(venueId);
-
+      await deleteVenue(createVenueUrl + "/" + id);
+      console.log(id);
       setHostingData((prevData) =>
-        prevData.filter((booking) => booking.id !== venueId),
+        prevData.filter((booking) => booking.id !== id),
       );
 
       setIsModalOpen(false);
@@ -55,13 +56,14 @@ function VenuesCards() {
       .catch((error) => console.error("Error fetching profile data:", error));
   }, []);
 
-  const filteredHostings = hostingData.filter((hosting) =>
+  const filteredHosting = hostingData.filter((hosting) =>
     hosting.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  if (!hostingData) {
-    return <div>{loading}</div>;
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
+
   if (error) {
     return <div>Error: {error.message}</div>;
   }
@@ -76,7 +78,7 @@ function VenuesCards() {
           onChange={(e) => setSearchTerm(e.target.value)}
           className=" w-full align-center p-2 border-2 text mb-4"
         />
-        {filteredHostings.reverse().map((hosting) => (
+        {filteredHosting.reverse().map((hosting) => (
           <div key={hosting.id}>
             <VenueCard
               id={hosting.id}
@@ -102,10 +104,14 @@ function VenuesCards() {
           </div>
         ))}
       </div>
+
       <ConfirmationModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onConfirm={() => handleVenueDelete(selectedBooking)}
+        message="Are you sure you want to delete this item?"
+        confirmText="Delete Permanently"
+        cancelText="Cancel"
       />
       {showSuccess && (
         <div className="fixed inset-0 flex items-center justify-center">

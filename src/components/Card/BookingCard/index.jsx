@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import ScrollToTopButton from "../../ScrollToTopButton";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
+import { daysSincePosted } from "../../utils/DateSincePost";
 
 function BookingCard({
   title,
   dateFrom,
   dateTo,
   media,
+  updated,
   price,
   guests,
   country,
@@ -23,7 +25,7 @@ function BookingCard({
   };
   return (
     <div className="flex flex-col sm:flex-row border cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out ease my-2">
-      <div className="relative w-full md:w-[40%] h-40 ">
+      <div className="relative w-full md:w-[40%] h-60 ">
         <img
           src={media}
           alt={title}
@@ -67,9 +69,9 @@ function BookingCard({
         <p
           className={`font-semibold  text pb-2 ${isExpired ? "text-red-500" : ""}`}
         >
-          Booked date:
+          Booked From :
           <span className="ml-1 font-normal">
-            {dateFrom} - {dateTo}
+            {dateFrom}- To -{dateTo}
           </span>
         </p>
         <p className="font-semibold text pb-2">
@@ -81,10 +83,16 @@ function BookingCard({
             {guests} Guests
           </span>
         </p>
-        <p className=" font-semibold  text">
+        <p className=" font-semibold  pb-2 text">
           Location:
           <span className="text-gray-700 ml-2 font-normal">
             {continent}, {country}, {city}
+          </span>
+        </p>
+        <p className=" font-semibold text pb-2">
+          Booking Created:
+          <span className="text-gray-700 ml-1 font-normal">
+            {daysSincePosted(updated)} ago
           </span>
         </p>
       </div>
