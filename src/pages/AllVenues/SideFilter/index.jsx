@@ -3,12 +3,6 @@ import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import Button from "../../../components/Ui/Button";
 import Input from "../../../components/Ui/Input";
-// import {
-//   faBed,
-//   faCalendarDays,
-//   faPerson,
-// } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const List = () => {
   const [destination, setDestination] = useState("");

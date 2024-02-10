@@ -9,6 +9,7 @@ import { TbCoffee, TbCoffeeOff } from "react-icons/tb";
 import StarRating from "../../../components/RatingStars";
 import { daysSincePosted } from "../../utils/DateSincePost";
 import ScrollToTopButton from "../../../components/ScrollToTopButton";
+import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 
 function VenueCard({
   id,
@@ -57,9 +58,9 @@ function VenueCard({
           <div className="relative">
             <div
               onClick={toggleDropdown}
-              className="font-semibold cursor-pointer"
+              className="font-semibold border py-1 cursor-pointer"
             >
-              ...
+              <PiDotsThreeOutlineVerticalFill />
             </div>
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 py-2 border rounded shadow-lg bg-white z-10">

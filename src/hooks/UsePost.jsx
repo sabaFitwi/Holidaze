@@ -1,23 +1,21 @@
 import { useState } from "react";
+import Headers from "./useHeader";
 
 const usePOST = () => {
-  const options = (data, accessToken) => ({
+  const options = (data) => ({
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
+    headers: Headers("application/json"),
     body: JSON.stringify(data),
   });
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const postRequest = async (url, data, accessToken = null) => {
+  const postRequest = async (url, data) => {
     setIsLoading(true);
     setIsError(false);
 
     try {
-      const response = await fetch(url, options(data, accessToken));
+      const response = await fetch(url, options(data));
       const results = await response.json();
       console.log(results);
 

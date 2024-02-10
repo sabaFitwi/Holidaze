@@ -17,7 +17,6 @@ function VenuesCards() {
   const handleEditClick = (venueId) => {
     const updateRoute = `/update/${venueId}`;
     navigate(updateRoute);
-    console.log(`Edit button clicked for booking ID: ${venueId}`);
   };
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -47,11 +46,15 @@ function VenuesCards() {
   };
   useEffect(() => {
     getProfile()
-      .then((data) => setHostingData(data.venues))
+      .then((data) => {
+        const sortedHosting = data.venues.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+        );
+        setHostingData(sortedHosting);
+      })
       .catch((error) => console.error("Error fetching profile data:", error));
   }, []);
 
-  // Filter the hostingData based on the searchTerm
   const filteredHostings = hostingData.filter((hosting) =>
     hosting.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );

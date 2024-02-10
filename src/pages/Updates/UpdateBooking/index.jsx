@@ -6,9 +6,14 @@ import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // Import the styles for react-date-range
 import "react-date-range/dist/theme/default.css";
 import ScrollToTopButton from "../../../components/ScrollToTopButton";
+import useApi from "../../../hooks/useApi";
+import { bookingUrl } from "../../../api";
+import usePut from "../../../hooks/usePut";
 
 const UpdateBooking = () => {
   const { id } = useParams();
+  const { updateItem, isUpdating, isError, errorMessage } = usePut();
+
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -16,49 +21,32 @@ const UpdateBooking = () => {
       key: "selection",
     },
   ]);
+
   const [guests, setGuests] = useState(0);
+  const {
+    data,
+    isLoading,
+    isError: bookingError,
+  } = useApi(`${bookingUrl}/${id}`);
 
   useEffect(() => {
-    const fetchBookingData = async () => {
+    if (!isLoading && !bookingError && data) {
       try {
-        const accessToken = localStorage.getItem("Token");
-        const response = await fetch(
-          `https://api.noroff.dev/api/v1/holidaze/bookings/${id}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          },
-        );
+        const { dateFrom, dateTo, guests } = data;
+        const startDate = new Date(dateFrom);
+        const endDate = new Date(dateTo);
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+          setDate([{ startDate, endDate, key: "selection" }]);
+          setGuests(guests);
+        } else {
+          console.error("Invalid dates received:", dateFrom, dateTo);
         }
-
-        const bookingData = await response.json();
-        console.log(bookingData);
-
-        // Convert date strings to the format yyyy-MM-dd
-        const formattedStartDate = new Date(bookingData.dateFrom).toISOString();
-        const formattedEndDate = new Date(bookingData.dateTo).toISOString();
-
-        setDate([
-          {
-            startDate: new Date(formattedStartDate),
-            endDate: new Date(formattedEndDate),
-            key: "selection",
-          },
-        ]);
-        setGuests(bookingData.guests);
       } catch (error) {
         console.error("Error:", error);
-        // Handle error fetching booking data
       }
-    };
-
-    fetchBookingData();
-  }, [id]);
+    }
+  }, [isLoading, bookingError, data]);
 
   const handleDateChange = (ranges) => {
     setDate([ranges.selection]);
@@ -70,29 +58,17 @@ const UpdateBooking = () => {
 
   const handleSubmit = async () => {
     try {
-      const accessToken = localStorage.getItem("Token");
-      const response = await fetch(
-        `https://api.noroff.dev/api/v1/holidaze/bookings/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            dateFrom: date[0].startDate.toISOString(),
-            dateTo: date[0].endDate.toISOString(),
-            guests: guests,
-          }),
-        },
-      );
+      const response = await updateItem(`${bookingUrl}/${id}`, null, {
+        dateFrom: date[0].startDate.toISOString(),
+        dateTo: date[0].endDate.toISOString(),
+        guests: guests,
+      });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+      if (!response) {
+        throw new Error("Failed to update booking");
       }
 
-      const responseData = await response.json();
-      console.log("Success:", responseData);
+      console.log("Success:", response);
       alert("Booking updated successfully!");
     } catch (error) {
       console.error("Error:", error);
@@ -101,7 +77,7 @@ const UpdateBooking = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto shadow p-4 my-8">
+    <div className="max-w-2xl mx-auto px-4 sm:px-8 bg-white shadow py-4 my-8">
       <h1 className="text-2xl font-bold mb-4">Update Booking</h1>
       <form>
         <div className="mb-4">

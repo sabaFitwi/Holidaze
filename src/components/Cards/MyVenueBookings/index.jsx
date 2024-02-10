@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 function MyVenueBooking() {
   const [venueData, setVenueData] = useState(null);
@@ -38,11 +39,16 @@ function MyVenueBooking() {
   };
 
   return (
-    <div className="container mx-auto mt-8 text">
-      <h1 className=" h1 font-bold m-4">Your Venues Booking Information</h1>
+    <div className="container mx-auto my-8 text">
+      <div className="flex items-center mb-4">
+        <Link to="/profile" className="text-primary flex items-center">
+          <FaArrowLeft className="mr-2" /> Back
+        </Link>
+      </div>
+      <h1 className="h1 font-bold m-4">Your Venue Booking Information</h1>
       {venueData && (
-        <div className="flex flex-col rounded-2xl w-full  cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out">
-          <div className="relative w-full h-60 ">
+        <div className="flex flex-col rounded-2xl w-full cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out">
+          <div className="relative w-full h-60">
             <img
               src={venueData.media[0]}
               alt={venueData.name}
@@ -50,9 +56,9 @@ function MyVenueBooking() {
             />
           </div>
 
-          <div className="w-full  flex flex-col  p-2 px-4">
+          <div className="w-full flex flex-col p-2 px-4">
             <p className="font-semibold pb-2 text">
-              Number of Venues Booking:
+              Number of Venue Bookings:
               <span className="ml-1 font-normal">
                 ({venueData.bookings.length})
               </span>
@@ -61,7 +67,7 @@ function MyVenueBooking() {
               Title: <span className="ml-1 font-normal">{venueData.name}</span>
             </p>
 
-            <p className="font-semibold pb-2  text">
+            <p className="font-semibold pb-2 text">
               Price:
               <span className="ml-1 font-normal">
                 {venueData.price} kr/night
@@ -81,7 +87,7 @@ function MyVenueBooking() {
                   : "bg-gray-300 text"
               }`}
             >
-              upcoming Bookings
+              Upcoming Bookings
             </button>
             <button
               onClick={() => setShowActiveBookings(false)}
@@ -106,13 +112,13 @@ function MyVenueBooking() {
               <tbody>
                 {activeBookings.map((booking) => (
                   <tr key={booking.id} className="booking-details">
-                    <td className="border px-4 py-2  ">
+                    <td className="border px-4 py-2">
                       {formatDate(booking.dateFrom)}
                     </td>
-                    <td className="border px-4 py-2  ">
+                    <td className="border px-4 py-2">
                       {formatDate(booking.dateTo)}
                     </td>
-                    <td className="border px-4 py-2  ">{booking.guests}</td>
+                    <td className="border px-4 py-2">{booking.guests}</td>
                   </tr>
                 ))}
               </tbody>

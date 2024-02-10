@@ -76,7 +76,7 @@ function HomeCard({ id, title, imageUrl, maxGuests, description, price }) {
     return result;
   };
   return (
-    <div className="min-h-[400px] cursor-pointer shadow-2xl group mt-12">
+    <div className="min-h-[400px] bg-white cursor-pointer shadow-2xl group mt-12">
       <div className=" overflow-hidden h-40 w-60">
         <img
           src={imageUrl}

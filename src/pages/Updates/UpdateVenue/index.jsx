@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+
 import Input from "../../../components/Ui/Input";
 import { useParams } from "react-router-dom";
 import Button from "../../../components/Ui/Button";
+import { createVenueUrl } from "../../../api";
 import useApi from "../../../hooks/useApi";
-import { useFetchData } from "../../../hooks/useGetData";
-import ScrollToTopButton from "../../../components/ScrollToTopButton";
+import usePut from "../../../hooks/usePut";
 
 const UpdateVenue = () => {
   const { id } = useParams();
@@ -44,15 +45,17 @@ const UpdateVenue = () => {
     data: venueData,
     isLoading,
     isError,
-  } = useFetchData(`https://api.noroff.dev/api/v1/holidaze/venues/${id}`);
-
+  } = useApi(`${createVenueUrl}/${id}`);
+  const { updateItem, isUpdating, errorMessage } = usePut();
+  const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState("");
   useEffect(() => {
     if (!isLoading && venueData) {
       const updatedMeta = {
-        wifi: venueData.meta.wifi,
-        parking: venueData.meta.parking,
-        breakfast: venueData.meta.breakfast,
-        pets: venueData.meta.pets,
+        wifi: venueData.meta?.wifi || false,
+        parking: venueData.meta?.parking || false,
+        breakfast: venueData.meta?.breakfast || false,
+        pets: venueData.meta?.pets || false,
       };
 
       setFormData((prevData) => ({
@@ -139,37 +142,34 @@ const UpdateVenue = () => {
       }));
     }
   };
-
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      const accessToken = localStorage.getItem("Token");
-      const response = await fetch(
+      const response = await updateItem(
         `https://api.noroff.dev/api/v1/holidaze/venues/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify(formData),
-        },
+
+        formData,
       );
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+      if (!response) {
+        throw new Error("Empty response received");
       }
-
-      const responseData = await response.json();
-      console.log("Success:", responseData);
-      alert("Venue updated successfully!");
+      if (response) {
+        setSuccessMessage("Venue updated successfully!");
+        setError("");
+      } else {
+        setError("Error updating venue. Please try again.");
+        setSuccessMessage("");
+      }
     } catch (error) {
       console.error("Error:", error);
-      alert("Error updating venue. Please try again.");
+      setError("Error updating venue. Please try again.");
+      setSuccessMessage("");
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto shadow p-4 my-8">
+    <div className="max-w-2xl  bg-white mx-auto shadow p-4 my-8">
       <h1 className=" font-bold mb-4">Update Venue</h1>
       <form>
         <div className="mb-4">
@@ -309,7 +309,7 @@ const UpdateVenue = () => {
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-600">
-            Amenities
+            Amenities:
           </label>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex items-center">
@@ -531,12 +531,15 @@ const UpdateVenue = () => {
             className="mt-1 p-2 border rounded w-full"
           />
         </div>
+        {successMessage && (
+          <div className="text-green-600">{successMessage}</div>
+        )}
+        {error && <div className="text-red-600">{error}</div>}
 
         <Button type="button" onClick={handleSubmit}>
           Update
         </Button>
       </form>
-      <ScrollToTopButton />
     </div>
   );
 };

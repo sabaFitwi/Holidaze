@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ScrollToTopButton from "../../ScrollToTopButton";
+import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 
 function BookingCard({
   title,
@@ -41,7 +42,9 @@ function BookingCard({
               onClick={toggleDropdown}
               className="font-semibold cursor-pointer"
             >
-              ...
+              <div className="border-1 py-1 ">
+                <PiDotsThreeOutlineVerticalFill />
+              </div>
             </div>
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 py-2 border rounded shadow-lg bg-white z-10">

@@ -51,7 +51,12 @@ function BookingsCards() {
 
   useEffect(() => {
     getProfile()
-      .then((data) => setMyBookingsData(data.bookings))
+      .then((data) => {
+        const sortedBookings = data.bookings.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+        );
+        setMyBookingsData(sortedBookings);
+      })
       .catch((error) => {
         console.error("Error fetching profile data:", error);
         setError(error);
@@ -65,8 +70,16 @@ function BookingsCards() {
     return <div>Error: {error.message}</div>;
   }
 
-  const filteredBookings = myBookingsData.filter((booking) =>
-    booking.venue.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  const currentDate = new Date();
+
+  const activeBookings = myBookingsData.filter(
+    (booking) =>
+      new Date(booking.dateTo) >= currentDate &&
+      booking.venue.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  const expiredBookings = myBookingsData.filter(
+    (booking) => new Date(booking.dateTo) < currentDate,
   );
 
   const formatDate = (dateString) => {
@@ -106,7 +119,7 @@ function BookingsCards() {
 
       <div className="mx-auto grid w-full">
         {showActiveBookings &&
-          filteredBookings.map((booking) => (
+          activeBookings.map((booking) => (
             <div key={booking.id}>
               <BookingCard
                 id={booking.id}
@@ -120,6 +133,7 @@ function BookingsCards() {
                 continent={booking.venue.location.continent}
                 city={booking.venue.location.city}
                 onEditClick={() => handleEditClick(booking.id)}
+                updated={booking.venue.updated}
                 onDeleteClick={() => {
                   setSelectedBooking(booking.id);
                   setIsModalOpen(true);
@@ -129,7 +143,7 @@ function BookingsCards() {
           ))}
 
         {!showActiveBookings &&
-          filteredBookings.map((booking) => (
+          expiredBookings.map((booking) => (
             <div key={booking.id}>
               <BookingCard
                 id={booking.id}
