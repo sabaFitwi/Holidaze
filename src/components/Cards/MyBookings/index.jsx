@@ -3,7 +3,7 @@ import BookingCard from "../../Card/BookingCard";
 import { getProfile } from "../../../hooks/useProfile";
 import { useNavigate } from "react-router-dom";
 import useDeleteApi from "../../../hooks/useDelete";
-import ConfirmationModal from "../../DeleteModal/DeleteConfirm";
+import ConfirmModal from "../../Ui/Modal";
 import { bookingUrl } from "../../../api";
 
 function BookingsCards() {
@@ -53,8 +53,9 @@ function BookingsCards() {
   useEffect(() => {
     getProfile()
       .then((data) => {
+        console.log(data);
         const sortedBookings = data.bookings.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+          (a, b) => new Date(b.updated) - new Date(a.updated),
         );
         setMyBookingsData(sortedBookings);
       })
@@ -95,7 +96,7 @@ function BookingsCards() {
         <button
           onClick={() => setShowActiveBookings(true)}
           className={`px-2 text py-2 ${
-            showActiveBookings ? "bg-blue-500 text-white" : "bg-gray-300"
+            showActiveBookings ? "bg-primary text-white" : "bg-gray-300"
           }`}
         >
           Active Bookings
@@ -103,7 +104,7 @@ function BookingsCards() {
         <button
           onClick={() => setShowActiveBookings(false)}
           className={`px-2 text py-2 ${
-            !showActiveBookings ? "bg-blue-500 text-white" : "bg-gray-300"
+            !showActiveBookings ? "bg-primary text-white" : "bg-gray-300"
           }`}
         >
           Expired Bookings
@@ -169,7 +170,7 @@ function BookingsCards() {
           ))}
       </div>
 
-      <ConfirmationModal
+      <ConfirmModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onConfirm={() => handleBookingDelete(selectedBooking)}

@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../../components/Ui/Button";
-import Input from "../../../components/Ui/Input";
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { DateRange } from "react-date-range";
-import "react-date-range/dist/styles.css"; // Import the styles for react-date-range
+import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import ScrollToTopButton from "../../../components/ScrollToTopButton";
-import useApi from "../../../hooks/useApi";
+
 import { bookingUrl } from "../../../api";
 import usePut from "../../../hooks/usePut";
+import useApi from "../../../hooks/useApi";
+import { FaArrowLeft } from "react-icons/fa";
 
 const UpdateBooking = () => {
   const { id } = useParams();
-  const { updateItem, isUpdating, isError, errorMessage } = usePut();
+  const { updateItem } = usePut();
   const navigate = useNavigate();
 
   const [date, setDate] = useState([
@@ -23,22 +24,25 @@ const UpdateBooking = () => {
     },
   ]);
 
-  const [guests, setGuests] = useState(0);
-  const [showModal, setShowModal] = useState(false); // State for modal visibility
-  const [isLoading, setIsLoading] = useState(false);
-  const [bookingError, setBookingError] = useState(false);
-  const [data, setData] = useState(null);
+  const {
+    data,
+    isLoading,
+    isError: bookingError,
+  } = useApi(`${bookingUrl}/${id}`);
+
+  const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!isLoading && !bookingError && data) {
+      console.log(data);
       try {
-        const { dateFrom, dateTo, guests } = data;
+        const { dateFrom, dateTo } = data;
         const startDate = new Date(dateFrom);
         const endDate = new Date(dateTo);
 
         if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
           setDate([{ startDate, endDate, key: "selection" }]);
-          setGuests(guests);
         } else {
           console.error("Invalid dates received:", dateFrom, dateTo);
         }
@@ -49,21 +53,24 @@ const UpdateBooking = () => {
   }, [isLoading, bookingError, data]);
 
   const handleDateChange = (ranges) => {
-    setDate([ranges.selection]);
-  };
+    const selectedStartDate = new Date(ranges.selection.startDate);
+    const today = new Date();
 
-  const handleGuestsChange = (e) => {
-    setGuests(parseInt(e.target.value, 10));
+    if (selectedStartDate.toDateString() === today.toDateString()) {
+      setError("You cannot book for today. Please select another date.");
+      return;
+    }
+
+    setError("");
+    setDate([ranges.selection]);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      setIsLoading(true);
-      const response = await updateItem(`${bookingUrl}/${id}`, null, {
+      const response = await updateItem(`${bookingUrl}/${id}`, {
         dateFrom: date[0].startDate.toISOString(),
         dateTo: date[0].endDate.toISOString(),
-        guests: guests,
       });
 
       if (!response) {
@@ -71,27 +78,36 @@ const UpdateBooking = () => {
       }
 
       console.log("Success:", response);
-      setIsLoading(false);
-      setShowModal(true); // Set showModal state to true to display the modal
+      setSuccessMessage("Booking updated successfully");
+      setError("");
+
+      setTimeout(() => {
+        navigate("/profile");
+      }, 3000);
     } catch (error) {
       console.error("Error:", error);
-      setIsLoading(false);
-      setBookingError(true);
+      setError("Failed to update booking");
+      setSuccessMessage("");
     }
   };
 
-  const handleGoToProfile = () => {
-    navigate("/profile");
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  const handleCloseModal = () => {
-    setShowModal(false); // Set showModal state to false to close the modal
-  };
+  if (bookingError) {
+    return <div>Error fetching data</div>;
+  }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-8 bg-white shadow py-4 my-8">
-      <h1 className="text-2xl font-bold mb-4">Update Booking</h1>
-      <form>
+    <div className="max-w-2xl mx-auto px-4 sm:px-8 bg-white shadow py-4 my-10">
+      <div className="flex items-center my-4">
+        <Link to="/profile" className="text-primary flex items-center">
+          <FaArrowLeft className="mr-2" /> Back to profile
+        </Link>
+      </div>
+      <h1 className="h1 font-bold mb-4">Update Booking</h1>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
             htmlFor="dateRange"
@@ -103,44 +119,18 @@ const UpdateBooking = () => {
             onChange={handleDateChange}
             minDate={new Date()}
             ranges={date}
-            className="w-full"
           />
         </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="guests"
-            className="block text-sm font-medium text-gray-600"
-          >
-            Guests:
-          </label>
-          <Input
-            type="number"
-            id="guests"
-            name="guests"
-            value={guests}
-            onChange={handleGuestsChange}
-            className="mt-1 p-2 border rounded w-full"
-            required
-          />
-        </div>
+        {successMessage && (
+          <div className="text-green-600 p-4 ">{successMessage}</div>
+        )}
+        {error && <div className="text-red-600 p-4">{error}</div>}
 
-        <Button type="button" onClick={handleSubmit} disabled={isLoading}>
+        <Button type="submit" disabled={isLoading}>
           {isLoading ? "Updating..." : "Update"}
         </Button>
       </form>
-
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-4 rounded-lg">
-            <p className="mb-4">Booking updated successfully!</p>
-            <div className="flex justify-end">
-              <Button onClick={handleGoToProfile}>Go to Profile</Button>
-              <Button onClick={handleCloseModal}>Cancel</Button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <ScrollToTopButton />
     </div>

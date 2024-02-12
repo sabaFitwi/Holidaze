@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-//import { useNavigate } from "react-router-dom";
 import usePOST from "./UsePost";
 import { registerUrl } from "../api";
 
@@ -17,7 +16,7 @@ const useRegister = () => {
   const [errors, setErrors] = useState({});
 
   const [touchedFields, setTouchedFields] = useState({});
-  //const navigate = useNavigate();
+
   const { isLoading, isError, postRequest } = usePOST();
 
   const handleInputChange = (e) => {

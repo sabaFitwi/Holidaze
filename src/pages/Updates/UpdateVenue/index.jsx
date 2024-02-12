@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 import Input from "../../../components/Ui/Input";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "../../../components/Ui/Button";
 import { createVenueUrl } from "../../../api";
 import useApi from "../../../hooks/useApi";
 import usePut from "../../../hooks/usePut";
+import { FaArrowLeft } from "react-icons/fa";
 
 const UpdateVenue = () => {
   const { id } = useParams();
@@ -46,9 +47,10 @@ const UpdateVenue = () => {
     isLoading,
     isError,
   } = useApi(`${createVenueUrl}/${id}`);
-  const { updateItem, isUpdating, errorMessage } = usePut();
+  const { updateItem } = usePut();
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
+
   useEffect(() => {
     if (!isLoading && venueData) {
       const updatedMeta = {
@@ -142,11 +144,12 @@ const UpdateVenue = () => {
       }));
     }
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await updateItem(
-        `https://api.noroff.dev/api/v1/holidaze/venues/${id}`,
+        `${createVenueUrl}/${id}`,
 
         formData,
       );
@@ -169,7 +172,12 @@ const UpdateVenue = () => {
   };
 
   return (
-    <div className="max-w-2xl  bg-white mx-auto shadow p-4 my-8">
+    <div className="max-w-2xl  bg-white mx-auto shadow p-4 my-10">
+      <div className="flex items-center my-4">
+        <Link to="/profile" className="text-primary flex items-center">
+          <FaArrowLeft className="mr-2" /> Back to profile
+        </Link>
+      </div>
       <h1 className=" font-bold mb-4">Update Venue</h1>
       <form>
         <div className="mb-4">
@@ -532,9 +540,9 @@ const UpdateVenue = () => {
           />
         </div>
         {successMessage && (
-          <div className="text-green-600">{successMessage}</div>
+          <div className="text-green-600 p-4">{successMessage}</div>
         )}
-        {error && <div className="text-red-600">{error}</div>}
+        {error && <div className="text-red-600 p-4">{error}</div>}
 
         <Button type="button" onClick={handleSubmit}>
           Update

@@ -6,6 +6,7 @@ import { updateAuthStatus } from "../../utils/authUtils";
 const Tabs = ({ onTabChange }) => {
   const [activeTab, setActiveTab] = useState("My Booking");
   const [isVenueManager, setIsVenueManager] = useState(false);
+  const [position, setPosition] = useState("");
 
   useEffect(() => {
     updateAuthStatus(setIsVenueManager);
@@ -14,18 +15,19 @@ const Tabs = ({ onTabChange }) => {
   const changeTab = (tab) => {
     setActiveTab(tab);
     onTabChange(tab);
+
+    setPosition(tab === "My Booking" ? "translateX(0)" : "translateX(100%)");
   };
 
   return (
     <div>
-      <div className="flex justify-center max-w-full space-x-5 py-4 bg-gray-300">
+      <div className="flex justify-center max-w-full space-x-5 pt-1">
         <h3
           className={`${
             activeTab === "My Booking"
               ? "bg-black text-white"
               : "bg-gray-200 text-gray-400"
-          } p-2 text  my-4
-           rounded-t-lg`}
+          } p-2 text  my-1 rounded-t-lg cursor-pointer`}
           onClick={() => changeTab("My Booking")}
         >
           Your Bookings
@@ -36,7 +38,7 @@ const Tabs = ({ onTabChange }) => {
               activeTab === "My Venue"
                 ? "bg-black text-white"
                 : "bg-gray-200 text-gray-400"
-            } p-2 text  my-4 rounded-t-lg`}
+            } p-2 text  my-1 rounded-t-lg cursor-pointer`}
             onClick={() => changeTab("My Venue")}
           >
             Your Venues
@@ -44,7 +46,11 @@ const Tabs = ({ onTabChange }) => {
         )}
       </div>
 
-      <div className="bg-white p-0 md:p-4 rounded-b-lg -z-0">
+      <div className="bg-white p-0 md:p-4 rounded-b-lg relative overflow-hidden">
+        <div
+          className="absolute bg-black h-1 w-1/2 transition-transform duration-300"
+          style={{ transform: position }}
+        />
         {activeTab === "My Booking" && <BookingsCards />}
         {activeTab === "My Venue" && <VenuesCards />}
       </div>

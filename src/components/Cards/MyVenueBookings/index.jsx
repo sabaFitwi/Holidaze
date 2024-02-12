@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import { createVenueUrl } from "../../../api";
 
 function MyVenueBooking() {
   const [venueData, setVenueData] = useState(null);
@@ -10,9 +11,7 @@ function MyVenueBooking() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(
-      `https://api.noroff.dev/api/v1/holidaze/venues/${id}?_bookings=true&_owner=true`,
-    )
+    fetch(`${createVenueUrl}/${id}?_bookings=true&_owner=true`)
       .then((response) => response.json())
       .then((data) => {
         setVenueData(data);
@@ -42,7 +41,7 @@ function MyVenueBooking() {
     <div className="container mx-auto my-8 text">
       <div className="flex items-center mb-4">
         <Link to="/profile" className="text-primary flex items-center">
-          <FaArrowLeft className="mr-2" /> Back
+          <FaArrowLeft className="mr-2" /> Back to Profile
         </Link>
       </div>
       <h1 className="h1 font-bold m-4">Your Venue Booking Information</h1>

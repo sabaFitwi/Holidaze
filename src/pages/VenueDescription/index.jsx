@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Headers from "../../hooks/useHeader";
+
 import Button from "../../components/Ui/Button";
 import Input from "../../components/Ui/Input";
 import { useFetchData } from "../../hooks/useGetData";
-import { createVenueUrl } from "../../api";
+import { bookingUrl, createVenueUrl } from "../../api";
 import StarRating from "../../components/RatingStars";
 
 import DateInput from "../../components/Ui/DateInput";
@@ -14,6 +14,7 @@ import VenueAmenities from "./VenueAmenities";
 import { FaCalendarDay, FaUsers } from "react-icons/fa";
 import { daysSincePosted } from "../../components/utils/DateSincePost";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
+import usePOST from "../../hooks/UsePost";
 
 function VenueDescription({ onUpdate }) {
   const { id } = useParams();
@@ -30,6 +31,7 @@ function VenueDescription({ onUpdate }) {
   const { data, isLoading, error } = useFetchData(
     createVenueUrl + `/${id}?_bookings=true&_owner=true`,
   );
+  const { postRequest: postBookingRequest } = usePOST();
 
   const existingBookings = data && data.bookings ? data.bookings : [];
 
@@ -40,25 +42,46 @@ function VenueDescription({ onUpdate }) {
   }, [data]);
 
   useEffect(() => {
+    const calculateTotalCost = () => {
+      const pricePerNight = data.price || 0;
+
+      const startTime = startDate.getTime();
+      const endTime = endDate.getTime();
+
+      const differenceInTime = endTime - startTime;
+
+      const nightCount = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+
+      const totalNights = nightCount + 1;
+      setTotalNights(totalNights);
+
+      const newTotalCost = pricePerNight * totalNights * guests;
+      setTotalCost(newTotalCost.toFixed(2));
+    };
+
     calculateTotalCost();
-  }, [startDate, endDate, guests]);
+  }, [startDate, endDate, guests, data.price]);
 
-  const calculateTotalCost = () => {
-    const pricePerNight = data.price || 0;
+  // useEffect(() => {
+  //   calculateTotalCost();
+  // }, [startDate, endDate, guests, calculateTotalCost]);
 
-    const startTime = startDate.getTime();
-    const endTime = endDate.getTime();
+  // const calculateTotalCost = () => {
+  //   const pricePerNight = data.price || 0;
 
-    const differenceInTime = endTime - startTime;
+  //   const startTime = startDate.getTime();
+  //   const endTime = endDate.getTime();
 
-    const nightCount = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+  //   const differenceInTime = endTime - startTime;
 
-    const totalNights = nightCount + 1;
-    setTotalNights(totalNights);
+  //   const nightCount = Math.ceil(differenceInTime / (1000 * 3600 * 24));
 
-    const newTotalCost = pricePerNight * totalNights * guests;
-    setTotalCost(newTotalCost.toFixed(2));
-  };
+  //   const totalNights = nightCount + 1;
+  //   setTotalNights(totalNights);
+
+  //   const newTotalCost = pricePerNight * totalNights * guests;
+  //   setTotalCost(newTotalCost.toFixed(2));
+  // };
 
   const maxGuests = data.maxGuests || 0;
 
@@ -94,18 +117,13 @@ function VenueDescription({ onUpdate }) {
     };
 
     try {
-      const response = await fetch(
-        "https://api.noroff.dev/api/v1/holidaze/bookings",
-        {
-          method: "POST",
-          headers: Headers("application/json"),
-          body: JSON.stringify(bookingData),
-        },
+      const { success, error } = await postBookingRequest(
+        `${bookingUrl}`,
+        bookingData,
       );
 
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log("Booking successful", responseData);
+      if (success) {
+        console.log("Booking successful");
         setSuccessMessage("Booking successful!");
         setTimeout(() => {
           setSuccessMessage("");
@@ -116,11 +134,11 @@ function VenueDescription({ onUpdate }) {
           onUpdate();
         }
       } else {
-        console.error("Error during booking", response.statusText);
+        console.error("Error during booking", error);
         setValidationMessage("Error during booking. Please try again.");
       }
     } catch (error) {
-      console.error("Error during booking", error.message);
+      console.error("Error during booking", error);
       setValidationMessage("Error during booking. Please try again.");
     }
   };
