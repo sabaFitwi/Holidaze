@@ -13,7 +13,7 @@ const Home = () => {
         <title>Holidayz</title>
       </head>
       <Banner />
-      <main className="w-full mx-auto px-8 sm:px-16">
+      <main className="w-full mx-auto px-8 sm:px-16 pt-20">
         <section>
           <InfoSection />
         </section>
