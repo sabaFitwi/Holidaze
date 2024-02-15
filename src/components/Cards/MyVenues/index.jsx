@@ -76,7 +76,7 @@ function VenuesCards() {
           placeholder="Search your Venues..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className=" w-full align-center p-2 border-2 text mb-4"
+          className=" w-[80%] align-center p-2 border-2 rounded text mx-auto my-4"
         />
         {filteredHosting.reverse().map((hosting) => (
           <div key={hosting.id}>

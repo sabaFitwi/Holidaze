@@ -92,14 +92,21 @@ function BookingsCards() {
 
   return (
     <div>
-      <div className="flex justify-between m-4">
+      <input
+        type="text"
+        placeholder="Search bookings..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="w-[80%] align-center p-2 border-2 rounded my-4 mx-auto text"
+      />
+      <div className="flex justify-between mt-2">
         <button
           onClick={() => setShowActiveBookings(true)}
           className={`px-2 text py-2 ${
             showActiveBookings ? "bg-primary text-white" : "bg-gray-300"
           }`}
         >
-          Active Bookings
+          Upcoming Bookings
         </button>
         <button
           onClick={() => setShowActiveBookings(false)}
@@ -110,14 +117,6 @@ function BookingsCards() {
           Expired Bookings
         </button>
       </div>
-
-      <input
-        type="text"
-        placeholder="Search bookings..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full align-center text p-2 border-2 mb-4 text"
-      />
 
       <div className="mx-auto grid w-full">
         {showActiveBookings &&
