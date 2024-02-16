@@ -15,6 +15,7 @@ import { FaCalendarDay, FaUsers } from "react-icons/fa";
 import { daysSincePosted } from "../../components/utils/DateSincePost";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import usePOST from "../../hooks/UsePost";
+import SEO from "../../components/SEO";
 
 function VenueDescription({ onUpdate }) {
   const { id } = useParams();
@@ -61,27 +62,6 @@ function VenueDescription({ onUpdate }) {
 
     calculateTotalCost();
   }, [startDate, endDate, guests, data.price]);
-
-  // useEffect(() => {
-  //   calculateTotalCost();
-  // }, [startDate, endDate, guests, calculateTotalCost]);
-
-  // const calculateTotalCost = () => {
-  //   const pricePerNight = data.price || 0;
-
-  //   const startTime = startDate.getTime();
-  //   const endTime = endDate.getTime();
-
-  //   const differenceInTime = endTime - startTime;
-
-  //   const nightCount = Math.ceil(differenceInTime / (1000 * 3600 * 24));
-
-  //   const totalNights = nightCount + 1;
-  //   setTotalNights(totalNights);
-
-  //   const newTotalCost = pricePerNight * totalNights * guests;
-  //   setTotalCost(newTotalCost.toFixed(2));
-  // };
 
   const maxGuests = data.maxGuests || 0;
 
@@ -152,135 +132,143 @@ function VenueDescription({ onUpdate }) {
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-24">
-      <h1 className="h1 mb-4 font-bold text-gray-800 capitalize md:hidden">
-        {data.name}
-      </h1>
-      <div className="flex flex-col md:flex-row -mx-4">
-        <div className="w-full md:w-[60%] divide-y">
-          <div className="md:flex-1 px-4 divide-y">
-            <div className="grid gap-4">
+    <div>
+      <SEO
+        title="Detail | Holidaze"
+        description="Select dates and explore all the venue details. Easy booking, easy planning with Holidaze."
+      />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-24">
+        <h1 className="h1 mb-4 font-bold text-gray-800 capitalize md:hidden">
+          {data.name}
+        </h1>
+        <div className="flex flex-col md:flex-row -mx-4">
+          <div className="w-full md:w-[60%] divide-y">
+            <div className="md:flex-1 px-4 divide-y">
+              <div className="grid gap-4">
+                <img
+                  className="h-auto w-full max-w-full rounded-lg object-cover object-center md:h-[480px]"
+                  src={active}
+                  alt="venueImage"
+                />
+                <VenueImages images={data.media} setActive={setActive} />
+              </div>
+            </div>
+            <div className="flex items-center py-4 mt-4 ">
               <img
-                className="h-auto w-full max-w-full rounded-lg object-cover object-center md:h-[480px]"
-                src={active}
-                alt="venueImage"
+                className="w-20 h-20 rounded-full m-4"
+                src={data.owner?.avatar}
+                alt="Avatar of Writer"
               />
-              <VenueImages images={data.media} setActive={setActive} />
+              <div className="text-sm ">
+                <h4 className="text-gray-900  text-sm">
+                  Hosted by
+                  <span className="font-bold mx-2">{data.owner?.name}</span>
+                </h4>
+                <p className="text-gray-600 text-xs">
+                  Posted. {daysSincePosted(data.updated)} ago
+                </p>
+                <div className="flex items-center pb-2">
+                  <StarRating rating={data.rating} />
+                  <span className="ml-1 text-sm">({data.rating})</span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center py-4 mt-4 ">
-            <img
-              className="w-20 h-20 rounded-full m-4"
-              src={data.owner?.avatar}
-              alt="Avatar of Writer"
-            />
-            <div className="text-sm ">
-              <h4 className="text-gray-900  text-sm">
-                Hosted by
-                <span className="font-bold mx-2">{data.owner?.name}</span>
-              </h4>
-              <p className="text-gray-600 text-xs">
-                Posted. {daysSincePosted(data.updated)} ago
-              </p>
-              <div className="flex items-center pb-2">
-                <StarRating rating={data.rating} />
-                <span className="ml-1 text-sm">({data.rating})</span>
+            <div className=" divide-y">
+              <VenueAmenities data={data} />
+              <div className="flex my-4 ml-4 py-4">
+                <FaUsers className="text-gray-800 mr-2" />
+                <span className="text-sm">Maximum Guests {data.maxGuests}</span>
               </div>
             </div>
           </div>
-          <div className=" divide-y">
-            <VenueAmenities data={data} />
-            <div className="flex my-4 ml-4 py-4">
-              <FaUsers className="text-gray-800 mr-2" />
-              <span className="text-sm">Maximum Guests {data.maxGuests}</span>
+
+          <div className=" w-full md:w-[40%]  px-4">
+            <h1 className="h1 mb-4 font-bold text-gray-800 capitalize hidden md:block">
+              {data.name}
+            </h1>
+            <p className="text-gray-700">{data.description}</p>
+
+            <div className="flex items-center space-x-4 my-4">
+              <div className="rounded-lg bg-gray-100 flex items-end py-2 px-3 ">
+                <span className="font-bold text-primary text-xl">
+                  {data.price} kr
+                </span>
+
+                <span className=" mx-2 text-sm">/Night</span>
+              </div>
             </div>
-          </div>
-        </div>
+            <div>
+              <div className="my-4">
+                <div className="flex items-center mb-1">
+                  <FaCalendarDay />
+                  <p className="ml-2 text-sm font-semibold">
+                    CheckIn - Checkout
+                  </p>
+                </div>
 
-        <div className=" w-full md:w-[40%]  px-4">
-          <h1 className="h1 mb-4 font-bold text-gray-800 capitalize hidden md:block">
-            {data.name}
-          </h1>
-          <p className="text-gray-700">{data.description}</p>
-
-          <div className="flex items-center space-x-4 my-4">
-            <div className="rounded-lg bg-gray-100 flex items-end py-2 px-3 ">
-              <span className="font-bold text-primary text-xl">
-                {data.price} kr
-              </span>
-
-              <span className=" mx-2 text-sm">/Night</span>
-            </div>
-          </div>
-          <div>
-            <div className="my-4">
-              <div className="flex items-center mb-1">
-                <FaCalendarDay />
-                <p className="ml-2 text-sm font-semibold">CheckIn - Checkout</p>
+                <DateInput
+                  label="Check-In"
+                  value={{ startDate, endDate }}
+                  onChange={(date) => {
+                    setStartDate(date.startDate);
+                    setEndDate(date.endDate);
+                  }}
+                  placeholder="Choose a date"
+                  existingBookings={existingBookings}
+                  className="text-sm mt-1"
+                />
               </div>
 
-              <DateInput
-                label="Check-In"
-                value={{ startDate, endDate }}
-                onChange={(date) => {
-                  setStartDate(date.startDate);
-                  setEndDate(date.endDate);
-                }}
-                placeholder="Choose a date"
-                existingBookings={existingBookings}
-                className="text-sm mt-1"
-              />
-            </div>
+              <div className=" my-4 ">
+                <div className="flex item-center mb-1">
+                  <FaUsers />
+                  <p className="ml-2  font-semibold text-sm">Guests</p>
+                </div>
 
-            <div className=" my-4 ">
-              <div className="flex item-center mb-1">
-                <FaUsers />
-                <p className="ml-2  font-semibold text-sm">Guests</p>
+                <Input
+                  type="number"
+                  placeholder="Number of guests"
+                  value={guests}
+                  onChange={handleGuestChange}
+                  className=" border text-sm mt-1 "
+                />
+                {validationMessage && (
+                  <div className="text-red-500 text-sm mt-2 divide-y">
+                    {validationMessage}
+                  </div>
+                )}
               </div>
-
-              <Input
-                type="number"
-                placeholder="Number of guests"
-                value={guests}
-                onChange={handleGuestChange}
-                className=" border text-sm mt-1 "
-              />
-              {validationMessage && (
-                <div className="text-red-500 text-sm mt-2 divide-y">
-                  {validationMessage}
+              {successMessage && (
+                <div className="text-green-500 text-sm mt-2">
+                  {successMessage}
                 </div>
               )}
-            </div>
-            {successMessage && (
-              <div className="text-green-500 text-sm mt-2">
-                {successMessage}
+
+              <div className="flex-1 text-right border-b border-t ">
+                <p>Night(s): {totalNights}</p>
+                <p className=" text-xl font-semibold">
+                  Total Price: {totalCost} kr
+                </p>
               </div>
-            )}
 
-            <div className="flex-1 text-right border-b border-t ">
-              <p>Night(s): {totalNights}</p>
-              <p className=" text-xl font-semibold">
-                Total Price: {totalCost} kr
-              </p>
-            </div>
-
-            <div className="mt-4 text-center">
-              <Button
-                type="button"
-                onClick={handleFiltersSubmit}
-                className={`bg-primary w-full text-gray-100 hover:bg-gray-700 ${
-                  successMessage ? "cursor-not-allowed" : ""
-                }`}
-                disabled={successMessage ? true : false}
-              >
-                Book Now
-              </Button>
+              <div className="mt-4 text-center">
+                <Button
+                  type="button"
+                  onClick={handleFiltersSubmit}
+                  className={`bg-primary w-full text-gray-100 hover:bg-gray-700 ${
+                    successMessage ? "cursor-not-allowed" : ""
+                  }`}
+                  disabled={successMessage ? true : false}
+                >
+                  Book Now
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <ScrollToTopButton />
-    </main>
+        <ScrollToTopButton />
+      </main>
+    </div>
   );
 }
 

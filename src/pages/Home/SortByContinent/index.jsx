@@ -60,12 +60,12 @@ const continents = [
   },
 ];
 
-function SmallCard() {
+function SortByContinent() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mx-auto">
+    <div className="grid grid-cols-2 lg:grid-cols-3 w-full mx-auto">
       {continents.map((continent, index) => (
         <div key={index} className=" ">
-          <div className="flex items-center m2 mt-5 space-x-4 rounded-full cursor-pointer hover:bg-gray-100">
+          <div className="flex items-center mt-5 space-x-4 rounded-full cursor-pointer hover:bg-gray-100">
             <div className="relative">
               <img
                 src={continent.image}
@@ -83,4 +83,4 @@ function SmallCard() {
   );
 }
 
-export default SmallCard;
+export default SortByContinent;

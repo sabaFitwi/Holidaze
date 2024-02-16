@@ -17,31 +17,35 @@ const FeaturedCards = () => {
       </div>
     );
   }
-
-  const filterCriteria = {
-    price: 100,
-    maxGuests: 4,
-  };
-
-  // Filter rooms based on the criteria
   const filteredRooms = rooms.filter((room) => {
-    return (
-      room.price <= filterCriteria.price &&
-      room.maxGuests <= filterCriteria.maxGuests
-    );
+    const isEurope = room.location && room.location.continent === "Europe";
+    const isNorway = room.location && room.location.country === "Norway";
+
+    // const isMetaValid =
+    // room.meta && Object.values(room.meta).every((value) => value === true);
+
+    const hasRating = room.rating >= 2;
+
+    return isEurope && isNorway && hasRating;
   });
 
   return (
     <div>
       <div className="flex space-x-6 overflow-scroll scrollbar-hide">
-        {filteredRooms?.map((room) => (
+        {filteredRooms.map((room) => (
           <div key={room.id}>
             <HomeCard
               id={room.id}
               imageUrl={room.media}
               title={room.name}
-              description={room.description}
               price={room.price}
+              wifi={room.meta.wifi}
+              breakfast={room.meta.breakfast}
+              pets={room.meta.pets}
+              parking={room.meta.parking}
+              city={room.location.city}
+              country={room.location.country}
+              continent={room.location.continent}
             />
           </div>
         ))}

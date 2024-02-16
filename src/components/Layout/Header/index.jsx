@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
-import imageBrand from "../../../assets/2.jpg";
+import imageBrand from "../../../assets/logo/logo1.png";
 import { Link, useNavigate } from "react-router-dom";
 import LogOut from "../../LogOut";
 import useAvatar from "../../../hooks/useAvatar";
@@ -46,15 +46,15 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 grid grid-cols-2 bg-white p-5 md:px-10 shadow-md text">
+    <nav className="sticky top-0 z-50 flex justify-around bg-white p-5 md:px-10 shadow-md text">
       <Link
         to="/"
-        className="relative  flex items-center cursor-pointer my-auto"
+        className="relative w-1/2 flex items-center cursor-pointer my-auto"
       >
         <img
           src={imageBrand}
           alt="brand"
-          className="absolute  w-30 h-12 object-contain object-left"
+          className="absolute w-full  h-[75px] object-contain object-left"
         />
       </Link>
 

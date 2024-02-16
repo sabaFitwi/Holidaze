@@ -1,70 +1,25 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-
-// const HomeCard = ({ imageUrl, title, description, price, id }) => {
-//   return (
-//     <Link to={`../../Venue/${id}`}>
-//       <div className="bg-white rounded-lg shadow-lg p-4">
-//         <div className="relative">
-//           <img
-//             src={imageUrl}
-//             alt={title}
-//             className="w-full h-48 object-cover rounded-lg"
-//           />
-//           <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-between bg-black bg-opacity-60 text-white">
-//             <button className="bg-yellow-500 px-4 py-2 rounded-md mr-2">
-//               Price: {price}
-//             </button>
-//             <button className="bg-blue-500 px-4 py-2 rounded-md">
-//               Book Now
-//             </button>
-//           </div>
-//         </div>
-//         <div className="mt-4">
-//           <h2 className="text-xl font-bold">{title}</h2>
-//         </div>
-//         <div className="mt-4 flex justify-between items-center">
-//           <div className="flex items-center">
-//             <i className="fa fa-wifi text-black mr-1" aria-hidden="true"></i>
-//           </div>
-//           <div className="flex items-center">
-//             <i className="fa fa-car text-black mr-1" aria-hidden="true"></i>
-//           </div>
-//           <div className="flex items-center">
-//             <i className="fa fa-paw text-black mr-1" aria-hidden="true"></i>
-//           </div>
-//           <div className="flex items-center">
-//             <i className="fa fa-coffee text-black mr-1" aria-hidden="true"></i>
-//           </div>
-//         </div>
-//       </div>
-//     </Link>
-//   );
-// };
-
-// export default HomeCard;
-
-// import React from 'react'
-// import {BsArrowsFullscreen, BsPeople} from 'react-icons/bs'
-
-// function HomeCard({id, title,imageUrl, maxGestes, description, price}) {
-//   return (
-//     <div className=' mb-4 shadow-2xl min-h-[500px] group'>
-//       <div className='overflow-scroll '>
-//         <img src={imageUrl} alt="" className=' group-hover:scale-110 transition-all duration-300 w-full' />
-
-//         </div>
-
-//     </div>
-//   )
-// }
-
-// export default HomeCard
-
 import React from "react";
 import { BsCurrencyDollar, BsPeople } from "react-icons/bs";
+import { BsSignNoParking, BsWifi } from "react-icons/bs";
+import { LuParkingCircle, LuWifiOff } from "react-icons/lu";
+import { FaPaw } from "react-icons/fa";
+import { TbCoffee, TbCoffeeOff } from "react-icons/tb";
+import StarRating from "../../../../components/RatingStars";
 
-function HomeCard({ id, title, imageUrl, maxGuests, description, price }) {
+function HomeCard({
+  title,
+  imageUrl,
+  maxGuests,
+  wifi,
+  pets,
+  parking,
+  breakfast,
+  city,
+  country,
+  continent,
+  price,
+  rating,
+}) {
   const insertSpace = (text, interval) => {
     let result = "";
     for (let i = 0; i < text.length; i++) {
@@ -118,8 +73,40 @@ function HomeCard({ id, title, imageUrl, maxGuests, description, price }) {
             10,
           )}
         </h3>
-        {/* <p className="px-5 text-gray-600 capitalize overflow-hidden">
-        {insertSpace(description,10)}</p> */}
+        <p className=" font-semibold  pb-2 text">
+          Location:
+          <span className="text-gray-700 ml-2 font-normal">
+            {continent}, {country}, {city}
+          </span>
+        </p>
+        <p className="flex font-semibold items-center mr-1 pb-2">
+          Rating: <StarRating rating={rating} />
+          <span className="font-normal ml-1">({rating})</span>
+        </p>
+        <div className="flex items-center font-semibold pb-2">
+          <span className="mr-1"> Included:</span>
+
+          {wifi ? (
+            <BsWifi className="text-primary mr-3" />
+          ) : (
+            <LuWifiOff className="text-gray-400 mr-3 " />
+          )}
+          {parking ? (
+            <LuParkingCircle className="text-primary mr-3" />
+          ) : (
+            <BsSignNoParking className="text-gray-400 mr-3 " />
+          )}
+          {breakfast ? (
+            <TbCoffee className="text-primary mr-3" />
+          ) : (
+            <TbCoffeeOff className="text-gray-400 mr-3 " />
+          )}
+          {pets ? (
+            <FaPaw className="text-primary mr-3" />
+          ) : (
+            <FaPaw className="text-gray-400 mr-3 " />
+          )}
+        </div>
       </div>
     </div>
   );

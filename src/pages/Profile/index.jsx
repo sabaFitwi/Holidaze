@@ -4,6 +4,7 @@ import ProfileCard from "./ProfileCard";
 import Tabs from "../../components/Ui/Tabs";
 import Breadcrumb from "../../components/Ui/Breadcrumbs";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
+import SEO from "../../components/SEO";
 
 function Profile() {
   const pathSegments = ["Home", "Profile"];
@@ -15,8 +16,12 @@ function Profile() {
 
   return (
     <div>
+      <SEO
+        title="Profile | Holidaze"
+        description="Take control of your Holidaze profile. view, update, and delete your bookings and venues. Customize your avatar to make it your own."
+      />
       <Breadcrumb pathSegments={pathSegments} activeTab={activeTab} />
-      <div className="flex flex-col lg:flex-row">
+      <main className="flex flex-col lg:flex-row">
         <ProfileCard />
 
         <div className="w-full mx-auto ">
@@ -24,7 +29,7 @@ function Profile() {
             <Tabs onTabChange={handleTabChange} />
           </div>
         </div>
-      </div>
+      </main>
       <ScrollToTopButton />
     </div>
   );

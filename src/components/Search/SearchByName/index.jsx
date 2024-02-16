@@ -98,7 +98,7 @@ const SearchByName = () => {
                 onChange={(item) => setDate([item.selection])}
                 moveRangeOnFirstSelection={false}
                 ranges={date}
-                className="absolute left-1/2 top-full transform -translate-x-1/2 "
+                className="absolute left-1/2 top-full transform -translate-x-1/2 z-10"
                 minDate={new Date()}
                 onClickOutside={() => setOpenDate(false)}
               />

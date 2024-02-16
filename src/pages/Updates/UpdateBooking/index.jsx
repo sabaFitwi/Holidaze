@@ -10,6 +10,7 @@ import { bookingUrl } from "../../../api";
 import usePut from "../../../hooks/usePut";
 import useApi from "../../../hooks/useApi";
 import { FaArrowLeft } from "react-icons/fa";
+import SEO from "../../../components/SEO";
 
 const UpdateBooking = () => {
   const { id } = useParams();
@@ -100,39 +101,45 @@ const UpdateBooking = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-8 bg-white shadow py-4 my-10">
-      <div className="flex items-center my-4">
-        <Link to="/profile" className="text-primary flex items-center">
-          <FaArrowLeft className="mr-2" /> Back to profile
-        </Link>
-      </div>
-      <h1 className="h1 font-bold mb-4">Update Booking</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label
-            htmlFor="dateRange"
-            className="block text-sm font-medium text-gray-600"
-          >
-            Date Range:
-          </label>
-          <DateRange
-            onChange={handleDateChange}
-            minDate={new Date()}
-            ranges={date}
-          />
+    <div>
+      <SEO
+        title="Update Booking | Holidaze"
+        description="update your Holidaze booking easily."
+      />
+      <main className="max-w-2xl mx-auto px-4 sm:px-8 bg-white shadow py-4 my-10">
+        <div className="flex items-center my-4">
+          <Link to="/profile" className="text-primary flex items-center">
+            <FaArrowLeft className="mr-2" /> Back to profile
+          </Link>
         </div>
+        <h1 className="h1 font-bold mb-4">Update Booking</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label
+              htmlFor="dateRange"
+              className="block text-sm font-medium text-gray-600"
+            >
+              Date Range:
+            </label>
+            <DateRange
+              onChange={handleDateChange}
+              minDate={new Date()}
+              ranges={date}
+            />
+          </div>
 
-        {successMessage && (
-          <div className="text-green-600 p-4 ">{successMessage}</div>
-        )}
-        {error && <div className="text-red-600 p-4">{error}</div>}
+          {successMessage && (
+            <div className="text-green-600 p-4 ">{successMessage}</div>
+          )}
+          {error && <div className="text-red-600 p-4">{error}</div>}
 
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Updating..." : "Update"}
-        </Button>
-      </form>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Updating..." : "Update"}
+          </Button>
+        </form>
 
-      <ScrollToTopButton />
+        <ScrollToTopButton />
+      </main>
     </div>
   );
 };

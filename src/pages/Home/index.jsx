@@ -3,24 +3,26 @@ import React from "react";
 import InfoSection from "./WelcomeText";
 import Banner from "./Banner";
 
-import SmallCard from "./SortByContinent";
 import FeaturedCards from "./FeaturedCard";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
+import SortByContinent from "./SortByContinent";
+import SEO from "../../components/SEO";
 const Home = () => {
   return (
     <div>
-      <head>
-        <title>Holidayz</title>
-      </head>
+      <SEO
+        title="Home | Holidaze"
+        description="Discover unique accommodations worldwide with Holidaze. Find your perfect stay for your next adventure"
+      />
       <Banner />
       <main className="w-full mx-auto px-8 sm:px-16 pt-20">
         <section>
           <InfoSection />
         </section>
-        <section className="max-w-5xl mx-auto px-8 sm:px-16">
-          <h2 className="text-3xl font-semibold text-center"> Explor</h2>
+        <section className="max-w-7xl mx-auto ">
+          <h2 className="text-3xl font-semibold text-center"> Explore</h2>
 
-          <SmallCard />
+          <SortByContinent />
         </section>
         {/* <section className="max-w-7xl"> <CardHome /></section> */}
         <section className="mt-24">

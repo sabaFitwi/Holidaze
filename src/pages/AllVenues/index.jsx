@@ -8,6 +8,7 @@ import Search from "./Search";
 import ContinentFilter from "./ContinentsFilter";
 import Venues from "./Venues";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
+import SEO from "../../components/SEO";
 
 function AllVenues() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -68,35 +69,41 @@ function AllVenues() {
   }
 
   return (
-    <main className="w-full md:container mx-auto p-4">
-      <section>
-        <h1 className="h1 font-semibold mb-2 text-center">
-          Venues in all the continents
-        </h1>
-        <div className="mb-6">
-          <ContinentFilter
-            sorting={sorting}
-            selectedContinent={selectedContinent}
-            handleContinentFilter={handleContinentFilter}
-          />
+    <div>
+      <SEO
+        title="Venues | Holidaze"
+        description="Explore unique accommodations worldwide with Holidaze. Discover the perfect getaway for your next adventure."
+      />
+      <main className="w-full md:container mx-auto p-4">
+        <section>
+          <h1 className="h1 font-semibold mb-2 text-center">
+            Venues in all the continents
+          </h1>
+          <div className="mb-6">
+            <ContinentFilter
+              sorting={sorting}
+              selectedContinent={selectedContinent}
+              handleContinentFilter={handleContinentFilter}
+            />
+          </div>
+        </section>
+        <div className="bg-black text-white p-4 justify-around">
+          <div className="flex flex-col sm:flex-row items-center  justify-between gap-2">
+            <Sort
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+              sortOrder={sortOrder}
+              setSortOrder={setSortOrder}
+            />
+            <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          </div>
         </div>
-      </section>
-      <div className="bg-black text-white p-4 justify-around">
-        <div className="flex flex-col sm:flex-row items-center  justify-between gap-2">
-          <Sort
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            sortOrder={sortOrder}
-            setSortOrder={setSortOrder}
-          />
-          <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        </div>
-      </div>
-      <section className="w-full flex flex-col lg:flex-row py-4">
-        <Venues sortedVenues={sortedVenues} />
-      </section>
-      <ScrollToTopButton />
-    </main>
+        <section className="w-full flex flex-col lg:flex-row py-4">
+          <Venues sortedVenues={sortedVenues} />
+        </section>
+        <ScrollToTopButton />
+      </main>
+    </div>
   );
 }
 
