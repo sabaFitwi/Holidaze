@@ -1,5 +1,6 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx,css}"],
+  darkMode: "class",
 
   theme: {
     extend: {
@@ -8,12 +9,15 @@ module.exports = {
         secondary: "#030f11",
         "primary-hover": "#86cfdf",
         "font-family": "Helvetica,Arial",
+
+        darkPrimary: "#333333",
+        darkSecondary: "#111111",
+        "dark-primary-hover": "#CCCCCC",
       },
       fontFamily: {
         "primary-font": ["Arimo", "sans-serif"],
         "secondary-font": ["Maven Pro", "sans-serif"],
       },
-
       fontSize: {
         xs: "0.8rem",
         sm: "0.9rem",
@@ -33,6 +37,13 @@ module.exports = {
         "3xl": "1600px",
         "4xl": "1920px",
       },
+    },
+  },
+  variants: {
+    extend: {
+      backgroundColor: ["dark"],
+      textColor: ["dark"],
+      borderColor: ["dark"],
     },
   },
   plugins: [],

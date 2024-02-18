@@ -9,7 +9,7 @@ import SortByContinent from "./SortByContinent";
 import SEO from "../../components/SEO";
 const Home = () => {
   return (
-    <div>
+    <div className="dark:bg-darkPrimary dark:text-white">
       <SEO
         title="Home | Holidaze"
         description="Discover unique accommodations worldwide with Holidaze. Find your perfect stay for your next adventure"

@@ -10,9 +10,12 @@ import {
   faArrowRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../Ui/Button";
+import { FaMoon, FaSun } from "react-icons/fa";
+import DarkModeButton from "../../utils/DarkMode";
 
-function Navbar() {
+function Navbar({ darkMode, setDarkMode }) {
   const [nav, setNav] = useState(false);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isVenueManager, setIsVenueManager] = useState(false);
   const { profileData, loading } = useAvatar();
@@ -46,7 +49,9 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 flex justify-between bg-white p-5 md:px-10 shadow-md text">
+    <nav
+      className={`sticky top-0 z-50 flex justify-between p-5 md:px-10 shadow-md text dark:text-white dark:bg-darkPrimary`}
+    >
       <Link
         to="/"
         className="relative w-1/2 flex items-center cursor-pointer my-auto"
@@ -59,7 +64,7 @@ function Navbar() {
       </Link>
 
       <div className="flex justify-end items-center space-x-1 sm:space-x-4">
-        <Link to="/" className="text-gray-600 hover:text-gray-900">
+        <Link to="/" className=" hover:text-underline">
           Home
         </Link>
         <Link
@@ -68,6 +73,7 @@ function Navbar() {
         >
           Browse
         </Link>
+        <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode} />
 
         {isLoggedIn && profileData && profileData.avatar && !loading ? (
           <div className="flex justify-center border-2 rounded-full shadow-sm bg-gray-100">
@@ -163,7 +169,7 @@ function Navbar() {
             <Button className="px-4 py-2 flex items-center">
               <Link
                 to={"./../Login"}
-                className="text-gray-600 hover:text-gray-900 ml-4"
+                className="text-gray-600 whitespace-nowrap hover:text-gray-900 ml-4"
               >
                 Sign in
               </Link>

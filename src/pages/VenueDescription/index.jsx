@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-
 import Button from "../../components/Ui/Button";
 import Input from "../../components/Ui/Input";
 import { useFetchData } from "../../hooks/useGetData";
 import { bookingUrl, createVenueUrl } from "../../api";
 import StarRating from "../../components/RatingStars";
-
 import DateInput from "../../components/Ui/DateInput";
-
 import VenueImages from "./VenueImages";
 import VenueAmenities from "./VenueAmenities";
 import { FaCalendarDay, FaUsers } from "react-icons/fa";
@@ -140,7 +137,7 @@ function VenueDescription({ onUpdate }) {
         description="Select dates and explore all the venue details. Easy booking, easy planning with Holidaze."
       />
       <Breadcrumb pathSegments={pathSegments} />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-24">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
         <h1 className="h1 mb-4 font-bold text-gray-800 capitalize md:hidden">
           {data.name}
         </h1>

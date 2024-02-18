@@ -31,15 +31,15 @@ function HomeCard({
     return result;
   };
   return (
-    <div className="min-h-[400px] bg-white cursor-pointer shadow-2xl group mt-12">
+    <div className="min-h-[400px] bg-white  dark:bg-black px-2 cursor-pointer shadow-2xl group mt-12">
       <div className=" overflow-hidden h-40 w-60">
         <img
           src={imageUrl}
-          alt=""
+          alt={title}
           className="h-full w-full  group-hover:scale-110 transition-all duration-300 "
         />
       </div>
-      <div className="bg-white shadow-lg max-w-[200px] mx-auto h-[60px] -translate-y-1/2 flex justify-center items-center uppercase  tracking-[1px] font-semibold text-base">
+      <div className="bg-white dark:bg-darkPrimary shadow-lg max-w-[200px] mx-auto h-[60px] -translate-y-1/2 flex justify-center items-center uppercase  tracking-[1px] font-semibold text-base">
         <div className="flex justify-between w-[80%]">
           <div className="flex items-center">
             <div>
@@ -63,7 +63,7 @@ function HomeCard({
         </div>
       </div>
       <div className="overflow-hidden">
-        <h3 className="p-5 text text- font-semibold ">
+        <h3 className="p-5 text  font-semibold ">
           {insertSpace(
             title
               .toLowerCase()
@@ -75,7 +75,7 @@ function HomeCard({
         </h3>
         <p className=" font-semibold  pb-2 text">
           Location:
-          <span className="text-gray-700 ml-2 font-normal">
+          <span className=" ml-2 font-normal">
             {continent}, {country}, {city}
           </span>
         </p>
@@ -87,22 +87,22 @@ function HomeCard({
           <span className="mr-1"> Included:</span>
 
           {wifi ? (
-            <BsWifi className="text-primary mr-3" />
+            <BsWifi className="text-primary  dark:text-primary-hover mr-3" />
           ) : (
             <LuWifiOff className="text-gray-400 mr-3 " />
           )}
           {parking ? (
-            <LuParkingCircle className="text-primary mr-3" />
+            <LuParkingCircle className="text-primary  dark:text-primary-hover mr-3" />
           ) : (
             <BsSignNoParking className="text-gray-400 mr-3 " />
           )}
           {breakfast ? (
-            <TbCoffee className="text-primary mr-3" />
+            <TbCoffee className="text-primary  dark:text-primary-hover mr-3" />
           ) : (
             <TbCoffeeOff className="text-gray-400 mr-3 " />
           )}
           {pets ? (
-            <FaPaw className="text-primary mr-3" />
+            <FaPaw className="text-primary dark:text-primary-hover mr-3" />
           ) : (
             <FaPaw className="text-gray-400 mr-3 " />
           )}

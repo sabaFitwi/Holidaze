@@ -69,14 +69,14 @@ function AllVenues() {
   }
 
   return (
-    <div>
+    <div className="dark:bg-darkPrimary">
       <SEO
         title="Venues | Holidaze"
         description="Explore unique accommodations worldwide with Holidaze. Discover the perfect getaway for your next adventure."
       />
       <main className="w-full md:container mx-auto p-4">
         <section>
-          <h1 className="h1 font-semibold mb-2 text-center">
+          <h1 className="h1 dark:text-white capitalize font-semibold mb-2 text-center">
             Venues in all the continents
           </h1>
           <div className="mb-6">

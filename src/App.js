@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
@@ -16,11 +16,31 @@ import Tabs from "./components/Ui/Tabs";
 import MyVenueBooking from "./components/Cards/MyVenueBookings";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedDarkMode = localStorage.getItem("darkMode");
+
+    return savedDarkMode ? JSON.parse(savedDarkMode) : false;
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
+
   return (
     <div>
       <CustomProgressBar />
+
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route
+          path="/"
+          element={<Layout darkMode={darkMode} setDarkMode={setDarkMode} />}
+        >
           <Route index element={<Home />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />

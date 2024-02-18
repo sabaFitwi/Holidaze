@@ -9,7 +9,6 @@
 body {
   font-family: "Arimo", sans-serif;
   margin: 0;
-  /* background-color: rgb(228, 236, 244); */
 }
 
 *,
@@ -49,6 +48,9 @@ img {
 
 .button {
   @apply w-full flex justify-center py-2 px-4 border text-sm font-bold bg-primary hover:bg-black rounded focus:outline-none focus:ring;
+}
+.dark-mode {
+  @apply bg-darkPrimary text-white;
 }
 
 .input-field {
