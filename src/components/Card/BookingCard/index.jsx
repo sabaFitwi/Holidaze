@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ScrollToTopButton from "../../ScrollToTopButton";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { daysSincePosted } from "../../utils/DateSincePost";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 function BookingCard({
   title,
@@ -24,7 +25,7 @@ function BookingCard({
     setIsDropdownOpen(!isDropdownOpen);
   };
   return (
-    <div className="flex flex-col sm:flex-row border cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out ease my-2">
+    <div className="flex flex-col sm:flex-row border cursor-pointer hover:opacity-90 hover:shadow-xl transition duration-200 ease-out ease my-2">
       <div className="relative w-full md:w-[40%] h-60 ">
         <img
           src={media}
@@ -50,18 +51,24 @@ function BookingCard({
             </div>
             {isDropdownOpen && (
               <div className="absolute right-0 mt-2 py-2 border rounded shadow-lg bg-white z-10">
-                <button
-                  onClick={onEditClick}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap"
-                >
-                  {isExpired ? "ReBook Venue" : "Edit"}
-                </button>
-                <button
-                  onClick={onDeleteClick}
-                  className="block px-4 py-2 text-sm text-red-700 hover:bg-gray-100"
-                >
-                  Delete
-                </button>
+                <div className="flex justify-start items-center px-2">
+                  <FaEdit className="text-gray-500" />
+                  <button
+                    onClick={onEditClick}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    {isExpired ? "ReBook Venue" : "Edit"}
+                  </button>
+                </div>
+                <div className="flex justify-start items-center px-2">
+                  <FaTrash className="text-gray-500" />
+                  <button
+                    onClick={onDeleteClick}
+                    className="block px-4 py-2 text-sm text-red-700 hover:bg-gray-100"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             )}
           </div>

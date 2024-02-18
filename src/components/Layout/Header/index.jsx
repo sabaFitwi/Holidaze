@@ -46,7 +46,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 flex justify-around bg-white p-5 md:px-10 shadow-md text">
+    <nav className="sticky top-0 z-50 flex justify-between bg-white p-5 md:px-10 shadow-md text">
       <Link
         to="/"
         className="relative w-1/2 flex items-center cursor-pointer my-auto"
@@ -54,7 +54,7 @@ function Navbar() {
         <img
           src={imageBrand}
           alt="brand"
-          className="absolute w-full  h-[75px] object-contain object-left"
+          className="absolute w-full  h-[85px] object-contain object-left"
         />
       </Link>
 

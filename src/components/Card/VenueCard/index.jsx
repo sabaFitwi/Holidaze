@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { updateAuthStatus } from "../../utils/authUtils";
 import { BsSignNoParking, BsWifi } from "react-icons/bs";
 import { LuParkingCircle, LuWifiOff } from "react-icons/lu";
-import { FaPaw } from "react-icons/fa";
+import { FaBook, FaEdit, FaPaw, FaTrash } from "react-icons/fa";
 import { TbCoffee, TbCoffeeOff } from "react-icons/tb";
 
 import StarRating from "../../../components/RatingStars";
@@ -41,7 +41,7 @@ function VenueCard({
   };
 
   return (
-    <div className=" text flex flex-col sm:flex-row border cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out ease my-2">
+    <div className=" text flex flex-col sm:flex-row border cursor-pointer hover:opacity-90 hover:shadow-xl transition duration-200 ease-out ease my-2">
       <div className="relative w-full md:w-[40%] h-60 ">
         <img
           src={media}
@@ -63,27 +63,36 @@ function VenueCard({
               <PiDotsThreeOutlineVerticalFill />
             </div>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 py-2 border rounded shadow-lg bg-white z-10">
+              <div className="absolute right-0 mt-2 py-2 border rounded shadow-lg bg-white ">
                 {isVenueManager && (
-                  <Link
-                    to={`/venueBookings/${id}`}
-                    className="block text-sm px-4 whitespace-nowrap py-2 text-gray-700 hover:bg-gray-300"
-                  >
-                    Venue Bookings
-                  </Link>
+                  <div className="flex justify-start items-center px-2">
+                    <FaBook className="text-gray-500" />
+                    <Link
+                      to={`/venueBookings/${id}`}
+                      className="block text-sm px-4 whitespace-nowrap py-2 text-gray-700 hover:bg-gray-300"
+                    >
+                      Venue Bookings
+                    </Link>
+                  </div>
                 )}
-                <button
-                  onClick={onEditClick}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={onDeleteClick}
-                  className="block px-4 py-2 text-sm text-red-700 hover:bg-gray-100"
-                >
-                  Delete
-                </button>
+                <div className="flex justify-start items-center px-2">
+                  <FaEdit className="text-gray-500" />
+                  <button
+                    onClick={onEditClick}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Edit
+                  </button>
+                </div>
+                <div className="flex justify-start items-center px-2">
+                  <FaTrash className="text-gray-500" />
+                  <button
+                    onClick={onDeleteClick}
+                    className="block px-4 py-2 text-sm text-red-700 hover:bg-gray-100"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             )}
           </div>

@@ -48,11 +48,15 @@ img {
 @tailwind components;
 
 .button {
-  @apply px-4 py-2 rounded focus:outline-none focus:ring focus:border-light-primary;
+  @apply w-full flex justify-center py-2 px-4 border text-sm font-bold bg-primary hover:bg-black rounded focus:outline-none focus:ring;
 }
 
 .input-field {
-  @apply block w-full py-2 px-3  rounded-md focus:outline-none focus:border-light-primary;
+  @apply block w-full py-2 px-3  rounded-md focus:outline-none focus:border-primary-hover;
+}
+
+input {
+  @apply pr-4 pl-14 py-2.5 text-sm text-black rounded bg-white border border-gray-400 w-full outline-primary;
 }
 
 .card {

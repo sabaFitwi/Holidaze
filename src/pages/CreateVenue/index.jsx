@@ -135,7 +135,7 @@ const CreateVenueForm = () => {
         description="Create a great place and let everyone know about it! Join us and share your creation with the world!"
       />
       <main className="max-w-2xl mx-auto shadow p-4 my-8">
-        <h1 className="text-2xl font-bold mb-4">Create Venue</h1>
+        <h1 className="h1 font-bold uppercase mb-4">Create Venue</h1>
         <form>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-600">
@@ -453,7 +453,7 @@ const CreateVenueForm = () => {
             />
           </div>
 
-          <Button type="button" onClick={handleSubmit}>
+          <Button className="button" type="button" onClick={handleSubmit}>
             Submit
           </Button>
         </form>

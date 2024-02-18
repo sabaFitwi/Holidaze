@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
 import Headers from "../../../hooks/useHeader";
 import { FaUser } from "react-icons/fa";
-import Modals from "../../../components/Ui/Modal"; // Rename Modal to Modals
-import AvatarInput from "../AvatarInput";
 import useAvatar from "../../../hooks/useAvatar";
 import { profileUrl } from "../../../api";
+import ConfirmModal from "../../../components/Ui/Modal";
 
 const ProfileCard = () => {
   const { profileData, updateAvatar } = useAvatar();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newAvatar, setNewAvatar] = useState(null); // State to store the new avatar
+  const [newAvatar, setNewAvatar] = useState("");
+  const [avatarError, setAvatarError] = useState("");
 
   useEffect(() => {}, [profileData]);
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setAvatarError("");
   };
 
-  const handleSaveChanges = () => {
-    if (newAvatar) {
+  const handleAvatarUpdate = () => {
+    if (!avatarError) {
       updateAvatar(newAvatar);
 
       const updatedUserData = {
@@ -47,8 +48,22 @@ const ProfileCard = () => {
     }
   };
 
-  const handleAvatarChange = (file) => {
-    setNewAvatar(file);
+  const handleAvatarChange = (event) => {
+    const url = event.target.value;
+    setNewAvatar(url);
+    validateUrl(url);
+  };
+
+  const validateUrl = (url) => {
+    const pattern = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/i;
+
+    if (!url.trim()) {
+      setAvatarError("Please enter an avatar URL.");
+    } else if (!pattern.test(url)) {
+      setAvatarError("Please enter a valid URL.");
+    } else {
+      setAvatarError("");
+    }
   };
 
   return (
@@ -76,9 +91,11 @@ const ProfileCard = () => {
               </p>
             </div>
             <div className="flex justify-center pt-2 space-x-4 divide-x divide-gray-700 align-center">
-              <button className="whitespace-nowrap text">Send me email</button>
+              <button className="whitespace-nowrap text">
+                {profileData.email}
+              </button>
               <button
-                className="whitespace-nowrap text pl-3"
+                className="whitespace-nowrap text pl-3 hover:text-primary"
                 onClick={() => setIsModalOpen(true)}
               >
                 Edit profile
@@ -88,17 +105,18 @@ const ProfileCard = () => {
         </div>
       )}
 
-      {isModalOpen && (
-        <Modals
-          isOpen={isModalOpen}
-          onClose={handleModalClose}
-          onConfirm={handleSaveChanges}
-          title="Edit Avatar"
-        >
-          <h2>Upload New Avatar</h2>
-          <AvatarInput onChange={handleAvatarChange} />
-        </Modals>
-      )}
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onConfirm={handleAvatarUpdate}
+        message="Are you sure you want to save changes?"
+        confirmText="Save Changes"
+        cancelText="Cancel"
+        showInput={true}
+        inputPlaceholder="Enter avatar URL"
+        inputValue={newAvatar}
+        onInputChange={handleAvatarChange}
+      />
     </div>
   );
 };

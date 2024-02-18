@@ -2,9 +2,8 @@ import React from "react";
 
 import useLogin from "../../hooks/useLogin";
 import Button from "../../components/Ui/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 import SEO from "../../components/SEO";
+import { FaEnvelope, FaKey } from "react-icons/fa";
 
 const Login = () => {
   const {
@@ -41,16 +40,13 @@ const Login = () => {
                       type="email"
                       autoComplete="email"
                       required
-                      class="pr-4 pl-14 py-2.5 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#007bff]"
+                      class="input"
                       onChange={handleInputChange}
                       value={loginData.email}
                     />
 
                     <div className="absolute left-4">
-                      <FontAwesomeIcon
-                        icon={faEnvelope}
-                        className="text-gray-400"
-                      />
+                      <FaEnvelope className="text-gray-400" />
                     </div>
                   </div>
                   {errors.email && touchedFields.email && (
@@ -68,13 +64,13 @@ const Login = () => {
                       type="password"
                       autoComplete="password"
                       required
-                      class="pr-4 pl-14 py-2.5 text-sm text-black rounded bg-white border border-gray-400 w-full outline-[#007bff]"
+                      class="input"
                       onChange={handleInputChange}
                       value={loginData.password}
                     />
 
                     <div className="absolute left-4">
-                      <FontAwesomeIcon icon={faKey} className="text-gray-400" />
+                      <FaKey className="text-gray-400" />
                     </div>
                   </div>
                 </div>
@@ -84,10 +80,7 @@ const Login = () => {
               </div>
             </div>
             <div>
-              <Button
-                type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border text-sm font-medium rounded-md text-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
+              <Button type="submit" className="button">
                 Log In
               </Button>
             </div>

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useDeleteApi from "../../../hooks/useDelete";
 import ConfirmModal from "../../Ui/Modal";
 import { bookingUrl } from "../../../api";
+import Input from "../../Ui/Input";
 
 function BookingsCards() {
   const [myBookingsData, setMyBookingsData] = useState([]);
@@ -92,12 +93,12 @@ function BookingsCards() {
 
   return (
     <div>
-      <input
+      <Input
         type="text"
         placeholder="Search bookings..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-[80%] align-center p-2 border-2 rounded my-4 mx-auto text"
+        className="input align-center p-2 border-2 rounded my-4 mx-auto text"
       />
       <div className="flex justify-between mt-2">
         <button
@@ -114,7 +115,7 @@ function BookingsCards() {
             !showActiveBookings ? "bg-primary text-white" : "bg-gray-300"
           }`}
         >
-          Expired Bookings
+          Past Bookings
         </button>
       </div>
 
@@ -176,6 +177,7 @@ function BookingsCards() {
         message="Are you sure you want to delete this item?"
         confirmText="Delete Permanently"
         cancelText="Cancel"
+        showInput={false}
       />
       {showSuccess && (
         <div className="fixed inset-0 flex items-center justify-center">

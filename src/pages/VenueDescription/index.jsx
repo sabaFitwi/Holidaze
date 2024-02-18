@@ -16,6 +16,7 @@ import { daysSincePosted } from "../../components/utils/DateSincePost";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import usePOST from "../../hooks/UsePost";
 import SEO from "../../components/SEO";
+import Breadcrumb from "../../components/Ui/Breadcrumbs";
 
 function VenueDescription({ onUpdate }) {
   const { id } = useParams();
@@ -28,6 +29,7 @@ function VenueDescription({ onUpdate }) {
   const [successMessage, setSuccessMessage] = useState("");
   const [active, setActive] = useState(null);
   const [totalNights, setTotalNights] = useState(0);
+  const pathSegments = ["Home", "Detail"];
 
   const { data, isLoading, error } = useFetchData(
     createVenueUrl + `/${id}?_bookings=true&_owner=true`,
@@ -137,6 +139,7 @@ function VenueDescription({ onUpdate }) {
         title="Detail | Holidaze"
         description="Select dates and explore all the venue details. Easy booking, easy planning with Holidaze."
       />
+      <Breadcrumb pathSegments={pathSegments} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-24">
         <h1 className="h1 mb-4 font-bold text-gray-800 capitalize md:hidden">
           {data.name}
@@ -255,7 +258,7 @@ function VenueDescription({ onUpdate }) {
                 <Button
                   type="button"
                   onClick={handleFiltersSubmit}
-                  className={`bg-primary w-full text-gray-100 hover:bg-gray-700 ${
+                  className={`button ${
                     successMessage ? "cursor-not-allowed" : ""
                   }`}
                   disabled={successMessage ? true : false}

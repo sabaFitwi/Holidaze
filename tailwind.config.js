@@ -6,7 +6,7 @@ module.exports = {
       colors: {
         primary: "#18766e",
         secondary: "#030f11",
-        "light-primary": "#86cfdf",
+        "primary-hover": "#86cfdf",
         "font-family": "Helvetica,Arial",
       },
       fontFamily: {

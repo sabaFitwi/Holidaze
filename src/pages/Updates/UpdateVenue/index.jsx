@@ -179,12 +179,14 @@ const UpdateVenue = () => {
         description="update your Holidaze venue."
       />
       <main className="max-w-2xl  bg-white mx-auto shadow p-4 my-10">
-        <div className="flex items-center my-4">
+        <div className="flex items-center mb-6">
           <Link to="/profile" className="text-primary flex items-center">
             <FaArrowLeft className="mr-2" /> Back to profile
           </Link>
         </div>
-        <h1 className=" font-bold mb-4">Update Venue</h1>
+        <h1 className="h1 font-bold uppercase text-center mb-4">
+          Update Venue
+        </h1>
         <form>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-600">
@@ -552,7 +554,7 @@ const UpdateVenue = () => {
           )}
           {error && <div className="text-red-600 p-4">{error}</div>}
 
-          <Button type="button" onClick={handleSubmit}>
+          <Button className="button" type="button" onClick={handleSubmit}>
             Update
           </Button>
         </form>

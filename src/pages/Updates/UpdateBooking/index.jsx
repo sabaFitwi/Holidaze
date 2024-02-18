@@ -133,7 +133,7 @@ const UpdateBooking = () => {
           )}
           {error && <div className="text-red-600 p-4">{error}</div>}
 
-          <Button type="submit" disabled={isLoading}>
+          <Button className="button" type="submit" disabled={isLoading}>
             {isLoading ? "Updating..." : "Update"}
           </Button>
         </form>

@@ -3,8 +3,10 @@ import VenueCard from "../../Card/VenueCard";
 import { getProfile } from "../../../hooks/useProfile";
 import { useNavigate } from "react-router-dom";
 import useDeleteApi from "../../../hooks/useDelete";
-import ConfirmationModal from "../../DeleteModal/DeleteConfirm";
+//import ConfirmationModal from "../../DeleteModal/DeleteConfirm";
 import { createVenueUrl } from "../../../api";
+import ConfirmModal from "../../Ui/Modal";
+import Input from "../../Ui/Input";
 
 function VenuesCards() {
   const [hostingData, setHostingData] = useState([]);
@@ -71,12 +73,12 @@ function VenuesCards() {
   return (
     <div>
       <div className="mx-auto grid  w-full ">
-        <input
+        <Input
           type="text"
           placeholder="Search your Venues..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className=" w-[80%] align-center p-2 border-2 rounded text mx-auto my-4"
+          className=" input align-center p-2 border-2 rounded text mx-auto my-2"
         />
         {filteredHosting.reverse().map((hosting) => (
           <div key={hosting.id}>
@@ -105,13 +107,14 @@ function VenuesCards() {
         ))}
       </div>
 
-      <ConfirmationModal
+      <ConfirmModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         onConfirm={() => handleVenueDelete(selectedBooking)}
         message="Are you sure you want to delete this item?"
         confirmText="Delete Permanently"
         cancelText="Cancel"
+        showInput={false}
       />
       {showSuccess && (
         <div className="fixed inset-0 flex items-center justify-center">
