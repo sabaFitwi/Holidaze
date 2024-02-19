@@ -10,7 +10,7 @@ import {
   faArrowRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../Ui/Button";
-import { FaMoon, FaSun } from "react-icons/fa";
+
 import DarkModeButton from "../../utils/DarkMode";
 
 function Navbar({ darkMode, setDarkMode }) {
