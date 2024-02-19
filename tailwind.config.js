@@ -10,8 +10,8 @@ module.exports = {
         "primary-hover": "#86cfdf",
         "font-family": "Helvetica,Arial",
 
-        darkPrimary: "#333333",
-        darkSecondary: "#111111",
+        darkPrimary: "#525252",
+        darkSecondary: "#333333",
         "dark-primary-hover": "#CCCCCC",
       },
       fontFamily: {

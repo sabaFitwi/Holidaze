@@ -13,8 +13,8 @@ const Breadcrumb = ({ pathSegments, activeTab, currentPage }) => {
               to={`/${pathSegments.slice(1, index + 1).join("/")}`}
               className={`${
                 index === pathSegments.length - 1
-                  ? "text-primary text hover:underline"
-                  : "text-gray-500 text"
+                  ? "text-primary  dark:text-primary-hover text hover:underline"
+                  : "text-gray-500 text dark:text-white"
               }`}
             >
               {segment}
@@ -24,13 +24,17 @@ const Breadcrumb = ({ pathSegments, activeTab, currentPage }) => {
         {activeTab && (
           <>
             <span className="mx-2">{">"}</span>
-            <span className="text-gray-500 text">{activeTab}</span>
+            <span className="text-gray-500 dark:text-white text">
+              {activeTab}
+            </span>
           </>
         )}
         {currentPage && (
           <>
             <span className="mx-2">{">"}</span>
-            <span className="text-gray-500 text">{currentPage}</span>
+            <span className="text-gray-500 dark:text-white text">
+              {currentPage}
+            </span>
           </>
         )}
       </div>

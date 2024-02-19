@@ -31,7 +31,7 @@ function HomeCard({
     return result;
   };
   return (
-    <div className="min-h-[400px] bg-white  dark:bg-black px-2 cursor-pointer shadow-2xl group mt-12">
+    <div className="min-h-[400px] bg-white  dark:bg-darkSecondary px-2 cursor-pointer shadow-2xl group mt-12">
       <div className=" overflow-hidden h-40 w-60">
         <img
           src={imageUrl}
@@ -63,7 +63,7 @@ function HomeCard({
         </div>
       </div>
       <div className="overflow-hidden">
-        <h3 className="p-5 text  font-semibold ">
+        <h3 className="p-1 text uppercase  ">
           {insertSpace(
             title
               .toLowerCase()
@@ -73,19 +73,14 @@ function HomeCard({
             10,
           )}
         </h3>
-        <p className=" font-semibold  pb-2 text">
-          Location:
-          <span className=" ml-2 font-normal">
-            {continent}, {country}, {city}
-          </span>
+        <p className=" dark:text-gray-300  pb-2 text">
+          {continent}, {country}, {city}
         </p>
         <p className="flex font-semibold items-center mr-1 pb-2">
-          Rating: <StarRating rating={rating} />
+          <StarRating rating={rating} />
           <span className="font-normal ml-1">({rating})</span>
         </p>
         <div className="flex items-center font-semibold pb-2">
-          <span className="mr-1"> Included:</span>
-
           {wifi ? (
             <BsWifi className="text-primary  dark:text-primary-hover mr-3" />
           ) : (

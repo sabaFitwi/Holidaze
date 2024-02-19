@@ -21,7 +21,7 @@ const Tabs = ({ onTabChange }) => {
 
   return (
     <div>
-      <div className="flex justify-center max-w-full space-x-5 pt-1">
+      <div className="flex justify-center max-w-full space-x-5 pt-1 ">
         <button
           className={`${
             activeTab === "My Booking"
@@ -38,7 +38,7 @@ const Tabs = ({ onTabChange }) => {
               activeTab === "My Venue"
                 ? "bg-black text-white"
                 : "bg-gray-200 text-gray-400"
-            } w-full p-2 text  my-1 rounded-t-lg cursor-pointer`}
+            }  w-full p-2 text  my-1 rounded-t-lg cursor-pointer`}
             onClick={() => changeTab("My Venue")}
           >
             Your Venues
@@ -46,9 +46,9 @@ const Tabs = ({ onTabChange }) => {
         )}
       </div>
 
-      <div className="bg-white p-0 md:p-4 rounded-b-lg relative overflow-hidden">
+      <div className="bg-white p-0 md:py-2 rounded-b-lg relative overflow-hidden  dark:bg-darkPrimary">
         <div
-          className="absolute bg-black h-1 w-1/2 transition-transform duration-300"
+          className="absolute bg-black dark:bg-dark-primary-hover h-1 w-1/2 transition-transform duration-300"
           style={{ transform: position }}
         />
         {activeTab === "My Booking" && <BookingsCards />}

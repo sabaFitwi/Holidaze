@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import imageBrand from "../../../assets/logo/logo1.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,11 +15,11 @@ import DarkModeButton from "../../utils/DarkMode";
 
 function Navbar({ darkMode, setDarkMode }) {
   const [nav, setNav] = useState(false);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isVenueManager, setIsVenueManager] = useState(false);
   const { profileData, loading } = useAvatar();
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
   const updateAuthStatus = () => {
     const userIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -31,6 +31,23 @@ function Navbar({ darkMode, setDarkMode }) {
 
   useEffect(() => {
     updateAuthStatus();
+
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !event.target.classList.contains("nav-toggle")
+      ) {
+        setNav(false);
+        document.body.style.overflow = "scroll";
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const handleLogout = () => {
@@ -50,7 +67,7 @@ function Navbar({ darkMode, setDarkMode }) {
 
   return (
     <nav
-      className={`sticky top-0 z-50 flex justify-between p-5 md:px-10 shadow-md text dark:text-white dark:bg-darkPrimary`}
+      className={`sticky top-0 z-50 flex justify-between p-5 md:px-10 shadow-md bg-white text dark:text-white dark:bg-darkPrimary`}
     >
       <Link
         to="/"
@@ -67,10 +84,7 @@ function Navbar({ darkMode, setDarkMode }) {
         <Link to="/" className=" hover:text-underline">
           Home
         </Link>
-        <Link
-          to={"./../venues"}
-          className="text-gray-600 pl-1 sm:pl-2 hover:text-gray-900"
-        >
+        <Link to={"./../venues"} className=" pl-1 sm:pl-2 hover:text-gray-900 ">
           Browse
         </Link>
         <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode} />
@@ -100,10 +114,11 @@ function Navbar({ darkMode, setDarkMode }) {
             <div className="relative group">
               <HiMenuAlt3
                 onClick={handleNav}
-                className="z-20 text-black group-hover:rotate-180 duration-300 cursor-pointer"
+                className="nav-toggle z-20 group-hover:rotate-180 duration-300 cursor-pointer"
                 size={25}
               />
               <div
+                ref={dropdownRef}
                 className={
                   nav
                     ? "nav-dropdown ease-in duration-300 absolute top-12 right-0 transform translate-x-0 opacity-100 z-10"

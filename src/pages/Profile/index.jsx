@@ -15,7 +15,7 @@ function Profile() {
   };
 
   return (
-    <div>
+    <div className="dark:bg-darkPrimary">
       <SEO
         title="Profile | Holidaze"
         description="Take control of your Holidaze profile. view, update, and delete your bookings and venues. Customize your avatar to make it your own."
@@ -24,8 +24,8 @@ function Profile() {
       <main className="flex flex-col lg:flex-row">
         <ProfileCard />
 
-        <div className="w-full mx-auto ">
-          <div className="bg-white p-0 md:p-6 ">
+        <div className="w-full mx-auto">
+          <div className="  p-0 md:p-6 ">
             <Tabs onTabChange={handleTabChange} />
           </div>
         </div>

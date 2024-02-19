@@ -101,24 +101,23 @@ const UpdateBooking = () => {
   }
 
   return (
-    <div>
+    <div className="">
       <SEO
         title="Update Booking | Holidaze"
         description="update your Holidaze booking easily."
       />
-      <main className="max-w-2xl mx-auto px-4 sm:px-8 bg-white shadow py-4 my-10">
+      <main className="max-w-2xl mx-auto px-4 sm:px-8  dark:bg-darkSecondary dark:text-white shadow py-4 my-10">
         <div className="flex items-center my-4">
           <Link to="/profile" className="text-primary flex items-center">
             <FaArrowLeft className="mr-2" /> Back to profile
           </Link>
         </div>
-        <h1 className="h1 font-bold mb-4">Update Booking</h1>
+        <h1 className="h1 font-bold items-center uppercase mb-4">
+          Update Booking
+        </h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label
-              htmlFor="dateRange"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="dateRange" className="block text-sm font-medium">
               Date Range:
             </label>
             <DateRange

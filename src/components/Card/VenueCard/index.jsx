@@ -41,7 +41,7 @@ function VenueCard({
   };
 
   return (
-    <div className=" text flex flex-col sm:flex-row border cursor-pointer hover:opacity-90 hover:shadow-xl transition duration-200 ease-out ease my-2">
+    <div className=" text flex flex-col sm:flex-row border dark:border-0  dark:bg-darkSecondary dark:text-white cursor-pointer hover:opacity-90 hover:shadow-xl transition duration-200 ease-out ease my-2">
       <div className="relative w-full md:w-[40%] h-60 ">
         <img
           src={media}
@@ -108,9 +108,7 @@ function VenueCard({
 
         <p className=" font-semibold pb-2">
           Guests:
-          <span className="text-gray-700 ml-1 font-normal">
-            Max {maxGuests} Guests
-          </span>
+          <span className=" ml-1 font-normal">Max {maxGuests} Guests</span>
         </p>
         <div className="flex items-center font-semibold pb-2">
           <span className="mr-1"> Included:</span>
@@ -138,13 +136,13 @@ function VenueCard({
         </div>
         <p className=" font-semibold pb-2">
           Location:
-          <span className="text-gray-700 ml-1 font-normal">
+          <span className=" ml-1 font-normal">
             {continent}, {country}, {city}
           </span>
         </p>
         <p className=" font-semibold ">
           Created:
-          <span className="text-gray-700 ml-1 font-normal">
+          <span className=" ml-1 font-normal">
             {daysSincePosted(updated)} ago
           </span>
         </p>

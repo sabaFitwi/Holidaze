@@ -178,9 +178,12 @@ const UpdateVenue = () => {
         title="Update Venue| Holidaze"
         description="update your Holidaze venue."
       />
-      <main className="max-w-2xl  bg-white mx-auto shadow p-4 my-10">
+      <main className="max-w-2xl mx-auto  dark:bg-darkSecondary dark:text-white shadow p-4 my-10">
         <div className="flex items-center mb-6">
-          <Link to="/profile" className="text-primary flex items-center">
+          <Link
+            to="/profile"
+            className="text-primary  dark:text-primary-hover  flex items-center"
+          >
             <FaArrowLeft className="mr-2" /> Back to profile
           </Link>
         </div>
@@ -189,7 +192,7 @@ const UpdateVenue = () => {
         </h1>
         <form>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600  dark:text-white">
               Title:
             </label>
             <Input
@@ -204,7 +207,7 @@ const UpdateVenue = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-700  dark:text-white">
               Description:
             </label>
             <Input
@@ -221,7 +224,7 @@ const UpdateVenue = () => {
           <div>
             {formData.media.map((imageUrl, index) => (
               <div key={index} className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-700  dark:text-white">
                   Image {index + 1}
                 </label>
 
@@ -272,7 +275,7 @@ const UpdateVenue = () => {
           <div className="mb-4">
             <label
               htmlFor="price"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-gray-600  dark:text-white"
             >
               Price:
             </label>
@@ -290,7 +293,7 @@ const UpdateVenue = () => {
           <div className="mb-4">
             <label
               htmlFor="maxGuests"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-gray-600  dark:text-white"
             >
               Max Guests:
             </label>
@@ -308,7 +311,7 @@ const UpdateVenue = () => {
           <div className="mb-4">
             <label
               htmlFor="rating"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-gray-600  dark:text-white"
             >
               Rating:
             </label>
@@ -324,7 +327,7 @@ const UpdateVenue = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600  dark:text-white">
               Amenities:
             </label>
             <div className="grid grid-cols-2 gap-4">
@@ -351,7 +354,7 @@ const UpdateVenue = () => {
                     }`}
                   ></span>
                 </label>
-                <div className="ml-2 text-gray-700">WiFi</div>
+                <div className="ml-2 text-gray-700  dark:text-white">WiFi</div>
               </div>
               <div className="flex items-center">
                 <Input
@@ -376,7 +379,9 @@ const UpdateVenue = () => {
                     }`}
                   ></span>
                 </label>
-                <div className="ml-2 text-gray-700">Parking</div>
+                <div className="ml-2 text-gray-700  dark:text-white">
+                  Parking
+                </div>
               </div>
               <div className="flex items-center">
                 <input
@@ -401,7 +406,9 @@ const UpdateVenue = () => {
                     }`}
                   ></span>
                 </label>
-                <div className="ml-2 text-gray-700">Breakfast</div>
+                <div className="ml-2 text-gray-700  dark:text-white">
+                  Breakfast
+                </div>
               </div>
               <div className="flex items-center">
                 <input
@@ -424,13 +431,13 @@ const UpdateVenue = () => {
                     }`}
                   ></span>
                 </label>
-                <div className="ml-2 text-gray-700">Pets</div>
+                <div className="ml-2 text-gray-700  dark:text-white">Pets</div>
               </div>
             </div>
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-medium text-gray-600  dark:text-white">
               Address:
             </label>
             <Input
@@ -446,7 +453,7 @@ const UpdateVenue = () => {
           <div className="mb-4">
             <label
               htmlFor="city"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-gray-600  dark:text-white"
             >
               City:
             </label>
@@ -463,7 +470,7 @@ const UpdateVenue = () => {
           <div className="mb-4">
             <label
               htmlFor="zip"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-gray-600  dark:text-white"
             >
               ZIP:
             </label>
@@ -480,7 +487,7 @@ const UpdateVenue = () => {
           <div className="mb-4">
             <label
               htmlFor="country"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-gray-600  dark:text-white"
             >
               Country:
             </label>
@@ -497,7 +504,7 @@ const UpdateVenue = () => {
           <div className="mb-4">
             <label
               htmlFor="continent"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-gray-600  dark:text-white"
             >
               Continent:
             </label>
@@ -519,7 +526,7 @@ const UpdateVenue = () => {
           <div className="mb-4">
             <label
               htmlFor="lat"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-gray-600  dark:text-white"
             >
               Latitude:
             </label>
@@ -536,7 +543,7 @@ const UpdateVenue = () => {
           <div className="mb-4">
             <label
               htmlFor="lng"
-              className="block text-sm font-medium text-gray-600"
+              className="block text-sm font-medium text-gray-600  dark:text-white"
             >
               Longitude:
             </label>

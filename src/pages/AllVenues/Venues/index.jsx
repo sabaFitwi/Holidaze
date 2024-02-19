@@ -19,7 +19,7 @@ function Venues({ sortedVenues }) {
       {sortedVenues.map((venue) => (
         <div key={venue.id}>
           <Link to={`/venue/${venue.id}`}>
-            <div className="flex flex-col xl:flex-row border dark:border-0 cursor-pointer dark:bg-black dark:text-white bg-white hover:opacity-80 hover:shadow-lg transition duration-200 ease-out ease pb-4">
+            <div className="flex flex-col xl:flex-row border dark:border-0 cursor-pointer dark:bg-darkSecondary dark:text-white bg-white hover:opacity-80 hover:shadow-lg transition duration-200 ease-out ease pb-4">
               <div className="relative w-full h-40 xl:w-60 flex-shrink-0">
                 {venue.media && venue.media[0] ? (
                   <img

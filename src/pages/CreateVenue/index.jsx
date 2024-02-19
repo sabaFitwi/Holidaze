@@ -134,13 +134,11 @@ const CreateVenueForm = () => {
         title="Create Venue | Holidaze"
         description="Create a great place and let everyone know about it! Join us and share your creation with the world!"
       />
-      <main className="max-w-2xl mx-auto shadow p-4 my-8">
+      <main className="max-w-2xl mx-auto  dark:bg-darkSecondary dark:text-white shadow p-4 my-8">
         <h1 className="h1 font-bold uppercase mb-4">Create Venue</h1>
         <form>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Title:
-            </label>
+            <label className="block text-sm font-medium">Title:</label>
             <Input
               type="text"
               id="name"
@@ -153,9 +151,7 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Description:
-            </label>
+            <label className="block text-sm font-medium">Description:</label>
             <Input
               type="text"
               id="description"
@@ -170,7 +166,7 @@ const CreateVenueForm = () => {
           <div>
             {images.map((imageUrl, index) => (
               <div key={index} className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium ">
                   Image {index + 1}
                 </label>
 
@@ -182,7 +178,7 @@ const CreateVenueForm = () => {
                       type="text"
                       value={formData.imageUrl}
                       onChange={(e) => handleImageChange(index, e.target.value)}
-                      className="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
+                      className="w-full p-2 border rounded focus:outline-none focus:border-primary"
                       placeholder="Image URL"
                     />
                     {index > 0 && (
@@ -218,10 +214,7 @@ const CreateVenueForm = () => {
             </div>
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="price"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="price" className="block text-sm font-medium">
               Price:
             </label>
             <Input
@@ -236,10 +229,7 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="maxGuests"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="maxGuests" className="block text-sm font-medium">
               Max Guests:
             </label>
             <Input
@@ -254,10 +244,7 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="rating"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="rating" className="block text-sm font-medium">
               Rating:
             </label>
             <Input
@@ -272,9 +259,7 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
-              Amenities:
-            </label>
+            <label className="block text-sm font-medium">Amenities:</label>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Input
@@ -329,10 +314,7 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="address"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="address" className="block text-sm font-medium">
               Address:
             </label>
             <Input
@@ -346,10 +328,7 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="city"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="city" className="block text-sm font-medium">
               City:
             </label>
             <Input
@@ -363,10 +342,7 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="zip"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="zip" className="block text-sm font-medium">
               ZIP:
             </label>
             <Input
@@ -380,10 +356,7 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="country"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="country" className="block text-sm font-medium">
               Country:
             </label>
             <Input
@@ -397,10 +370,7 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="continent"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="continent" className="block text-sm font-medium">
               Continent:
             </label>
             <select
@@ -410,7 +380,6 @@ const CreateVenueForm = () => {
               onChange={handleChange}
               className="mt-1 p-2 border rounded w-full"
             >
-              {/* Map over the continent options and create an option for each */}
               {continentOptions.map((continent) => (
                 <option key={continent} value={continent}>
                   {continent}
@@ -420,10 +389,7 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="lat"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="lat" className="block text-sm font-medium">
               Latitude:
             </label>
             <Input
@@ -437,10 +403,7 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label
-              htmlFor="lng"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="lng" className="block text-sm font-medium">
               Longitude:
             </label>
             <Input

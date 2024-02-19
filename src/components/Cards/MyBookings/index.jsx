@@ -13,7 +13,7 @@ function BookingsCards() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(""); // State for search term
+  const [searchTerm, setSearchTerm] = useState("");
   const [showActiveBookings, setShowActiveBookings] = useState(true);
 
   const navigate = useNavigate();
@@ -92,7 +92,7 @@ function BookingsCards() {
   };
 
   return (
-    <div>
+    <div className=" dark:bg-darkPrimary dark:text-white">
       <Input
         type="text"
         placeholder="Search bookings..."
@@ -104,18 +104,22 @@ function BookingsCards() {
         <button
           onClick={() => setShowActiveBookings(true)}
           className={`px-2 text py-2 ${
-            showActiveBookings ? "bg-primary text-white" : "bg-gray-300"
+            showActiveBookings
+              ? "bg-primary text-white"
+              : "bg-gray-300  dark:text-gray-500"
           }`}
         >
-          Upcoming Bookings
+          Upcoming Booking(s) ({activeBookings.length})
         </button>
         <button
           onClick={() => setShowActiveBookings(false)}
           className={`px-2 text py-2 ${
-            !showActiveBookings ? "bg-primary text-white" : "bg-gray-300"
+            !showActiveBookings
+              ? "bg-primary text-white"
+              : "bg-gray-300  dark:text-gray-500"
           }`}
         >
-          Past Bookings
+          Past Booking(s) ({expiredBookings.length})
         </button>
       </div>
 

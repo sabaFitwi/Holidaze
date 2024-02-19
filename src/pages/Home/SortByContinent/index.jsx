@@ -38,7 +38,7 @@ function SortByContinent() {
     <div className="grid grid-cols-2 lg:grid-cols-3 w-full mx-auto">
       {continents.map((continent, index) => (
         <div key={index}>
-          <div className="flex items-center mt-5 space-x-4 rounded-full cursor-pointer hover:bg-gray-100">
+          <div className="flex items-center mt-5 space-x-4 rounded-full cursor-pointer hover:bg-gray-100 hover:dark:bg-gray-500">
             <div className="relative">
               <img
                 src={continent.image}
@@ -47,7 +47,7 @@ function SortByContinent() {
               />
             </div>
             <div>
-              <h2 className="hover:text-black">{continent.name}</h2>
+              <h2 className="">{continent.name}</h2>
             </div>
           </div>
         </div>

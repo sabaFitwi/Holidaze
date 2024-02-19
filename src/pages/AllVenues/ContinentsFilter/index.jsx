@@ -27,7 +27,7 @@ function ContinentFilter({
               />
             )}
           </div>
-          <div className="text-center text">
+          <div className="text-center dark:text-dark-primary-hover text">
             <h2>{obj.name}</h2>
           </div>
         </div>

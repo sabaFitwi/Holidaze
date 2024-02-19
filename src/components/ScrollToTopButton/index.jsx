@@ -30,7 +30,7 @@ const ScrollToTopButton = () => {
     <div className="fixed bottom-4 right-4 z-10">
       {isVisible && (
         <div
-          className=" text-black p-1 rounded-full cursor-pointer"
+          className=" text-black dark:text-white p-1 rounded-full cursor-pointer"
           onClick={scrollToTop}
         >
           <BsArrowUpSquareFill className="text-2xl w-10 h-10" />

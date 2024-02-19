@@ -33,7 +33,7 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div>
+    <div className="dark:bg-darkPrimary ">
       <CustomProgressBar />
 
       <Routes>
