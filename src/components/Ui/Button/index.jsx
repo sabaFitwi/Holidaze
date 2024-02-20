@@ -1,6 +1,6 @@
 import React from "react";
 
-function Button({ onClick, children, className }) {
+function Button({ onClick, children, className, value }) {
   const defaultColor = "primary";
   const defaultSize = "py-3";
 
@@ -11,6 +11,7 @@ function Button({ onClick, children, className }) {
       <button
         className={`px-8 ${defaultSize} font-semibold rounded-full ${bgColorClass} text-white`}
         onClick={onClick}
+        value={value}
       >
         {children}
       </button>

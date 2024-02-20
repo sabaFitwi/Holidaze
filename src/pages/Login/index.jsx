@@ -80,7 +80,12 @@ const Login = () => {
               </div>
             </div>
             <div>
-              <Button type="submit" className="button">
+              <Button
+                type="submit"
+                value="login"
+                data-cy="login-button"
+                className="button"
+              >
                 Log In
               </Button>
             </div>
