@@ -1,4 +1,4 @@
-# Semester Project 2
+# Final Project 2
 
 ## Goal of the project
 
@@ -11,6 +11,7 @@ The goal of this project is to leverage the skills acquired over the last two ye
 - [Setup](#setup)
 - [How to run the project locally](#how-to-run-the-project-locally)
 - [Required Links](#required-Links)
+- [Acknowledgement](#acknowledgement)
 
 ## General Information
 
@@ -48,10 +49,10 @@ The following user stories were required and are fulfilled:
 - Must use an approved CSS Framework
 
   - CSS processors
-  - [] SASS/SCSS
+  - [ ] SASS/SCSS
   - [ ] PostCSS
   - CSS frameworks
-  - [] Bootstrap (>5)`used`
+  - [ ] Bootstrap (>5)`used`
   - [x] Tailwind (>3)
   - [ ] MUI (>5)
 
