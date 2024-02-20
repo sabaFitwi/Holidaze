@@ -135,6 +135,10 @@ This should start the server at http://localhost:3000/.
       <th>Gantt Chart</th>
       <td><a href= "https://ibb.co/YDLzJMz">Gantt Chart Image</a></td>
     </tr>
+     <tr>
+      <th>Architecture Diagram</th>
+      <td><a href="https://www.figma.com/file/ZT0EAwKS5uXPwXNaaPMAbv/Architecture-Diagram?type=whiteboard&node-id=0%3A1&t=g0Vmvgvu6A27mxGV-1">Live Site</a></td>
+    </tr>
     <tr>
       <th>Design Prototype</th>
       <td><a href="https://www.figma.com/file/X0ZLpE4bA7Ebajc30U2Xzh/Desktop-Holidayz?type=design&node-id=0%3A1&mode=design&t=QnQPsERYaOg1rL9j-1">Prototype</a> </td>
