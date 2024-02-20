@@ -49,10 +49,10 @@ The following user stories were required and are fulfilled:
 - Must use an approved CSS Framework
 
   - CSS processors
-  - [] SASS/SCSS
+  - [ ] SASS/SCSS
   - [ ] PostCSS
   - CSS frameworks
-  - [] Bootstrap (>5)`used`
+  - [ ] Bootstrap (>5)`used`
   - [x] Tailwind (>3)
   - [ ] MUI (>5)
 
