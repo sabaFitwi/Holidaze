@@ -14,7 +14,7 @@ import UpdateBooking from "./pages/Updates/UpdateBooking";
 import UpdateVenue from "./pages/Updates/UpdateVenue";
 import Tabs from "./components/Ui/Tabs";
 import MyVenueBooking from "./components/Cards/MyVenueBookings";
-import HotjarTracking from "./hotjarTracking.js";
+import HotjarTracking from "./components/hotjarTracking.js";
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
