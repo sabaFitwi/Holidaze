@@ -5,10 +5,22 @@ import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../api";
 import Headers from "./useHeader";
 
-const Url = baseUrl;
-const endPoint = `/auth/login`;
+/**
+ * Custom React hook for managing user login functionality.
+ * @returns {{
+ *   loginStatus: boolean|string,
+ *   loginData: { email: string, password: string },
+ *   errors: Object,
+ *   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+ *   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>,
+ *   touchedFields: Object
+ * }} An object containing login status, login data, error messages, input change handler,
+ * form submission handler, and touched fields state.
+ */
 
 const useLogin = () => {
+  const Url = baseUrl;
+  const endPoint = `/auth/login`;
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [loginStatus, setLoginStatus] = useState(false);
   const [touchedFields, setTouchedFields] = useState({});

@@ -116,6 +116,7 @@ function Navbar({ darkMode, setDarkMode }) {
                 onClick={handleNav}
                 className="nav-toggle z-20 group-hover:rotate-180 duration-300 cursor-pointer"
                 size={25}
+                id="hamburger-menu"
               />
               <div
                 ref={dropdownRef}
@@ -164,8 +165,9 @@ function Navbar({ darkMode, setDarkMode }) {
                           document.body.style.overflow = "scroll";
                         }}
                         className=" block px-4 py-2 text-gray-800 hover.bg-gray-100  whitespace-nowrap"
+                        data-cy="logout"
                       >
-                        Sign out
+                        Logout
                       </button>
                     </div>
                   </div>

@@ -3,6 +3,27 @@ import { useState, useEffect } from "react";
 import usePOST from "./UsePost";
 import { registerUrl } from "../api";
 
+/**
+ * Custom React hook for managing user registration functionality.
+ * @returns {{
+ *   selectedOption: any,
+ *   setSelectedOption: (option: any) => void,
+ *   registrationStatus: string|null,
+ *   registrationData: {
+ *     venueManager: boolean,
+ *     name: string,
+ *     email: string,
+ *     password: string,
+ *     avatar: string
+ *   },
+ *   errors: Object,
+ *   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+ *   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>,
+ *   isLoading: boolean
+ * }} An object containing selected option, functions to set selected option, registration status, registration data, error messages,
+ * input change handler, form submission handler, and loading status.
+ */
+
 const useRegister = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [registrationStatus, setRegistrationStatus] = useState(null);

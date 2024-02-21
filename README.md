@@ -52,8 +52,8 @@ The following user stories were required and are fulfilled:
   - [ ] SASS/SCSS
   - [ ] PostCSS
   - CSS frameworks
-  - [ ] Bootstrap (>5)`used`
-  - [x] Tailwind (>3)
+  - [ ] Bootstrap (>5)
+  - [x] Tailwind (>3)`used`
   - [ ] MUI (>5)
 
 - Must be hosted on an approved Static Host
@@ -90,7 +90,7 @@ Installed prettier as dev dependency
 
 ## Testing E2E CYPRESS
 
-The project includes one spec with two tests, login and logout.  
+The project includes Create venue, login and logout tests.  
 To run tests, first, you need to run the live server. This is done by the following command:
 
 ```
@@ -103,7 +103,7 @@ Once the project is running, you can open a second terminal and run the followin
 npm run test-e2e
 ```
 
-The tests should now be running in your terminal and displaying successful 2 out of 2 tests.
+The tests should now be running in your terminal and displaying successful tests.
 
 #### Available Scripts
 

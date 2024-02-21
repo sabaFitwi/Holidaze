@@ -1,6 +1,11 @@
 import Headers from "../hooks/useHeader";
 import { baseUrl } from "../api";
 
+/**
+ * Asynchronously fetches profile data for a given user.
+ * @param {Object} users - Optional data about the user(s) to include in the request.
+ * @returns {Promise<Object>} A Promise that resolves with the profile data fetched from the server.
+ */
 export async function getProfile(users) {
   const Url = baseUrl;
 

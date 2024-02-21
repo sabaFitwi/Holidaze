@@ -1,5 +1,15 @@
 import { useEffect, useState } from "react";
 
+/**
+ * Custom React hook for fetching data from a specified API endpoint.
+ * @param {string} apiEndpoint - The URL of the API endpoint to fetch data from.
+ * @returns {{
+ *   data: Array|Object,
+ *   isLoading: boolean,
+ *   isError: boolean
+ * }} An object containing fetched data, loading state, and error state.
+ */
+
 export function useFetchData(apiEndpoint) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
