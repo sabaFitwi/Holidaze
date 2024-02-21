@@ -36,6 +36,7 @@ function App() {
   return (
     <div className="dark:bg-darkPrimary ">
       <CustomProgressBar />
+
       <HotjarTracking />
       <Routes>
         <Route

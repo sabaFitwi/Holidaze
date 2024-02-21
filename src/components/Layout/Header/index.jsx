@@ -4,12 +4,12 @@ import imageBrand from "../../../assets/logo/logo1.png";
 import { Link, useNavigate } from "react-router-dom";
 import LogOut from "../../LogOut";
 import useAvatar from "../../../hooks/useAvatar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRightFromBracket,
-  faArrowRightToBracket,
-} from "@fortawesome/free-solid-svg-icons";
-import Button from "../../Ui/Button";
+
+import { AiOutlineForm } from "react-icons/ai";
+import { FaRegCircleUser } from "react-icons/fa6";
+import { IoHomeOutline } from "react-icons/io5";
+import { LuLayoutList } from "react-icons/lu";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 
 import DarkModeButton from "../../utils/DarkMode";
 
@@ -80,15 +80,18 @@ function Navbar({ darkMode, setDarkMode }) {
         />
       </Link>
 
-      <div className="flex justify-end items-center space-x-1 sm:space-x-4">
-        <Link to="/" className=" hover:text-underline">
-          Home
+      <div className="flex justify-end items-center space-x-3 sm:space-x-4">
+        <Link to="/" className="flex items-center">
+          <IoHomeOutline size={20} />
+          <p className=" hover:text-underline pl-2 hidden sm:block"> Home</p>
         </Link>
-        <Link to={"./../venues"} className=" pl-1 sm:pl-2 hover:text-gray-900 ">
-          Browse
+        <Link
+          to={"./../venues"}
+          className="flex items-center  pl-1 sm:pl-2 hover:text-gray-900 "
+        >
+          <LuLayoutList size={20} />
+          <p className=" hover:text-underline pl-2 hidden sm:block"> Browse</p>
         </Link>
-        <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode} />
-
         {isLoggedIn && profileData && profileData.avatar && !loading ? (
           <div className="flex justify-center border-2 rounded-full shadow-sm bg-gray-100">
             <img
@@ -108,7 +111,6 @@ function Navbar({ darkMode, setDarkMode }) {
               profileData.name.charAt(0).toUpperCase()}
           </Link>
         ) : null}
-
         {isLoggedIn ? (
           <>
             <div className="relative group">
@@ -129,34 +131,40 @@ function Navbar({ darkMode, setDarkMode }) {
                 <div className="bg-white shadow-lg rounded-lg">
                   <Link
                     to="/profile"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     onClick={() => {
                       handleNav();
                       document.body.style.overflow = "scroll";
                     }}
+                    className="flex items-center pl-3  hover:bg-gray-100"
                   >
-                    Profile
+                    {" "}
+                    <FaRegCircleUser size={16} />
+                    <p className="block px-4 py-2 text-gray-800"> Profile</p>
                   </Link>
+
                   <div className=" space-y-4 divide-y divide-gray-500 text-center ">
                     {isVenueManager && (
-                      <Link
-                        to="/create"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100 whitespace-nowrap"
-                        onClick={() => {
-                          handleNav();
-                          document.body.style.overflow = "scroll";
-                        }}
-                      >
-                        Create Venue
-                      </Link>
+                      <div className="">
+                        <Link
+                          to="/create"
+                          className="flex items-center pl-3 hover:bg-gray-100 whitespace-nowrap"
+                          onClick={() => {
+                            handleNav();
+                            document.body.style.overflow = "scroll";
+                          }}
+                        >
+                          {" "}
+                          <AiOutlineForm />
+                          <p className="block px-4 py-2 text-gray-800">
+                            Create Venue
+                          </p>
+                        </Link>
+                      </div>
                     )}
 
-                    <div className=" relative flex items-center">
+                    <div className=" relative flex items-center  hover:bg-gray-100">
                       <div className="absolute right-4">
-                        <FontAwesomeIcon
-                          icon={faArrowRightFromBracket}
-                          className="text-gray-400"
-                        />
+                        <FiLogOut />
                       </div>
                       <button
                         onClick={() => {
@@ -164,7 +172,7 @@ function Navbar({ darkMode, setDarkMode }) {
                           handleNav();
                           document.body.style.overflow = "scroll";
                         }}
-                        className=" block px-4 py-2 text-gray-800 hover.bg-gray-100  whitespace-nowrap"
+                        className=" block px-4 py-2 text-gray-800  whitespace-nowrap"
                         data-cy="logout"
                       >
                         Logout
@@ -177,29 +185,22 @@ function Navbar({ darkMode, setDarkMode }) {
           </>
         ) : (
           <>
-            <Link
-              to="./../Register"
-              className="text-gray-600 hover:text-gray-900 ml-4"
-            >
-              Register
-            </Link>
-            <Button className="px-4 py-2 flex items-center">
+            <div className=" py-2 flex items-center">
               <Link
                 to={"./../Login"}
-                className="text-gray-600 whitespace-nowrap hover:text-gray-900 ml-4"
+                className="whitespace-nowrap hover:text-gray-900  hidden sm:block"
               >
-                Sign in
+                <p className="mr-2">Login</p>
+                <FiLogIn size={20} />
               </Link>
-              <div className="ml-2">
-                <FontAwesomeIcon
-                  icon={faArrowRightToBracket}
-                  className="text-gray-400"
-                />
-              </div>
-            </Button>
+            </div>
+            <Link to="./../Register" className="bg-primary p-2 rounded-md ml-4">
+              Register
+            </Link>
           </>
         )}
       </div>
+      <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode} />
     </nav>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 
 function DarkModeButton({ darkMode, setDarkMode }) {
   return (
@@ -6,9 +7,9 @@ function DarkModeButton({ darkMode, setDarkMode }) {
       onClick={() => {
         setDarkMode(!darkMode);
       }}
-      className="bg-black text-white px-5 py-3 rounded focus:outline-none"
+      className="bg-black text-white   focus:outline-none"
     >
-      {darkMode ? "Light Mode" : "Dark Mode"}
+      {darkMode ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
     </button>
   );
 }
