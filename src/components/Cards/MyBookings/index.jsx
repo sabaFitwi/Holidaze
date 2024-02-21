@@ -77,7 +77,7 @@ function BookingsCards() {
 
   const activeBookings = myBookingsData.filter(
     (booking) =>
-      new Date(booking.dateTo) >= currentDate &&
+      new Date(booking.dateTo) > currentDate &&
       booking.venue.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
@@ -139,7 +139,7 @@ function BookingsCards() {
                 continent={booking.venue.location.continent}
                 city={booking.venue.location.city}
                 onEditClick={() => handleEditClick(booking.id)}
-                updated={booking.venue.updated}
+                updated={booking.updated}
                 onDeleteClick={() => {
                   setSelectedBooking(booking.id);
                   setIsModalOpen(true);

@@ -83,11 +83,23 @@ function VenueDescription({ onUpdate }) {
   };
 
   const handleFiltersSubmit = async () => {
-    if (!startDate || !endDate || !id || !guests) {
-      alert("Please fill out all fields");
+    const isAuthenticated = localStorage.getItem("isLoggedIn") === "true";
+
+    if (!isAuthenticated) {
+      setValidationMessage("You are not logged in. Please login.");
       return;
     }
 
+    if (!startDate || !endDate) {
+      console.error("Start date or end date is undefined");
+      return;
+    }
+
+    if (!id) {
+      console.error("Venue ID is missing");
+      setValidationMessage("Venue ID is required.");
+      return;
+    }
     const bookingData = {
       dateFrom: startDate.toISOString(),
       dateTo: endDate.toISOString(),
@@ -102,7 +114,6 @@ function VenueDescription({ onUpdate }) {
       );
 
       if (success) {
-        console.log("Booking successful");
         setSuccessMessage("Booking successful!");
         setTimeout(() => {
           setSuccessMessage("");
