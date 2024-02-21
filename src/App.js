@@ -14,6 +14,7 @@ import UpdateBooking from "./pages/Updates/UpdateBooking";
 import UpdateVenue from "./pages/Updates/UpdateVenue";
 import Tabs from "./components/Ui/Tabs";
 import MyVenueBooking from "./components/Cards/MyVenueBookings";
+import HotjarTracking from "./hotjarTracking.js";
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -35,7 +36,7 @@ function App() {
   return (
     <div className="dark:bg-darkPrimary ">
       <CustomProgressBar />
-
+      <HotjarTracking />
       <Routes>
         <Route
           path="/"
