@@ -140,6 +140,7 @@ const CreateVenueForm = () => {
           <div className="mb-4">
             <label className="block text-sm font-medium">Title:</label>
             <Input
+              data-cy="venueName"
               type="text"
               id="name"
               name="name"
@@ -153,6 +154,7 @@ const CreateVenueForm = () => {
           <div className="mb-4">
             <label className="block text-sm font-medium">Description:</label>
             <Input
+              data-cy="venueDescription"
               type="text"
               id="description"
               name="description"
@@ -173,6 +175,7 @@ const CreateVenueForm = () => {
                 <div className="flex flex-col items-center space-x-2 w-full">
                   <div className="flex justify-between w-full">
                     <Input
+                      data-cy="media"
                       id="media"
                       name="media"
                       type="text"
@@ -204,6 +207,7 @@ const CreateVenueForm = () => {
             <div className="mb-4">
               <div className="flex flex-col items-center space-x-2">
                 <button
+                  id="add-image-button"
                   type="button"
                   onClick={handleAddImage}
                   className="text-blue-500 hover:text-blue-700 focus:outline-none"
@@ -218,6 +222,7 @@ const CreateVenueForm = () => {
               Price:
             </label>
             <Input
+              data-cy="price"
               type="number"
               id="price"
               name="price"
@@ -233,6 +238,7 @@ const CreateVenueForm = () => {
               Max Guests:
             </label>
             <Input
+              data-cy="maxGuests"
               type="number"
               id="maxGuests"
               name="maxGuests"
@@ -248,6 +254,7 @@ const CreateVenueForm = () => {
               Rating:
             </label>
             <Input
+              data-cy="rating"
               type="number"
               id="rating"
               name="rating"
@@ -263,6 +270,7 @@ const CreateVenueForm = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Input
+                  data-cy="wifi"
                   type="checkbox"
                   id="wifi"
                   name="meta.wifi"
@@ -275,6 +283,7 @@ const CreateVenueForm = () => {
               </div>
               <div>
                 <Input
+                  data-cy="parking"
                   type="checkbox"
                   id="parking"
                   name="meta.parking"
@@ -287,6 +296,7 @@ const CreateVenueForm = () => {
               </div>
               <div>
                 <Input
+                  data-cy="breakfast"
                   type="checkbox"
                   id="breakfast"
                   name="meta.breakfast"
@@ -299,6 +309,7 @@ const CreateVenueForm = () => {
               </div>
               <div>
                 <Input
+                  data-cy="pets"
                   type="checkbox"
                   id="pets"
                   name="meta.pets"
@@ -318,6 +329,7 @@ const CreateVenueForm = () => {
               Address:
             </label>
             <Input
+              data-cy="address"
               type="text"
               id="address"
               name="location.address"
@@ -332,6 +344,7 @@ const CreateVenueForm = () => {
               City:
             </label>
             <Input
+              data-cy="city"
               type="text"
               id="city"
               name="location.city"
@@ -346,6 +359,7 @@ const CreateVenueForm = () => {
               ZIP:
             </label>
             <Input
+              data-cy="zip"
               type="text"
               id="zip"
               name="location.zip"
@@ -360,6 +374,7 @@ const CreateVenueForm = () => {
               Country:
             </label>
             <Input
+              data-cy="country"
               type="text"
               id="country"
               name="location.country"
@@ -393,6 +408,7 @@ const CreateVenueForm = () => {
               Latitude:
             </label>
             <Input
+              data-cy="lat"
               type="number"
               id="lat"
               name="location.lat"
@@ -407,6 +423,7 @@ const CreateVenueForm = () => {
               Longitude:
             </label>
             <Input
+              data-cy="lng"
               type="number"
               id="lng"
               name="location.lng"
@@ -416,7 +433,13 @@ const CreateVenueForm = () => {
             />
           </div>
 
-          <Button className="button" type="button" onClick={handleSubmit}>
+          <Button
+            data-cy="submitVenue"
+            id="submit-button"
+            className="button"
+            type="button"
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
         </form>

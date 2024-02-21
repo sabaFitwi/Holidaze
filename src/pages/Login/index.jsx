@@ -35,6 +35,7 @@ const Login = () => {
                 <div>
                   <div className="relative flex items-center">
                     <input
+                      data-cy="email-input"
                       id="email"
                       name="email"
                       type="email"
@@ -59,6 +60,7 @@ const Login = () => {
                 <div>
                   <div className="relative flex items-center">
                     <input
+                      data-cy="password-input"
                       id="password"
                       name="password"
                       type="password"
@@ -92,11 +94,13 @@ const Login = () => {
           </form>
 
           {loginStatus === "success" && (
-            <p className="text-green-600 text-center">Login successful!</p>
+            <p id="successful" className="text-green-600 text-center">
+              Login successful!
+            </p>
           )}
 
           {loginStatus === "failure" && (
-            <p className="text-red-600 text-center">
+            <p id="failed" className="text-red-600 text-center">
               Login failed. Please check your credentials.
             </p>
           )}

@@ -1,0 +1,16 @@
+{
+  "name": "Sample Venue",
+  "description": "This is a sample venue description.",
+  "wifi": true,
+  "parking": false,
+  "breakfast": true,
+  "pets": false,
+  "image": "https://example.com/image.jpg",
+  "address": "123 Sample Street",
+  "city": "Sample City",
+  "zip": "12345",
+  "country": "Sample Country",
+  "continent": "Europe",
+  "price": 100,
+  "maxGuests": 50
+}
