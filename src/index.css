@@ -59,6 +59,9 @@ img {
 .dark-mode {
   @apply bg-darkPrimary text-white;
 }
+.overlay {
+  @apply bg-opacity-60 bg-black rounded-lg shadow-lg backdrop-blur-md border border-gray-300;
+}
 
 .input-field {
   @apply block w-full py-2 px-3  rounded-md focus:outline-none focus:border-primary-hover;

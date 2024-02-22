@@ -1,21 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  faBed,
-  faCalendarDays,
-  faPerson,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-
+import { FaBed } from "react-icons/fa";
+import { IoCalendarNumberOutline } from "react-icons/io5";
+import { BsPeople } from "react-icons/bs";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import Input from "../../Ui/Input";
 import Button from "../../Ui/Button";
 import backgroundImage from "../../../assets/banner/13.jpg";
 
-const SearchByName = () => {
+const BannerSearch = () => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
@@ -66,28 +62,28 @@ const SearchByName = () => {
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className=" w-full max-w-4xl  text-start my-auto">
-        <h1 className="text-2xl text-black font-bold">
+        <h1 className="text-2xl font-bold">
           A lifetime of discounts? It's Genius.
         </h1>
 
-        <div className="mt-4 h-30  w-full max-w-4xl  marker: bg-gray-500 border-3 border-yellow-500 flex flex-col lg:flex-row  items-center justify-around p-4 rounded-5 absolute  bottom-(-25)">
+        <div className=" bg-opacity-50 bg-primary rounded-lg shadow-lg backdrop-blur-md border mt-4 h-30  w-full max-w-4xl flex flex-col lg:flex-row  items-center justify-start p-4 rounded-5 absolute  bottom-(-25)">
           <div className="flex items-center gap-4">
-            <FontAwesomeIcon icon={faBed} className="text-lightgray" />
+            <FaBed className=" w-7 h-7 " />
             <Input
               type="text"
               placeholder="Where are you going?"
-              className="border-none outline-none p-4 bg-white"
+              className="border-none outline-none p-4"
               onChange={(e) => setDestination(e.target.value)}
             />
           </div>
-          <div className="flex items-center gap-4 relative" ref={dateRangeRef}>
-            <FontAwesomeIcon
-              icon={faCalendarDays}
-              className="text-lightgray cursor-pointer"
-            />
+          <div
+            className="flex items-center gap-4 p-2 relative"
+            ref={dateRangeRef}
+          >
+            <IoCalendarNumberOutline className="w-7 h-7 cursor-pointer" />
             <span
               onClick={() => setOpenDate(!openDate)}
-              className="text-lightgray cursor-pointer"
+              className=" cursor-pointer"
             >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
               date[0].endDate,
               "MM/dd/yyyy",
@@ -105,8 +101,8 @@ const SearchByName = () => {
             )}
           </div>
           <div className="relative">
-            <div className="flex items-center gap-4">
-              <FontAwesomeIcon icon={faPerson} className="text-lightgray" />
+            <div className="flex items-center p-2">
+              <BsPeople size={20} />
               <span
                 onClick={() => setOpenOptions(!openOptions)}
                 className="text-lightgray cursor-pointer"
@@ -150,4 +146,4 @@ const SearchByName = () => {
   );
 };
 
-export default SearchByName;
+export default BannerSearch;

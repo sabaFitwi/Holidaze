@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import imageBrand from "../../../assets/logo/logo1.png";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LogOut from "../../LogOut";
 import useAvatar from "../../../hooks/useAvatar";
 import DarkModeButton from "../../utils/DarkMode";
@@ -18,6 +18,18 @@ function Navbar({ darkMode, setDarkMode }) {
   const { profileData, loading } = useAvatar();
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
+
+  let { pathname } = useLocation();
+
+  function Linkness(destination) {
+    let classes = "px-4 py-2 rounded flex items-center whitespace-nowrap";
+    if (pathname === destination) {
+      classes += " bg-primary text-white";
+    } else {
+      classes += " ";
+    }
+    return classes;
+  }
 
   const updateAuthStatus = () => {
     const userIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -73,23 +85,14 @@ function Navbar({ darkMode, setDarkMode }) {
       </Link>
 
       <div className="flex justify-end items-center space-x-3 sm:space-x-4">
-        <NavLink
-          exact
-          to="/"
-          activeClassName="active"
-          className="flex items-center"
-        >
+        <Link to="/" className={Linkness("/")}>
           <IoHomeOutline size={20} />
           <p className="pl-2 hidden sm:block"> Home</p>
-        </NavLink>
-        <NavLink
-          to="/venues"
-          activeClassName="active"
-          className="flex items-center"
-        >
+        </Link>
+        <Link to="/venues" className={Linkness("/venues")}>
           <LuLayoutList size={20} />
           <p className="pl-2 hidden sm:block"> Browse</p>
-        </NavLink>
+        </Link>
         {isLoggedIn && profileData && profileData.avatar && !loading ? (
           <div className="flex justify-center border-2 rounded-full shadow-sm bg-gray-100">
             <img
@@ -99,7 +102,7 @@ function Navbar({ darkMode, setDarkMode }) {
             />
           </div>
         ) : isLoggedIn ? (
-          <NavLink
+          <Link
             to={"/profile"}
             onClick={handleNav}
             className="flex items-center justify-center w-10 h-10 bg-gray-300 text-gray-600 rounded-full"
@@ -107,7 +110,7 @@ function Navbar({ darkMode, setDarkMode }) {
             {profileData &&
               profileData.name &&
               profileData.name.charAt(0).toUpperCase()}
-          </NavLink>
+          </Link>
         ) : null}
         {isLoggedIn ? (
           <>
@@ -127,10 +130,9 @@ function Navbar({ darkMode, setDarkMode }) {
                 }
               >
                 <div className="bg-white dark:bg-black shadow-lg rounded-lg">
-                  <NavLink
+                  <Link
                     to="/profile"
-                    activeClassName="active"
-                    className="flex items-center pl-3  hover:bg-gray-500"
+                    className={Linkness("/profile")}
                     onClick={() => {
                       handleNav();
                     }}
@@ -138,23 +140,23 @@ function Navbar({ darkMode, setDarkMode }) {
                     {" "}
                     <FaRegCircleUser size={16} />
                     <p className="block px-4 py-2 "> Profile</p>
-                  </NavLink>
+                  </Link>
 
                   <div className=" space-y-4 divide-y divide-gray-500 text-center ">
                     {isVenueManager && (
                       <div className="">
-                        <NavLink
+                        <Link
                           to="/create"
-                          activeClassName="active"
-                          className="flex items-center pl-3 hover:bg-gray-500 whitespace-nowrap"
+                          className={Linkness("/create")}
                           onClick={() => {
                             handleNav();
                           }}
+                          size={16}
                         >
                           {" "}
                           <AiOutlineForm />
                           <p className="block px-4 py-2">Create Venue</p>
-                        </NavLink>
+                        </Link>
                       </div>
                     )}{" "}
                     <DarkModeButton

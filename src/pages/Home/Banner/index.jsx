@@ -1,7 +1,7 @@
 // Banner.js
 import React from "react";
 //import bannerVideo from "../../../assets/cont/bannerVideo.mp4";
-import SearchByName from "../../../components/Search/SearchByName";
+import BannerSearch from "../../../components/Search/BannerSearch";
 
 const Banner = () => {
   const handleSearch = (destination, checkInDate, checkOutDate) => {
@@ -11,18 +11,7 @@ const Banner = () => {
 
   return (
     <header className="relative h-[300px] lg:h-[400px] xl:h-[500px]">
-      {/* <video
-        className="banner-video absolute inset-0 w-full h-full z-0 object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-      >
-        <source src={bannerVideo} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video> */}
-
-      <SearchByName onSearch={handleSearch} />
+      <BannerSearch onSearch={handleSearch} />
     </header>
   );
 };

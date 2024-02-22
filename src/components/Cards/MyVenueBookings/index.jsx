@@ -111,7 +111,9 @@ function MyVenueBooking() {
                 {expiredBookings.length > 0 && `(${expiredBookings.length})`}
               </button>
             </div>
-            {showActiveBookings ? (
+            {venueData.bookings.length === 0 ? (
+              <p>No bookings found for this venue.</p>
+            ) : showActiveBookings ? (
               <table className="table-auto ">
                 <thead>
                   <tr>

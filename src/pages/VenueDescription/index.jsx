@@ -204,7 +204,7 @@ function VenueDescription({ onUpdate }) {
                   {data.price} kr
                 </span>
 
-                <span className=" mx-2 text-sm">/Night</span>
+                <span className=" mx-2 dark:text-primary text-sm">/Night</span>
               </div>
             </div>
             <div>
