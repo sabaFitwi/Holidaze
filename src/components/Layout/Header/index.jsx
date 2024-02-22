@@ -121,6 +121,10 @@ function Navbar({ darkMode, setDarkMode }) {
                 }
               >
                 <div className="bg-white shadow-lg rounded-lg">
+                  <DarkModeButton
+                    darkMode={darkMode}
+                    setDarkMode={setDarkMode}
+                  />
                   <Link
                     to="/profile"
                     onClick={() => {
