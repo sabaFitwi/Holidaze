@@ -18,12 +18,12 @@ function VenueAmenities({ data }) {
         <div className="flex text-sm items-center">
           {wifi ? (
             <>
-              <BsWifi className="text-primary  m-3" />
-              <span className="text-gray-800 ">Wifi</span>
+              <BsWifi className="text-primary w-5 h-5 dark:text-primary-hover m-3" />
+              <span>Wifi</span>
             </>
           ) : (
             <>
-              <LuWifiOff className="text-gray-400 line-through m-3" />
+              <LuWifiOff className="text-gray-400 w-5 h-5 line-through m-3" />
               <span className="text-gray-400 line-through">Wifi</span>
             </>
           )}
@@ -31,12 +31,12 @@ function VenueAmenities({ data }) {
         <div className="flex text-sm items-center">
           {parking ? (
             <>
-              <LuParkingCircle className="text-primary m-3" />
-              <span className="text-gray-800">Parking</span>
+              <LuParkingCircle className="text-primary w-5 h-5 dark:text-primary-hover m-3" />
+              <span>Parking</span>
             </>
           ) : (
             <>
-              <BsSignNoParking className="text-gray-400  line-through m-3" />
+              <BsSignNoParking className="text-gray-400 w-5 h-5 line-through m-3" />
               <span className="text-gray-400 line-through ">Parking</span>
             </>
           )}
@@ -44,12 +44,12 @@ function VenueAmenities({ data }) {
         <div className="flex text-sm items-center">
           {breakfast ? (
             <>
-              <TbCoffee className="text-primary m-3" />
-              <span className="text-gray-800">Breakfast</span>
+              <TbCoffee className="text-primary w-5 h-5 dark:text-primary-hover m-3" />
+              <span>Breakfast</span>
             </>
           ) : (
             <>
-              <TbCoffeeOff className="text-gray-400 line-through m-3" />
+              <TbCoffeeOff className="text-gray-400  w-5 h-5 line-through m-3" />
               <span className="text-gray-400 line-through">Breakfast</span>
             </>
           )}
@@ -57,12 +57,12 @@ function VenueAmenities({ data }) {
         <div className="flex text-sm items-center">
           {pet ? (
             <>
-              <FaPaw className="text-primary m-3" />
-              <span className="text-gray-800">Pets</span>
+              <FaPaw className="text-primary w-5 h-5 dark:text-primary-hover m-3" />
+              <span>Pets</span>
             </>
           ) : (
             <>
-              <FaPaw className="text-gray-400 line-through m-3" />
+              <FaPaw className="text-gray-400 w-5 h-5 line-through m-3" />
               <span className="text-gray-400 line-through">Pets</span>
             </>
           )}

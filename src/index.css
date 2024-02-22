@@ -50,6 +50,9 @@ img {
 
 @tailwind components;
 
+.active {
+  @apply bg-primary text-white dark:bg-primary-hover dark:text-black p-2;
+}
 .button {
   @apply w-full flex justify-center py-2 px-4 border text-sm font-bold bg-primary hover:bg-black rounded focus:outline-none focus:ring;
 }

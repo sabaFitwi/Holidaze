@@ -8,12 +8,13 @@ import StarRating from "../../components/RatingStars";
 import DateInput from "../../components/Ui/DateInput";
 import VenueImages from "./VenueImages";
 import VenueAmenities from "./VenueAmenities";
-import { FaCalendarDay, FaUsers } from "react-icons/fa";
 import { daysSincePosted } from "../../components/utils/DateSincePost";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import usePOST from "../../hooks/UsePost";
 import SEO from "../../components/SEO";
 import Breadcrumb from "../../components/Ui/Breadcrumbs";
+import { IoCalendarNumberOutline } from "react-icons/io5";
+import { IoIosPeople } from "react-icons/io";
 
 function VenueDescription({ onUpdate }) {
   const { id } = useParams();
@@ -149,9 +150,7 @@ function VenueDescription({ onUpdate }) {
       />
       <Breadcrumb pathSegments={pathSegments} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
-        <h1 className="h1 mb-4 font-bold text-gray-800 capitalize md:hidden">
-          {data.name}
-        </h1>
+        <h1 className="h1 mb-4 font-bold  capitalize md:hidden">{data.name}</h1>
         <div className="flex flex-col md:flex-row -mx-4">
           <div className="w-full md:w-[60%] divide-y">
             <div className="md:flex-1 px-4 divide-y">
@@ -171,11 +170,11 @@ function VenueDescription({ onUpdate }) {
                 alt="Avatar of Writer"
               />
               <div className="text-sm ">
-                <h4 className="text-gray-900  text-sm">
+                <h4 className=" text-sm">
                   Hosted by
                   <span className="font-bold mx-2">{data.owner?.name}</span>
                 </h4>
-                <p className="text-gray-600 text-xs">
+                <p className=" text-xs">
                   Posted. {daysSincePosted(data.updated)} ago
                 </p>
                 <div className="flex items-center pb-2">
@@ -187,17 +186,17 @@ function VenueDescription({ onUpdate }) {
             <div className=" divide-y">
               <VenueAmenities data={data} />
               <div className="flex my-4 ml-4 py-4">
-                <FaUsers className="text-gray-800 mr-2" />
+                <IoIosPeople className="mr-2 w-5 h-5" />
                 <span className="text-sm">Maximum Guests {data.maxGuests}</span>
               </div>
             </div>
           </div>
 
           <div className=" w-full md:w-[40%]  px-4">
-            <h1 className="h1 mb-4 font-bold text-gray-800 capitalize hidden md:block">
+            <h1 className="h1 mb-4 font-bold capitalize hidden md:block">
               {data.name}
             </h1>
-            <p className="text-gray-700">{data.description}</p>
+            <p>{data.description}</p>
 
             <div className="flex items-center space-x-4 my-4">
               <div className="rounded-lg bg-gray-100 flex items-end py-2 px-3 ">
@@ -211,8 +210,8 @@ function VenueDescription({ onUpdate }) {
             <div>
               <div className="my-4">
                 <div className="flex items-center mb-1">
-                  <FaCalendarDay />
-                  <p className="ml-2 text-sm font-semibold">
+                  <IoCalendarNumberOutline className="w-5 h-5" />
+                  <p className="ml-2 text-sm font-semibold dark:font-normal">
                     CheckIn - Checkout
                   </p>
                 </div>
@@ -226,14 +225,16 @@ function VenueDescription({ onUpdate }) {
                   }}
                   placeholder="Choose a date"
                   existingBookings={existingBookings}
-                  className="text-sm mt-1"
+                  className="text-sm mt-1 border"
                 />
               </div>
 
               <div className=" my-4 ">
                 <div className="flex item-center mb-1">
-                  <FaUsers />
-                  <p className="ml-2  font-semibold text-sm">Guests</p>
+                  <IoIosPeople className="w-5 h-5" />
+                  <p className="ml-2  font-semibold dark:font-normal text-sm">
+                    Guests
+                  </p>
                 </div>
 
                 <Input
@@ -257,7 +258,7 @@ function VenueDescription({ onUpdate }) {
 
               <div className="flex-1 text-right border-b border-t ">
                 <p>Night(s): {totalNights}</p>
-                <p className=" text-xl font-semibold">
+                <p className=" text-xl font-semibold dark:font-normal">
                   Total Price: {totalCost} kr
                 </p>
               </div>

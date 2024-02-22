@@ -39,7 +39,7 @@ const DateInput = ({ value, onChange, placeholder, existingBookings }) => {
   return (
     <div className="relative">
       <span
-        className="h-10 px-2 bg-white flex items-center cursor-pointer"
+        className="h-10 p-2 bg-white flex items-center cursor-pointer border"
         onClick={() => setOpenDate(!openDate)}
       >
         {formattedStartDate && formattedEndDate

@@ -3,14 +3,24 @@ import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 
 function DarkModeButton({ darkMode, setDarkMode }) {
   return (
-    <button
+    <div
+      className="flex items-center pl-3 hover:bg-gray-500 whitespace-nowrap"
       onClick={() => {
         setDarkMode(!darkMode);
       }}
-      className="bg-black text-white   focus:outline-none"
     >
-      {darkMode ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
-    </button>
+      {darkMode ? (
+        <div className="flex items-center  hover:bg-gray-500 whitespace-nowrap">
+          <MdOutlineLightMode size={16} />
+          <p className="px-4 py-2">Light Mode</p>
+        </div>
+      ) : (
+        <div className="flex items-center  hover:bg-gray-500 whitespace-nowrap">
+          <MdOutlineDarkMode size={16} />
+          <p className="px-4 py-2">Dark Mode</p>
+        </div>
+      )}
+    </div>
   );
 }
 
