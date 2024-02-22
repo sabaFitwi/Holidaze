@@ -4,14 +4,12 @@ import imageBrand from "../../../assets/logo/logo1.png";
 import { Link, useNavigate } from "react-router-dom";
 import LogOut from "../../LogOut";
 import useAvatar from "../../../hooks/useAvatar";
-
+import DarkModeButton from "../../utils/DarkMode";
 import { AiOutlineForm } from "react-icons/ai";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { IoHomeOutline } from "react-icons/io5";
 import { LuLayoutList } from "react-icons/lu";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
-
-import DarkModeButton from "../../utils/DarkMode";
 
 function Navbar({ darkMode, setDarkMode }) {
   const [nav, setNav] = useState(false);
@@ -39,7 +37,6 @@ function Navbar({ darkMode, setDarkMode }) {
         !event.target.classList.contains("nav-toggle")
       ) {
         setNav(false);
-        document.body.style.overflow = "scroll";
       }
     };
 
@@ -58,16 +55,11 @@ function Navbar({ darkMode, setDarkMode }) {
 
   const handleNav = () => {
     setNav(!nav);
-    if (!nav) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "scroll";
-    }
   };
 
   return (
     <nav
-      className={`sticky top-0 z-50 flex justify-between p-5 md:px-10 shadow-md bg-white text dark:text-white dark:bg-darkPrimary`}
+      className={`sticky top-0 z-50 flex justify-between  sm:justify-around p-5 md:px-10 shadow-md bg-white text dark:text-white dark:bg-darkPrimary`}
     >
       <Link
         to="/"
@@ -124,8 +116,8 @@ function Navbar({ darkMode, setDarkMode }) {
                 ref={dropdownRef}
                 className={
                   nav
-                    ? "nav-dropdown ease-in duration-300 absolute top-12 right-0 transform translate-x-0 opacity-100 z-10"
-                    : "nav-dropdown transform translate-x-0 opacity-0 duration-200 absolute top-12 right-0 z-10 pointer-events-none"
+                    ? "nav-dropdown ease-in duration-300 absolute top-12 right-5 transform translate-x-0 opacity-100 z-10"
+                    : "nav-dropdown transform translate-x-0 opacity-0 duration-200 absolute top-12 right-5 z-10 pointer-events-none"
                 }
               >
                 <div className="bg-white shadow-lg rounded-lg">
@@ -133,7 +125,6 @@ function Navbar({ darkMode, setDarkMode }) {
                     to="/profile"
                     onClick={() => {
                       handleNav();
-                      document.body.style.overflow = "scroll";
                     }}
                     className="flex items-center pl-3  hover:bg-gray-100"
                   >
@@ -150,7 +141,6 @@ function Navbar({ darkMode, setDarkMode }) {
                           className="flex items-center pl-3 hover:bg-gray-100 whitespace-nowrap"
                           onClick={() => {
                             handleNav();
-                            document.body.style.overflow = "scroll";
                           }}
                         >
                           {" "}
@@ -170,7 +160,6 @@ function Navbar({ darkMode, setDarkMode }) {
                         onClick={() => {
                           handleLogout();
                           handleNav();
-                          document.body.style.overflow = "scroll";
                         }}
                         className=" block px-4 py-2 text-gray-800  whitespace-nowrap"
                         data-cy="logout"
@@ -185,22 +174,47 @@ function Navbar({ darkMode, setDarkMode }) {
           </>
         ) : (
           <>
-            <div className=" py-2 flex items-center">
-              <Link
-                to={"./../Login"}
-                className="whitespace-nowrap hover:text-gray-900  hidden sm:block"
-              >
-                <p className="mr-2">Login</p>
-                <FiLogIn size={20} />
-              </Link>
+            <HiMenuAlt3
+              onClick={handleNav}
+              className="nav-toggle z-20 group-hover:rotate-180 duration-300 cursor-pointer relative"
+              size={25}
+              id="hamburger-menu"
+            />
+            <div
+              ref={dropdownRef}
+              className={
+                nav
+                  ? "nav-dropdown ease-in duration-300 absolute top-12 right-30 transform translate-x-0 opacity-100 z-10"
+                  : "nav-dropdown transform translate-x-0 opacity-0 duration-200 absolute top-12 right-30 z-10 pointer-events-none"
+              }
+            >
+              <div className="bg-white shadow-lg rounded-lg">
+                <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode} />
+                <Link
+                  to={"/Login"}
+                  className={`whitespace-nowrap hover:text-gray-900 block px-4 py-2 text-gray-800 flex-row ${
+                    nav ? "block" : "hidden"
+                  }`}
+                >
+                  <div className="whitespace-nowrap flex item-center p-4">
+                    {" "}
+                    <FiLogIn size={16} />
+                    <p>Login</p>
+                  </div>
+                </Link>
+                <Link
+                  to={"/Register"}
+                  className={`whitespace-nowrap hover:text-gray-900 block px-4 py-2 text-gray-800 ${
+                    nav ? "block" : "hidden"
+                  }`}
+                >
+                  Register
+                </Link>
+              </div>
             </div>
-            <Link to="./../Register" className="bg-primary p-2 rounded-md ml-4">
-              Register
-            </Link>
           </>
         )}
       </div>
-      <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode} />
     </nav>
   );
 }
