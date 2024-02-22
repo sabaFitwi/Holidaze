@@ -4,6 +4,7 @@ import { format } from "date-fns";
 
 const DateInput = ({ value, onChange, placeholder, existingBookings }) => {
   const [openDate, setOpenDate] = useState(false);
+  const [error, setError] = useState("");
 
   const selectedRange = {
     startDate: value.startDate,
@@ -36,10 +37,24 @@ const DateInput = ({ value, onChange, placeholder, existingBookings }) => {
     return disabledDates.includes(formattedDate);
   };
 
+  const handleDateChange = (ranges) => {
+    const selectedStartDate = new Date(ranges.selection.startDate);
+    const today = new Date();
+
+    if (selectedStartDate.toDateString() === today.toDateString()) {
+      setError("You cannot book for today. Please select another date.");
+      return;
+    } else {
+      setError("");
+    }
+
+    onChange(ranges.selection);
+  };
+
   return (
     <div className="relative">
       <span
-        className="h-10 p-2 bg-white flex items-center cursor-pointer border"
+        className="h-10 px-2 bg-white dark:text-black flex items-center border  cursor-pointer"
         onClick={() => setOpenDate(!openDate)}
       >
         {formattedStartDate && formattedEndDate
@@ -48,7 +63,7 @@ const DateInput = ({ value, onChange, placeholder, existingBookings }) => {
       </span>
       {openDate && (
         <DateRange
-          onChange={(item) => onChange(item.selection)}
+          onChange={handleDateChange}
           minDate={new Date()}
           ranges={[selectedRange]}
           rangeColors={["#18766a"]}
@@ -57,6 +72,7 @@ const DateInput = ({ value, onChange, placeholder, existingBookings }) => {
           isDateBlocked={isDateDisabled}
         />
       )}
+      {error && <div className="text-red-500 mt-2">{error}</div>}
     </div>
   );
 };

@@ -143,7 +143,7 @@ function VenueDescription({ onUpdate }) {
   }
 
   return (
-    <div className="dark:bg-darkPrimary dark:text-white">
+    <div className="dark:bg-darkSecondary dark:text-white">
       <SEO
         title="Detail | Holidaze"
         description="Select dates and explore all the venue details. Easy booking, easy planning with Holidaze."
