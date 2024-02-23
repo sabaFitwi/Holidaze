@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
-import imageBrand from "../../../assets/logo/logo1.png";
+import logo from "../../../assets/logo/2.png";
+import darkLogo from "../../../assets/logo/darkLogo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import LogOut from "../../LogOut";
 import useAvatar from "../../../hooks/useAvatar";
@@ -78,7 +79,7 @@ function Navbar({ darkMode, setDarkMode }) {
         className="relative w-1/2 flex items-center cursor-pointer my-auto"
       >
         <img
-          src={imageBrand}
+          src={darkMode ? darkLogo : logo}
           alt="brand"
           className="absolute w-full  h-[85px] object-contain object-left"
         />
@@ -86,11 +87,11 @@ function Navbar({ darkMode, setDarkMode }) {
 
       <div className="flex justify-end items-center space-x-3 sm:space-x-4">
         <Link to="/" className={Linkness("/")}>
-          <IoHomeOutline size={20} />
+          <IoHomeOutline />
           <p className="pl-2 hidden sm:block"> Home</p>
         </Link>
         <Link to="/venues" className={Linkness("/venues")}>
-          <LuLayoutList size={20} />
+          <LuLayoutList />
           <p className="pl-2 hidden sm:block"> Browse</p>
         </Link>
         {isLoggedIn && profileData && profileData.avatar && !loading ? (

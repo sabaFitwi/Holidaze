@@ -62,17 +62,15 @@ const BannerSearch = () => {
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className=" w-full max-w-4xl  text-start my-auto">
-        <h1 className="text-2xl font-bold">
-          A lifetime of discounts? It's Genius.
-        </h1>
+        <h1 className="h1 font-bold">A lifetime of discounts? It's Genius.</h1>
 
-        <div className=" bg-opacity-50 bg-primary rounded-lg shadow-lg backdrop-blur-md border mt-4 h-30  w-full max-w-4xl flex flex-col lg:flex-row  items-center justify-start p-4 rounded-5 absolute  bottom-(-25)">
+        <div className=" bg-opacity-50 bg-primary rounded-lg shadow-lg backdrop-blur-md border mt-4 h-30  w-full max-w-4xl flex flex-col md:flex-row  items-center justify-between p-4 rounded-5 absolute  bottom-(-25)">
           <div className="flex items-center gap-4">
             <FaBed className=" w-7 h-7 " />
             <Input
               type="text"
               placeholder="Where are you going?"
-              className="border-none outline-none p-4"
+              className="border-none outline-none px-4"
               onChange={(e) => setDestination(e.target.value)}
             />
           </div>
@@ -94,7 +92,7 @@ const BannerSearch = () => {
                 onChange={(item) => setDate([item.selection])}
                 moveRangeOnFirstSelection={false}
                 ranges={date}
-                className="absolute left-1/2 top-full transform -translate-x-1/2 z-10"
+                className="absolute  bg-white left-1/2 top-full transform -translate-x-1/2 z-10"
                 minDate={new Date()}
                 onClickOutside={() => setOpenDate(false)}
               />

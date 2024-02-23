@@ -20,13 +20,13 @@ const Home = () => {
           <InfoSection />
         </section>
         <section className="max-w-7xl mx-auto ">
-          <h2 className="text-3xl font-semibold text-center"> Explore</h2>
+          <h2 className="h2 font-semibold text-center"> Explore</h2>
 
           <SortByContinent />
         </section>
         {/* <section className="max-w-7xl"> <CardHome /></section> */}
         <section className="mt-24">
-          <h2 className="text-2xl font-semibold text-center">
+          <h2 className="h2 font-semibold text-center">
             Find Cheapest Accommodation
           </h2>
 
