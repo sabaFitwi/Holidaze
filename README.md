@@ -84,9 +84,7 @@ Installed dependencies
 
 `npm i`
 
-Installed prettier as dev dependency
 
-`npm install --save-dev prettier`
 
 ## Testing E2E CYPRESS
 
@@ -118,7 +116,7 @@ This project uses the following scripts:
 
 ## How to run the project locally
 
-First install `npm install -D tailwindcss`
+First install `npm install
 Then open it on the live server by running `npm start`
 This should start the server at http://localhost:3000/.
 
@@ -158,7 +156,7 @@ This should start the server at http://localhost:3000/.
     </tr>
     <tr>
       <th>Hosted Demo</th>
-      <td><a href="https://lovely-lebkuchen-1efdca.netlify.app/">Live Site</a></td>
+      <td><a href="https://holidaze-saba-fitwi.netlify.app/profile">Live Site</a></td>
     </tr>
   </tbody>
 </table>
