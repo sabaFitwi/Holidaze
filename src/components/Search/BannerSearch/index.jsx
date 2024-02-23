@@ -78,7 +78,10 @@ const BannerSearch = () => {
             className="flex items-center gap-4 p-2 relative"
             ref={dateRangeRef}
           >
-            <IoCalendarNumberOutline className="w-7 h-7 cursor-pointer" />
+            <label>
+              <IoCalendarNumberOutline className="w-7 h-7 cursor-pointer" />
+            </label>
+
             <span
               onClick={() => setOpenDate(!openDate)}
               className=" cursor-pointer"
