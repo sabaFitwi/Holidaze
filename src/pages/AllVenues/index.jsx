@@ -29,16 +29,16 @@ function AllVenues() {
     venue.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
   const sortedVenues = [...filteredVenues].sort((a, b) => {
-    if (sortBy === "name") {
+    if (sortBy === "date") {
+      return sortOrder === "asc"
+        ? new Date(a.updated) - new Date(b.updated)
+        : new Date(b.updated) - new Date(a.updated);
+    } else if (sortBy === "price") {
+      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+    } else if (sortBy === "name") {
       return sortOrder === "asc"
         ? a.name.localeCompare(b.name)
         : b.name.localeCompare(a.name);
-    } else if (sortBy === "price") {
-      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
-    } else if (sortBy === "date") {
-      return sortOrder === "asc"
-        ? new Date(a.date) - new Date(b.date)
-        : new Date(b.date) - new Date(a.date);
     } else if (sortBy === "maxGuests") {
       return sortOrder === "asc"
         ? a.maxGuests - b.maxGuests

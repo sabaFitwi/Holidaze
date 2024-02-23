@@ -184,11 +184,11 @@ function BookingsCards() {
         showInput={false}
       />
       {showSuccess && (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-gray-200 p-6 rounded-md max-w-md w-full shadow-lg">
-            <div className="text-green-600 font-semibold mb-4">
+        <div className="fixed max-w-[450px] h-[260] mx-auto inset-0 flex items-center justify-center">
+          <div className="bg-black dark:bg-white opacity-80  dark:opacity-100 p-6 rounded-md max-w-md w-full shadow-md">
+            <p className="text-white dark:text-black text-center  mb-4">
               Item deleted successfully!
-            </div>
+            </p>
           </div>
         </div>
       )}

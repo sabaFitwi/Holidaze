@@ -7,6 +7,8 @@ import useDeleteApi from "../../../hooks/useDelete";
 import { createVenueUrl } from "../../../api";
 import ConfirmModal from "../../Ui/Modal";
 import Input from "../../Ui/Input";
+import Loader from "../../Loading";
+import ErrorMessage from "../../ErrorMessage";
 
 function VenuesCards() {
   const [hostingData, setHostingData] = useState([]);
@@ -51,7 +53,7 @@ function VenuesCards() {
     getProfile()
       .then((data) => {
         const sortedHosting = data.venues.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+          (a, b) => new Date(a.updated) - new Date(b.updated),
         );
         setHostingData(sortedHosting);
       })
@@ -63,11 +65,19 @@ function VenuesCards() {
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div>
+        <ErrorMessage />
+      </div>
+    );
   }
   console.log(hostingData);
   return (
@@ -117,11 +127,11 @@ function VenuesCards() {
         showInput={false}
       />
       {showSuccess && (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-md max-w-md w-full shadow-md">
-            <div className="text-green-600 font-semibold mb-4">
-              Item deleted successfully!
-            </div>
+        <div className="fixed max-w-[450px] h-[260] mx-auto inset-0 flex items-center justify-center">
+          <div className="bg-black opacity-80 p-6 rounded-md max-w-md w-full shadow-md">
+            <p className=" text-green-400  text-center  mb-4">
+              Venue deleted successfully!
+            </p>
           </div>
         </div>
       )}

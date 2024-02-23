@@ -8,7 +8,6 @@ module.exports = {
         primary: "#18766e",
         secondary: "#030f11",
         "primary-hover": "#86cfdf",
-        "font-family": "Helvetica,Arial",
 
         darkPrimary: "#525252",
         darkSecondary: "#333333",

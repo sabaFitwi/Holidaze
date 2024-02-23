@@ -63,32 +63,32 @@ function VenueCard({
               <PiDotsThreeOutlineVerticalFill />
             </div>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 py-2 border rounded shadow-lg bg-white ">
+              <div className="absolute right-0 mt-2 py-2 border rounded shadow-lg bg-white  dark:bg-black  ">
                 {isVenueManager && (
-                  <div className="flex justify-start items-center px-2">
-                    <FaBook className="text-gray-500" />
+                  <div className="flex justify-start items-center px-2  hover:bg-gray-500">
+                    <FaBook />
                     <Link
                       to={`/venueBookings/${id}`}
-                      className="block text-sm px-4 whitespace-nowrap py-2 text-gray-700 hover:bg-gray-300"
+                      className="block text-sm px-4 whitespace-nowrap py-2 "
                     >
                       Venue Bookings
                     </Link>
                   </div>
                 )}
-                <div className="flex justify-start items-center px-2">
-                  <FaEdit className="text-gray-500" />
+                <div className="flex justify-start items-center hover:bg-gray-500 px-2">
+                  <FaEdit />
                   <button
                     onClick={onEditClick}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-sm"
                   >
                     Edit
                   </button>
                 </div>
-                <div className="flex justify-start items-center px-2">
-                  <FaTrash className="text-gray-500" />
+                <div className="flex justify-start items-center  hover:bg-gray-500 px-2">
+                  <FaTrash className="text-red-500" />
                   <button
                     onClick={onDeleteClick}
-                    className="block px-4 py-2 text-sm text-red-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-red-700"
                   >
                     Delete
                   </button>

@@ -3,6 +3,7 @@ import Button from "../../components/Ui/Button";
 import Input from "../../components/Ui/Input";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import SEO from "../../components/SEO";
+import { useNavigate } from "react-router-dom";
 
 const CreateVenueForm = () => {
   const [formData, setFormData] = useState({
@@ -39,6 +40,9 @@ const CreateVenueForm = () => {
   ];
 
   const [images, setImages] = useState([""]);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleImageChange = (index, value) => {
     const newImages = [...images];
@@ -100,7 +104,8 @@ const CreateVenueForm = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       const accessToken = localStorage.getItem("Token");
       const response = await fetch(
@@ -121,10 +126,18 @@ const CreateVenueForm = () => {
 
       const responseData = await response.json();
       console.log("Success:", responseData);
-      alert("Venue created successfully!");
+
+      setSuccessMessage(true);
+      setError("");
+
+      setTimeout(() => {
+        navigate("/profile");
+        setSuccessMessage(false);
+      }, 2500);
     } catch (error) {
       console.error("Error:", error);
-      alert("Error creating venue. Please try again.");
+      setError("Error creating venue. Please try again.");
+      setSuccessMessage("");
     }
   };
 
@@ -440,10 +453,14 @@ const CreateVenueForm = () => {
               name="location.continent"
               value={formData.location.continent}
               onChange={handleChange}
-              className="mt-1 p-2 border rounded w-full"
+              className="mt-1 p-2 border dark:bg-darkPrimary rounded w-full"
             >
               {continentOptions.map((continent) => (
-                <option key={continent} value={continent}>
+                <option
+                  key={continent}
+                  value={continent}
+                  className=" dark:bg-darkPrimary"
+                >
                   {continent}
                 </option>
               ))}
@@ -480,6 +497,8 @@ const CreateVenueForm = () => {
             />
           </div>
 
+          {error && <div className="text-red-600 p-4">{error}</div>}
+
           <Button
             data-cy="submitVenue"
             id="submit-button"
@@ -490,6 +509,16 @@ const CreateVenueForm = () => {
             Submit
           </Button>
         </form>
+        {successMessage && (
+          <div className="fixed w-full mx-auto inset-0 flex items-center justify-center">
+            <div className="bg-black opacity-80  dark:opacity-100 p-6 rounded-md max-w-md w-full shadow-md">
+              <p className=" text-green-400 text-center  mb-4">
+                Venue created successfully! You can see the created venue in
+                your profile.
+              </p>
+            </div>
+          </div>
+        )}
         <ScrollToTopButton />
       </main>
     </div>

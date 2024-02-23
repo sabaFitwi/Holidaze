@@ -92,7 +92,7 @@ function Navbar({ darkMode, setDarkMode }) {
         </Link>
         <Link to="/venues" className={Linkness("/venues")}>
           <LuLayoutList size={20} />
-          <p className="pl-2 hidden sm:block"> Browse</p>
+          <p className="pl-2 hidden sm:block">Venues</p>
         </Link>
         {isLoggedIn && profileData && profileData.avatar && !loading ? (
           <div className="flex justify-center border-2 rounded-full shadow-sm bg-gray-100">

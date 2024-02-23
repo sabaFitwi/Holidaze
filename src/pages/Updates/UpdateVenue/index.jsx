@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Input from "../../../components/Ui/Input";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../../../components/Ui/Button";
 import { createVenueUrl } from "../../../api";
 import useApi from "../../../hooks/useApi";
@@ -53,6 +53,9 @@ const UpdateVenue = () => {
   const { updateItem } = usePut();
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
+  //const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isLoading && venueData) {
@@ -169,8 +172,13 @@ const UpdateVenue = () => {
         throw new Error("Empty response received");
       }
       if (response) {
-        setSuccessMessage("Venue updated successfully!");
+        setSuccessMessage(true);
         setError("");
+
+        setTimeout(() => {
+          navigate("/profile");
+          setSuccessMessage(false);
+        }, 2500);
       } else {
         setError("Error updating venue. Please try again.");
         setSuccessMessage("");
@@ -562,9 +570,7 @@ const UpdateVenue = () => {
               className="mt-1 p-2 border rounded w-full"
             />
           </div>
-          {successMessage && (
-            <div className="text-green-600 p-4">{successMessage}</div>
-          )}
+
           {error && <div className="text-red-600 p-4">{error}</div>}
 
           <Button className="button" type="button" onClick={handleSubmit}>
@@ -572,6 +578,18 @@ const UpdateVenue = () => {
           </Button>
         </form>
       </main>
+
+      {successMessage && (
+        <div className="fixed w-full mx-auto inset-0 flex items-center justify-center">
+          <div className="bg-black opacity-80  dark:opacity-100 p-6 rounded-md max-w-md w-full shadow-md">
+            <p className="p text-green-400 text-center  mb-4">
+              Venue updated successfully! You can see the updated venue in your
+              profile.
+            </p>
+          </div>
+        </div>
+      )}
+      <ScrollToTopButton />
     </div>
   );
 };
