@@ -66,7 +66,7 @@ const BannerSearch = () => {
       <div className=" w-full max-w-4xl text-center  mx-auto -translate-y-1/2">
         <h1 className="h1 overlay ">Experience Comfort, Stay Inspired"</h1>
 
-        <div className=" overlay border mt-4 h-30  w-full max-w-4xl -translate-y-2/3 flex flex-col md:flex-row  items-center justify-between p-4 rounded-5 absolute  bottom-(-25)">
+        <div className=" overlay border mt-4 h-30  w-full max-w-4xl flex flex-col md:flex-row  items-center justify-between p-4 rounded-5 absolute  bottom-(-25)">
           <div className="flex items-center gap-4">
             <FaBed className=" w-7 h-7 " />
             <Input
