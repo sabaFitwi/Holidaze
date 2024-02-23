@@ -343,9 +343,7 @@ const UpdateVenue = () => {
                 <label
                   htmlFor="wifi"
                   className={`switch-label ${
-                    formData.meta.wifi
-                      ? "switch-label.bg-green-500"
-                      : "switch-label.bg-gray-300 "
+                    formData.meta.breakfast ? "bg-green-500" : "bg-gray-300"
                   }`}
                 >
                   <span
@@ -368,9 +366,7 @@ const UpdateVenue = () => {
                 <label
                   htmlFor="parking"
                   className={`switch-label ${
-                    formData.meta.parking
-                      ? "switch-label.bg-green-500"
-                      : "switch-label.bg-gray-300 "
+                    formData.meta.parking ? "bg-green-500" : "bg-gray-300"
                   }`}
                 >
                   <span
