@@ -9,7 +9,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import Input from "../../Ui/Input";
 import Button from "../../Ui/Button";
-import backgroundImage from "../../../assets/banner/13.jpg";
+import backgroundImage from "../../../assets/banner/15.png";
 
 const BannerSearch = () => {
   const [destination, setDestination] = useState("");
@@ -58,13 +58,15 @@ const BannerSearch = () => {
 
   return (
     <div
-      className="bg-no-repeat bg-cover bg-center h-full flex justify-center items-center relative"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      className="bg-no-repeat bg-cover bg-center bg-slate-500 h-full flex justify-center items-center relative "
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+      }}
     >
-      <div className=" w-full max-w-4xl  text-start my-auto">
-        <h1 className="h1 font-bold">A lifetime of discounts? It's Genius.</h1>
+      <div className=" w-full max-w-4xl text-center my-auto">
+        <h1 className="h1 overlay ">Experience Comfort, Stay Inspired</h1>
 
-        <div className=" bg-opacity-50 bg-primary rounded-lg shadow-lg backdrop-blur-md border mt-4 h-30  w-full max-w-4xl flex flex-col md:flex-row  items-center justify-between p-4 rounded-5 absolute  bottom-(-25)">
+        <div className=" overlay border mt-4 h-30  w-full max-w-4xl flex flex-col md:flex-row  items-center justify-between p-4 rounded-5 absolute  bottom-(-25)">
           <div className="flex items-center gap-4">
             <FaBed className=" w-7 h-7 " />
             <Input
@@ -116,14 +118,14 @@ const BannerSearch = () => {
                   <div className="flex items-center gap-2">
                     <button
                       disabled={options.guest <= 1}
-                      className="border border-blue-500 text-blue-500 px-2 py-1 cursor-pointer"
+                      className="border border-primary  px-2 py-1 cursor-pointer"
                       onClick={() => handleOption("d")}
                     >
                       -
                     </button>
                     <span>{options.guest}</span>
                     <button
-                      className="border border-blue-500 text-blue-500 px-2 py-1 cursor-pointer"
+                      className="border border-primary  px-2 py-1 cursor-pointer"
                       onClick={() => handleOption("i")}
                     >
                       +
