@@ -126,8 +126,8 @@ function Navbar({ darkMode, setDarkMode }) {
                 ref={dropdownRef}
                 className={
                   nav
-                    ? "nav-dropdown ease-in duration-300 absolute top-16 right-0 transform translate-x-0 opacity-100 z-10"
-                    : "nav-dropdown transform translate-x-0 opacity-0 duration-200 absolute top-16 right-0 z-10 pointer-events-none"
+                    ? "nav-dropdown ease-in duration-300 absolute top-12 right-0 transform translate-x-0 opacity-100 z-10"
+                    : "nav-dropdown transform translate-x-0 opacity-0 duration-200 absolute top-12 right-0 z-10 pointer-events-none"
                 }
               >
                 <div className="bg-white dark:bg-black shadow-lg rounded-lg">
@@ -196,8 +196,8 @@ function Navbar({ darkMode, setDarkMode }) {
               ref={dropdownRef}
               className={
                 nav
-                  ? "nav-dropdown ease-in duration-300 absolute top-16 right-0 transform translate-x-0 opacity-100 z-10"
-                  : "nav-dropdown transform translate-x-0 opacity-0 duration-200 absolute top-16 right-0 z-10 pointer-events-none"
+                  ? "nav-dropdown ease-in duration-300 absolute top-12 right-0 transform translate-x-0 opacity-100 z-10"
+                  : "nav-dropdown transform translate-x-0 opacity-0 duration-200 absolute top-12 right-0 z-10 pointer-events-none"
               }
             >
               <div className=" bg-white dark:bg-black dark:text-white shadow-lg rounded-lg">
