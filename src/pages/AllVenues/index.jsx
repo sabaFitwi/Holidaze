@@ -9,6 +9,8 @@ import ContinentFilter from "./ContinentsFilter";
 import Venues from "./Venues";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import SEO from "../../components/SEO";
+import Loader from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
 
 function AllVenues() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -56,16 +58,14 @@ function AllVenues() {
   }, [selectedContinent]);
 
   if (isLoading) {
-    return <div className="align-middle">Loading...</div>;
-  }
-
-  if (isError) {
     return (
       <div>
-        <h2>Error fetching data.</h2>
-        <p>Please try again later.</p>
+        <Loader />
       </div>
     );
+  }
+  if (isError) {
+    return <ErrorMessage />;
   }
 
   return (

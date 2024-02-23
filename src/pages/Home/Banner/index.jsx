@@ -1,11 +1,9 @@
-// Banner.js
 import React from "react";
-//import bannerVideo from "../../../assets/cont/bannerVideo.mp4";
+
 import BannerSearch from "../../../components/Search/BannerSearch";
 
 const Banner = () => {
   const handleSearch = (destination, checkInDate, checkOutDate) => {
-    // Implement your search logic here
     console.log("Searching for:", destination, checkInDate, checkOutDate);
   };
 

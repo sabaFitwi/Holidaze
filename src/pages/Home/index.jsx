@@ -24,7 +24,7 @@ const Home = () => {
 
           <SortByContinent />
         </section>
-        {/* <section className="max-w-7xl"> <CardHome /></section> */}
+
         <section className="mt-24">
           <h2 className="h2 font-semibold text-center">
             Find the Most Popular Accommodations

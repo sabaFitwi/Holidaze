@@ -60,7 +60,7 @@ img {
   @apply bg-darkPrimary text-white;
 }
 .overlay {
-  @apply bg-opacity-60 bg-black rounded-lg shadow-lg backdrop-blur-md border border-gray-300;
+  @apply bg-opacity-40 bg-black rounded-lg shadow-lg backdrop-blur-sm text-white;
 }
 
 .input-field {

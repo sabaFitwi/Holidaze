@@ -3,27 +3,25 @@ import { useFetchData } from "../../../hooks/useGetData";
 import HomeCard from "./HomeCard";
 import { getAllVenues } from "../../../api";
 import { Link } from "react-router-dom";
+import ErrorMessage from "../../../components/ErrorMessage";
+import Loader from "../../../components/Loading";
 
 const FeaturedCards = () => {
   const { data: rooms, isLoading, isError } = useFetchData(getAllVenues);
 
   if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (isError) {
     return (
       <div>
-        <h2>Error fetching data.</h2>
-        <p>Please try again later.</p>
+        <Loader />
       </div>
     );
+  }
+  if (isError) {
+    return <ErrorMessage />;
   }
   const filteredRooms = rooms.filter((room) => {
     const isEurope = room.location && room.location.continent === "Europe";
     const isNorway = room.location && room.location.country === "Norway";
-
-    // const isMetaValid =
-    // room.meta && Object.values(room.meta).every((value) => value === true);
 
     const hasRating = room.rating >= 2;
 
@@ -33,13 +31,13 @@ const FeaturedCards = () => {
   return (
     <div>
       <div className="flex space-x-6 overflow-scroll scrollbar-hide">
-        {filteredRooms.map((room) => (
-          <div key={room.id}>
+        {filteredRooms.map((room, index) => (
+          <div key={index}>
             <Link to={`/venue/${room.id}`}>
               <HomeCard
-                id={room.id}
                 imageUrl={room.media}
                 title={room.name}
+                maxGuests={room.maxGuests}
                 price={room.price}
                 wifi={room.meta.wifi}
                 breakfast={room.meta.breakfast}

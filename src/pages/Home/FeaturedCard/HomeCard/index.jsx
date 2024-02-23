@@ -42,28 +42,20 @@ function HomeCard({
       <div className="bg-white dark:bg-darkPrimary shadow-lg max-w-[200px] mx-auto h-[60px] -translate-y-1/2 flex justify-center items-center uppercase  tracking-[1px] font-semibold text-base">
         <div className="flex justify-between w-[80%]">
           <div className="flex items-center">
-            <div>
-              <BsCurrencyDollar className="text-xs" />
-            </div>
-            <div className="flex gap-x-1 text-xs ">
-              <span></span>
+            <div className="flex items-center">
+              <BsCurrencyDollar />
+
               <span>{price}</span>
             </div>
           </div>
 
           <div className="flex items-center">
-            <div>
-              <BsPeople className="text-xs" />
-            </div>
-            <div className="flex gap-x-1 text-xs ">
-              <span>Guests</span>
-              <span>{maxGuests}m2</span>
-            </div>
+            <BsPeople />({maxGuests})
           </div>
         </div>
       </div>
       <div className="overflow-hidden">
-        <h3 className="p-1 text uppercase  ">
+        <h3 className="h3 p-1 capitalize  ">
           {insertSpace(
             title
               .toLowerCase()
