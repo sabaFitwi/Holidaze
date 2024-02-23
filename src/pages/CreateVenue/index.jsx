@@ -266,61 +266,108 @@ const CreateVenueForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium">Amenities:</label>
+            <label className="block text-sm font-medium text-gray-600  dark:text-white">
+              Amenities:
+            </label>
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Input
-                  data-cy="wifi"
+              <div className="flex items-center">
+                <input
                   type="checkbox"
                   id="wifi"
                   name="meta.wifi"
                   checked={formData.meta.wifi}
                   onChange={handleChange}
+                  className="switch-checkbox"
                 />
-                <label htmlFor="wifi" className="ml-2">
-                  WiFi
+                <label
+                  htmlFor="wifi"
+                  className={`switch-label ${
+                    formData.meta.wifi ? "bgOn" : "bgOff "
+                  }`}
+                >
+                  <span
+                    className={`switch-slider ${
+                      formData.meta.wifi ? "translate-x-5" : "translate-x-0"
+                    }`}
+                  ></span>
                 </label>
+                <div className="ml-2 text-gray-700  dark:text-white">WiFi</div>
               </div>
-              <div>
+              <div className="flex items-center">
                 <Input
-                  data-cy="parking"
                   type="checkbox"
                   id="parking"
                   name="meta.parking"
                   checked={formData.meta.parking}
                   onChange={handleChange}
+                  className="switch-checkbox"
                 />
-                <label htmlFor="parking" className="ml-2">
-                  Parking
+                <label
+                  htmlFor="parking"
+                  className={`switch-label ${
+                    formData.meta.parking ? "bgOn" : "bgOff"
+                  }`}
+                >
+                  <span
+                    className={`switch-slider ${
+                      formData.meta.parking ? "translate-x-5" : "translate-x-0"
+                    }`}
+                  ></span>
                 </label>
+                <div className="ml-2 text-gray-700  dark:text-white">
+                  Parking
+                </div>
               </div>
-              <div>
-                <Input
-                  data-cy="breakfast"
+              <div className="flex items-center">
+                <input
                   type="checkbox"
                   id="breakfast"
                   name="meta.breakfast"
                   checked={formData.meta.breakfast}
                   onChange={handleChange}
+                  className="switch-checkbox"
                 />
-                <label htmlFor="breakfast" className="ml-2">
-                  Breakfast
+                <label
+                  htmlFor="breakfast"
+                  className={`switch-label ${
+                    formData.meta.breakfast ? "bgOn" : "bgOff"
+                  }`}
+                >
+                  <span
+                    className={`switch-slider ${
+                      formData.meta.breakfast
+                        ? "translate-x-5"
+                        : "translate-x-0"
+                    }`}
+                  ></span>
                 </label>
+                <div className="ml-2 text-gray-700  dark:text-white">
+                  Breakfast
+                </div>
               </div>
-              <div>
-                <Input
-                  data-cy="pets"
+              <div className="flex items-center">
+                <input
                   type="checkbox"
                   id="pets"
                   name="meta.pets"
                   checked={formData.meta.pets}
                   onChange={handleChange}
+                  className="switch-checkbox"
                 />
-                <label htmlFor="pets" className="ml-2">
-                  Pets
+                <label
+                  htmlFor="pets"
+                  className={`switch-label ${
+                    formData.meta.pets ? "bgOn" : "bgOff"
+                  }`}
+                >
+                  <span
+                    className={`switch-slider ${
+                      formData.meta.pets ? "translate-x-5" : "translate-x-0"
+                    }`}
+                  ></span>
                 </label>
+                <div className="ml-2 text-gray-700  dark:text-white">Pets</div>
               </div>
-              {/* Repeat similar block for other amenities */}
             </div>
           </div>
 

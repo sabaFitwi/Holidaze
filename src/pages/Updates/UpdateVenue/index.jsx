@@ -8,6 +8,8 @@ import useApi from "../../../hooks/useApi";
 import usePut from "../../../hooks/usePut";
 import { FaArrowLeft } from "react-icons/fa";
 import SEO from "../../../components/SEO";
+import Loader from "../../../components/Loading";
+import ErrorMessage from "../../../components/ErrorMessage";
 
 const UpdateVenue = () => {
   const { id } = useParams();
@@ -70,11 +72,19 @@ const UpdateVenue = () => {
   }, [venueData, isLoading, isError]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   if (isError) {
-    return <div>Error fetching data</div>;
+    return (
+      <div>
+        <ErrorMessage />
+      </div>
+    );
   }
 
   const handleImageChange = (index, value) => {
@@ -343,7 +353,7 @@ const UpdateVenue = () => {
                 <label
                   htmlFor="wifi"
                   className={`switch-label ${
-                    formData.meta.breakfast ? "bg-green-500" : "bg-gray-300"
+                    formData.meta.wifi ? "bgOn" : "bgOff "
                   }`}
                 >
                   <span
@@ -366,7 +376,7 @@ const UpdateVenue = () => {
                 <label
                   htmlFor="parking"
                   className={`switch-label ${
-                    formData.meta.parking ? "bg-green-500" : "bg-gray-300"
+                    formData.meta.parking ? "bgOn" : "bgOff"
                   }`}
                 >
                   <span
@@ -391,7 +401,7 @@ const UpdateVenue = () => {
                 <label
                   htmlFor="breakfast"
                   className={`switch-label ${
-                    formData.meta.breakfast ? "bg-green-500" : "bg-gray-300"
+                    formData.meta.breakfast ? "bgOn" : "bgOff"
                   }`}
                 >
                   <span
@@ -418,7 +428,7 @@ const UpdateVenue = () => {
                 <label
                   htmlFor="pets"
                   className={`switch-label ${
-                    formData.meta.pets ? "bg-green-500" : "bg-gray-300"
+                    formData.meta.pets ? "bgOn" : "bgOff"
                   }`}
                 >
                   <span
