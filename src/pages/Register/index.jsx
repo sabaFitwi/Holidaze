@@ -22,15 +22,15 @@ const Register = () => {
   return (
     <div>
       <SEO
-        title="Profile | Holidaze"
-        description="Take control of your Holidaze profile. view, update, and delete your bookings and venues. Customize your avatar to make it your own."
+        title="Register | Holidaze"
+        description=" 'Join Holidaze, a global community of travelers and hosts. Discover unique homes and experiences around the world, or rent out your own."
       />
-      <main className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <main className="min-h-screen flex items-center dark:text-white justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <h1 className="h1 mt-6 text-center font-extrabold  uppercase">
               Register
-            </h2>
+            </h1>
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="rounded-md shadow-sm -space-y-px">
@@ -65,7 +65,7 @@ const Register = () => {
                     }`}
                   ></span>
                 </label>
-                <div className="ml-2 text-gray-700">
+                <div className="ml-2">
                   {isVenueManager
                     ? "Register as Venue Manager"
                     : "Register as Customer"}
@@ -76,7 +76,7 @@ const Register = () => {
             <div class="space-y-6  max-w-md mx-auto">
               <div class="space-y-6  max-w-md mx-auto">
                 <div>
-                  <labe class="mb-2 text-sm text-black block">User Name</labe>
+                  <labe class="mb-2 text-sm  block">User Name</labe>
                   <div>
                     <div class="relative flex items-center">
                       <input
@@ -99,7 +99,7 @@ const Register = () => {
                 </div>
               </div>
               <div>
-                <labe class="mb-2 text-sm text-black block">Email</labe>
+                <labe class="mb-2 text-sm block">Email</labe>
                 <div>
                   <div class="relative flex items-center">
                     <input
@@ -122,7 +122,7 @@ const Register = () => {
                 </div>
               </div>
               <div>
-                <labe class="mb-2 text-sm text-black block">Password</labe>
+                <labe class="mb-2 text-sm block">Password</labe>
                 <div>
                   <div class="relative flex items-center">
                     <input
@@ -147,7 +147,7 @@ const Register = () => {
               </div>
             </div>
             <div>
-              <labe class="mb-2 text-sm text-black block">Avatar</labe>
+              <labe class="mb-2 text-sm  block">Avatar</labe>
               <div>
                 <div class="relative flex items-center">
                   <input

@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div
       className="flex items-center text-center p-4
-     bg-gray-700"
+       text-white bg-black"
     >
       <p className="p-4 text-white">About</p>
       <p className="p-4 text-white">Contact</p>

@@ -72,7 +72,7 @@ function Navbar({ darkMode, setDarkMode }) {
 
   return (
     <nav
-      className={`sticky top-0 z-50 flex justify-between  sm:justify-around p-5 md:px-10 shadow-md bg-white text dark:text-white dark:bg-darkPrimary`}
+      className={`sticky top-0 z-50 flex justify-between  sm:justify-around p-5 md:px-10 shadow-md bg-white text dark:text-white dark:bg-black`}
     >
       <Link
         to="/"
@@ -87,11 +87,11 @@ function Navbar({ darkMode, setDarkMode }) {
 
       <div className="flex justify-end items-center space-x-3 sm:space-x-4">
         <Link to="/" className={Linkness("/")}>
-          <IoHomeOutline />
+          <IoHomeOutline size={20} />
           <p className="pl-2 hidden sm:block"> Home</p>
         </Link>
         <Link to="/venues" className={Linkness("/venues")}>
-          <LuLayoutList />
+          <LuLayoutList size={20} />
           <p className="pl-2 hidden sm:block"> Browse</p>
         </Link>
         {isLoggedIn && profileData && profileData.avatar && !loading ? (
@@ -203,8 +203,8 @@ function Navbar({ darkMode, setDarkMode }) {
               <div className=" bg-white dark:bg-black dark:text-white shadow-lg rounded-lg">
                 <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode} />
                 <Link
-                  to={"/Login"}
-                  className={` flex items-center pl-3 hover:bg-gray-500  whitespace-nowrap ${
+                  to={"/login"}
+                  className={` flex items-center ${Linkness("/login")} pl-3 hover:bg-gray-500  whitespace-nowrap ${
                     nav ? "block" : "hidden"
                   }`}
                 >
@@ -212,8 +212,8 @@ function Navbar({ darkMode, setDarkMode }) {
                   <p className="px-4 py-2">Login</p>
                 </Link>
                 <Link
-                  to={"/Register"}
-                  className={`whitespace-nowrap  hover:bg-gray-500 block pl-10 pr-4 py-2 ${
+                  to={"/register"}
+                  className={`whitespace-nowrap ${Linkness("/register")} hover:bg-gray-500 block pl-10 pr-4 py-2 ${
                     nav ? "block" : "hidden"
                   }`}
                 >

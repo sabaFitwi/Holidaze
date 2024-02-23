@@ -21,17 +21,17 @@ const Login = () => {
         title="Login | Holidaze"
         description="Log in to your Holidaze account. Access your bookings, manage your profile, and plan your next adventure."
       />
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen flex items-center dark:text-white justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Log In
+            <h2 className=" h1 mt-6 text-center font-extrabold uppercase">
+              Login
             </h2>
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-6  max-w-md mx-auto">
               <div>
-                <labe className="mb-2 text-sm text-black block">Email</labe>
+                <labe className="mb-2 text-sm block">Email</labe>
                 <div>
                   <div className="relative flex items-center">
                     <input
@@ -56,7 +56,7 @@ const Login = () => {
                 </div>
               </div>
               <div>
-                <labe className="mb-2 text-sm text-black block">Password</labe>
+                <labe className="mb-2 text-sm block">Password</labe>
                 <div>
                   <div className="relative flex items-center">
                     <input
