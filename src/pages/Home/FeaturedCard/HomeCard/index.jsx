@@ -76,10 +76,10 @@ function HomeCard({
         <p className=" dark:text-gray-300  pb-2 text">
           {continent}, {country}, {city}
         </p>
-        <p className="flex font-semibold items-center mr-1 pb-2">
+        <div className="flex font-semibold items-center mr-1 pb-2">
           <StarRating rating={rating} />
           <span className="font-normal ml-1">({rating})</span>
-        </p>
+        </div>
         <div className="flex items-center font-semibold pb-2">
           {wifi ? (
             <BsWifi className="text-primary  dark:text-primary-hover mr-3" />

@@ -51,14 +51,14 @@ function Venues({ sortedVenues }) {
                       </>
                     )}
                   </div>
-                  <h2 className=" h2 px-5 mr-2  font-semibold">
+                  <h3 className=" h3 px-5 mr-2  font-semibold">
                     {venue.price}
                     <span className="text-sm font-light">/night</span>
-                  </h2>
+                  </h3>
                 </div>
-                <h3 className="h3 text-gray-900 dark:text-dark-primary-hover font-bold">
+                <h2 className="h2 text-gray-900 dark:text-dark-primary-hover font-bold">
                   {venue.name}
-                </h3>
+                </h2>
                 <div className="flex items-center pb-2">
                   <StarRating rating={venue.rating} />
                   <span className="ml-1 text-xs">({venue.rating})</span>

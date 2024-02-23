@@ -23,7 +23,7 @@ const Register = () => {
     <div>
       <SEO
         title="Register | Holidaze"
-        description=" 'Join Holidaze, a global community of travelers and hosts. Discover unique homes and experiences around the world, or rent out your own."
+        description="Join Holidaze, a global community of travelers and hosts. Discover unique homes and experiences around the world, or rent out your own."
       />
       <main className="min-h-screen flex items-center dark:text-white justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">

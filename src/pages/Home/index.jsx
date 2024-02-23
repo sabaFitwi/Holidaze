@@ -27,7 +27,7 @@ const Home = () => {
         {/* <section className="max-w-7xl"> <CardHome /></section> */}
         <section className="mt-24">
           <h2 className="h2 font-semibold text-center">
-            Find Cheapest Accommodation
+            Find the Most Popular Accommodations
           </h2>
 
           <FeaturedCards />

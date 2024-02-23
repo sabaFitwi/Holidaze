@@ -76,7 +76,7 @@ function AllVenues() {
       />
       <main className="w-full md:container mx-auto p-4">
         <section>
-          <h1 className="h1 dark:text-white capitalize font-semibold mb-2 text-center">
+          <h1 className="h1 dark:text-white uppercase font-semibold mb-2 text-center">
             Venues in all the continents
           </h1>
           <div className="mb-6">
