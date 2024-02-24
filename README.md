@@ -116,7 +116,7 @@ This project uses the following scripts:
 
 ## How to run the project locally
 
-First install `npm install
+First install `npm install`
 Then open it on the live server by running `npm start`
 This should start the server at http://localhost:3000/.
 
