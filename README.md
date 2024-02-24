@@ -156,7 +156,7 @@ This should start the server at http://localhost:3000/.
     </tr>
     <tr>
       <th>Hosted Demo</th>
-      <td><a href="https://holidaze-saba-fitwi.netlify.app/profile">Live Site</a></td>
+      <td><a href="https://holidaze-saba-fitwi.netlify.app/">Live Site</a></td>
     </tr>
   </tbody>
 </table>
