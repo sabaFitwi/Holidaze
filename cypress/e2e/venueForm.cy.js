@@ -1,7 +1,7 @@
 describe("Create Venue Form", () => {
   beforeEach(() => {
     // Set the isVenueManager flag in the local storage
-    localStorage.setItem("isVenueManager", "true");
+    localStorage.getItemItem("isVenueManager", "true");
 
     cy.visit("http://localhost:3000/create");
   });
@@ -20,13 +20,10 @@ describe("Create Venue Form", () => {
     cy.get("#lat").type("40.7128");
     cy.get("#lng").type("-74.0060");
 
-    // Select a continent from the dropdown
     cy.get("#continent").select("North America");
 
-    // Check some amenities checkboxes using labels
     cy.get('label[for="wifi"]').click();
 
-    // Click the submit button
     cy.contains("Submit").click();
   });
 });

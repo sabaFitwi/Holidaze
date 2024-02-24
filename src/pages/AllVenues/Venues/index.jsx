@@ -60,6 +60,9 @@ function Venues({ sortedVenues }) {
                   {venue.name}
                 </h2>
                 <div className="flex items-center pb-2">
+                  venue created: {daysSincePosted(venue.updated)} ago
+                </div>
+                <div className="flex items-center pb-2">
                   <StarRating rating={venue.rating} />
                   <span className="ml-1 text-xs">({venue.rating})</span>
                 </div>
