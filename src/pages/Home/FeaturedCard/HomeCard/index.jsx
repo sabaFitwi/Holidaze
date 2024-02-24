@@ -7,8 +7,8 @@ import { TbCoffee, TbCoffeeOff } from "react-icons/tb";
 import StarRating from "../../../../components/RatingStars";
 
 function HomeCard({
-  title,
-  imageUrl,
+  name,
+  media,
   maxGuests,
   wifi,
   pets,
@@ -30,14 +30,18 @@ function HomeCard({
     }
     return result;
   };
+
   return (
     <div className="min-h-[400px] bg-white  dark:bg-darkSecondary px-2 cursor-pointer shadow-2xl group mt-12">
       <div className=" overflow-hidden h-40 w-60">
-        <img
-          src={imageUrl}
-          alt={title}
-          className="h-full w-full  group-hover:scale-110 transition-all duration-300 "
-        />
+        {media.map((imageUrl, index) => (
+          <img
+            key={index}
+            src={imageUrl.trim()}
+            alt={`${name} - Image ${index + 1}`}
+            className="h-full w-full  group-hover:scale-110 transition-all duration-300 "
+          />
+        ))}
       </div>
       <div className="bg-white dark:bg-darkPrimary shadow-lg max-w-[200px] mx-auto h-[60px] -translate-y-1/2 flex justify-center items-center uppercase  tracking-[1px] font-semibold text-base">
         <div className="flex justify-between w-[80%]">
@@ -57,7 +61,7 @@ function HomeCard({
       <div className="overflow-hidden">
         <h3 className="h3 p-1 capitalize  ">
           {insertSpace(
-            title
+            name
               .toLowerCase()
               .split(" ")
               .map((word) => word.charAt(0).toUpperCase() + word.slice(1))

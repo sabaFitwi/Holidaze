@@ -20,23 +20,21 @@ const FeaturedCards = () => {
     return <ErrorMessage />;
   }
   const filteredRooms = rooms.filter((room) => {
-    const isEurope = room.location && room.location.continent === "Europe";
-    const isNorway = room.location && room.location.country === "Norway";
+    // Check if the length of the media array is greater than 2
+    const hasMultipleImages = room.media && room.media.length >= 2;
 
-    const hasRating = room.rating >= 2;
-
-    return isEurope && isNorway && hasRating;
+    return hasMultipleImages;
   });
 
   return (
     <div>
       <div className="flex space-x-6 overflow-scroll scrollbar-hide">
-        {filteredRooms.map((room, index) => (
-          <div key={index}>
+        {filteredRooms.map((room) => (
+          <div key={room.id}>
             <Link to={`/venue/${room.id}`}>
               <HomeCard
-                imageUrl={room.media}
-                title={room.name}
+                media={room.media}
+                name={room.name}
                 maxGuests={room.maxGuests}
                 price={room.price}
                 rating={room.rating}
@@ -46,7 +44,6 @@ const FeaturedCards = () => {
                 parking={room.meta.parking}
                 city={room.location.city}
                 country={room.location.country}
-                continent={room.location.continent}
               />
             </Link>
           </div>
