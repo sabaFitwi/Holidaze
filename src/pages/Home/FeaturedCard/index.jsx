@@ -39,6 +39,7 @@ const FeaturedCards = () => {
                 title={room.name}
                 maxGuests={room.maxGuests}
                 price={room.price}
+                rating={room.rating}
                 wifi={room.meta.wifi}
                 breakfast={room.meta.breakfast}
                 pets={room.meta.pets}

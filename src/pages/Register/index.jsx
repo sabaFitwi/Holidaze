@@ -73,22 +73,22 @@ const Register = () => {
               </div>
             </div>
 
-            <div class="space-y-6  max-w-md mx-auto">
-              <div class="space-y-6  max-w-md mx-auto">
+            <div className="space-y-6  max-w-md mx-auto">
+              <div className="space-y-6  max-w-md mx-auto">
                 <div>
-                  <labe class="mb-2 text-sm  block">User Name</labe>
+                  <label className="mb-2 text-sm  block">User Name</label>
                   <div>
-                    <div class="relative flex items-center">
+                    <div className="relative flex items-center">
                       <input
                         id="name"
                         name="name"
                         type="name"
                         required
-                        class="input"
+                        className="input"
                         onChange={handleInputChange}
                         value={registrationData.name}
                       />
-                      <div class="absolute left-4">
+                      <div className="absolute left-4">
                         <FaUserCircle className="text-gray-400" />
                       </div>
                     </div>
@@ -99,20 +99,20 @@ const Register = () => {
                 </div>
               </div>
               <div>
-                <labe class="mb-2 text-sm block">Email</labe>
+                <label className="mb-2 text-sm block">Email</label>
                 <div>
-                  <div class="relative flex items-center">
+                  <div className="relative flex items-center">
                     <input
                       id="email"
                       name="email"
                       type="email"
                       autoComplete="email"
                       required
-                      class="input"
+                      className="input"
                       onChange={handleInputChange}
                       value={registrationData.email}
                     />
-                    <div class="absolute left-4">
+                    <div className="absolute left-4">
                       <FaEnvelope className="text-gray-400" />
                     </div>
                   </div>
@@ -122,21 +122,21 @@ const Register = () => {
                 </div>
               </div>
               <div>
-                <labe class="mb-2 text-sm block">Password</labe>
+                <label className="mb-2 text-sm block">Password</label>
                 <div>
-                  <div class="relative flex items-center">
+                  <div className="relative flex items-center">
                     <input
                       id="password"
                       name="password"
                       type="password"
                       autoComplete="password"
                       required
-                      class="input"
+                      className="input"
                       onChange={handleInputChange}
                       value={registrationData.password}
                     />
 
-                    <div class="absolute left-4">
+                    <div className="absolute left-4">
                       <FaKey className="text-gray-400" />
                     </div>
                   </div>
@@ -147,19 +147,19 @@ const Register = () => {
               </div>
             </div>
             <div>
-              <labe class="mb-2 text-sm  block">Avatar</labe>
+              <label className="mb-2 text-sm  block">Avatar</label>
               <div>
-                <div class="relative flex items-center">
+                <div className="relative flex items-center">
                   <input
                     id="avatar"
                     name="avatar"
                     type="avatar"
-                    class="input"
+                    className="input"
                     onChange={handleInputChange}
                     value={registrationData.avatar}
                   />
 
-                  <div class="absolute left-4">
+                  <div className="absolute left-4">
                     <FaImage className="text-gray-400" />
                   </div>
                 </div>
@@ -177,13 +177,16 @@ const Register = () => {
           </form>
 
           {registrationStatus === "success" && (
-            <p className="text-green-600 text-center">
-              Registration successful. Please
-              <Link to="/login" className="border p-2 text-primary ">
-                Login
-              </Link>
-              .
-            </p>
+            <div className="fixed w-full mx-auto inset-0 flex items-center justify-center">
+              <div className="bg-black opacity-80  dark:opacity-100 p-6 rounded-md max-w-md w-full shadow-md">
+                <p className="p text-green-400 text-center  mb-4">
+                  Registration successful!
+                </p>
+                <Link to="/login" className="button">
+                  Go to Login
+                </Link>
+              </div>
+            </div>
           )}
 
           {registrationStatus === "failure" && (

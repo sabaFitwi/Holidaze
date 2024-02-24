@@ -104,7 +104,7 @@ const useRegister = () => {
 
       setErrors(newErrors);
     }
-  }, [registrationData, errors, touchedFields, selectedOption]);
+  }, [registrationData, touchedFields, selectedOption]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

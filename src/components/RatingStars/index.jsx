@@ -1,4 +1,3 @@
-// StarRating.js
 import React from "react";
 import {
   TiStarFullOutline,
@@ -19,14 +18,20 @@ function StarRating({ rating }) {
 
   if (hasHalfStar) {
     stars.push(
-      <TiStarHalfOutline key={fullStars} className="text-yellow-500 text-sm" />,
+      <TiStarHalfOutline
+        key={`${fullStars}-half`}
+        className="text-yellow-500 text-sm"
+      />,
     );
   }
 
   const remainingStars = 5 - stars.length;
   for (let i = 0; i < remainingStars; i++) {
     stars.push(
-      <TiStarOutline key={fullStars + i} className="text-yellow-500 text-sm" />,
+      <TiStarOutline
+        key={`${fullStars + i}-empty`}
+        className="text-yellow-500 text-sm"
+      />,
     );
   }
 

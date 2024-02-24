@@ -31,7 +31,7 @@ const Login = () => {
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-6  max-w-md mx-auto">
               <div>
-                <labe className="mb-2 text-sm block">Email</labe>
+                <label className="mb-2 text-sm block">Email</label>
                 <div>
                   <div className="relative flex items-center">
                     <input
@@ -41,7 +41,7 @@ const Login = () => {
                       type="email"
                       autoComplete="email"
                       required
-                      class="input"
+                      className="input"
                       onChange={handleInputChange}
                       value={loginData.email}
                     />
@@ -56,7 +56,7 @@ const Login = () => {
                 </div>
               </div>
               <div>
-                <labe className="mb-2 text-sm block">Password</labe>
+                <label className="mb-2 text-sm block">Password</label>
                 <div>
                   <div className="relative flex items-center">
                     <input
@@ -66,7 +66,7 @@ const Login = () => {
                       type="password"
                       autoComplete="password"
                       required
-                      class="input"
+                      className="input"
                       onChange={handleInputChange}
                       value={loginData.password}
                     />
@@ -101,7 +101,7 @@ const Login = () => {
 
           {loginStatus === "failure" && (
             <p id="failed" className="text-red-600 text-center">
-              Login failed. Please check your credentials.
+              Login failed. Please check your email or password.
             </p>
           )}
         </div>
