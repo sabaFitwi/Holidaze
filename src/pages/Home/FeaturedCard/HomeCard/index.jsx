@@ -16,7 +16,7 @@ function HomeCard({
   breakfast,
   city,
   country,
-  continent,
+
   price,
   rating,
 }) {
@@ -70,7 +70,7 @@ function HomeCard({
           )}
         </h3>
         <p className=" dark:text-gray-300  pb-2 text">
-          {continent}, {country}, {city}
+          {country} {city}
         </p>
         <div className="flex font-semibold items-center mr-1 pb-2">
           <StarRating rating={rating} />
