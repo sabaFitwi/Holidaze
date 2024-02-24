@@ -15,6 +15,8 @@ import SEO from "../../components/SEO";
 import Breadcrumb from "../../components/Ui/Breadcrumbs";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { IoIosPeople } from "react-icons/io";
+import Loader from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
 
 function VenueDescription({ onUpdate }) {
   const { id } = useParams();
@@ -96,6 +98,17 @@ function VenueDescription({ onUpdate }) {
       return;
     }
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set hours to 0 to compare only dates
+
+    if (startDate.toDateString() === today.toDateString()) {
+      console.error("You cannot book for today. Please select another date.");
+      setValidationMessage(
+        "You cannot book for today. Please select another date.",
+      );
+      return;
+    }
+
     if (!id) {
       console.error("Venue ID is missing");
       setValidationMessage("Venue ID is required.");
@@ -135,11 +148,19 @@ function VenueDescription({ onUpdate }) {
   };
 
   if (isLoading) {
-    return <div className="container">Loading...</div>;
+    return (
+      <div className="container">
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {
-    return <p>Something went wrong: {error}</p>;
+    return (
+      <p>
+        <ErrorMessage />
+      </p>
+    );
   }
 
   return (
