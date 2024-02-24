@@ -10,6 +10,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import SEO from "../../../components/SEO";
 import Loader from "../../../components/Loading";
 import ErrorMessage from "../../../components/ErrorMessage";
+import ScrollToTopButton from "../../../components/ScrollToTopButton";
 
 const UpdateVenue = () => {
   const { id } = useParams();
