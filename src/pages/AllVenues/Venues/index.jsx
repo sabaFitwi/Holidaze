@@ -12,7 +12,7 @@ import { TbCoffee, TbCoffeeOff } from "react-icons/tb";
 
 import noImage from "../../../assets/noPic.jpg";
 import StarRating from "../../../components/RatingStars";
-
+import { daysSincePosted } from "../../../components/utils/DateSincePost";
 function Venues({ sortedVenues }) {
   return (
     <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 w-full  ">
@@ -60,7 +60,7 @@ function Venues({ sortedVenues }) {
                   {venue.name}
                 </h2>
                 <div className="flex items-center pb-2">
-                  venue created: {daysSincePosted(venue.updated)} ago
+                  Venue created: {daysSincePosted(venue.updated)} ago
                 </div>
                 <div className="flex items-center pb-2">
                   <StarRating rating={venue.rating} />
