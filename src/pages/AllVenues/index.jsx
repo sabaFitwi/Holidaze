@@ -15,7 +15,7 @@ import ErrorMessage from "../../components/ErrorMessage";
 function AllVenues() {
   const [searchQuery, setSearchQuery] = useState("");
   const { data: venues, isLoading, isError } = useApi(getAllVenues);
-  const [sortBy, setSortBy] = useState("name");
+  const [sortBy, setSortBy] = useState("date");
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedContinent, setSelectedContinent] = useState("");
 

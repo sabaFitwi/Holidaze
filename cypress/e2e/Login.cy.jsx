@@ -11,8 +11,8 @@ describe("Login Functionality", () => {
   });
 
   it("allows users to input email and password", () => {
-    const email = "test@stud.noroff.no";
-    const password = "password123";
+    const email = "marcos@stud.noroff.no";
+    const password = "12345678";
 
     cy.get("[data-cy=email-input]").type(email).should("have.value", email);
     cy.get("[data-cy=password-input]")
@@ -21,13 +21,12 @@ describe("Login Functionality", () => {
   });
 
   it("submits the form and checks local storage for login status", () => {
-    const email = "test@stud.noroff.no";
-    const password = "password123";
+    const email = "marcos@stud.noroff.no";
+    const password = "12345678";
 
     cy.get("[data-cy=email-input]").type(email);
     cy.get("[data-cy=password-input]").type(password);
     cy.contains("Log In").click();
-
     cy.window()
       .its("localStorage")
       .then((localStorage) => {

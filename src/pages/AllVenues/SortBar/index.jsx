@@ -1,4 +1,3 @@
-// Sort.js
 import React from "react";
 
 function Sort({ sortBy, setSortBy, sortOrder, setSortOrder }) {
@@ -10,9 +9,9 @@ function Sort({ sortBy, setSortBy, sortOrder, setSortOrder }) {
         onChange={(e) => setSortBy(e.target.value)}
         className="bg-black text-white text-xs border-white border rounded p-1"
       >
+        <option value="date">Date</option>
         <option value="name">Name</option>
         <option value="price">Price</option>
-        <option value="date">Date</option>
         <option value="maxGuests">Max Guests</option>
         <option value="rating">Rating</option>
       </select>

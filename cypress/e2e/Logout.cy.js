@@ -1,6 +1,6 @@
 describe("Logout Functionality", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/profile");
+    cy.visit("http://localhost:3000/login");
   });
 
   it("allows users to log out if logged in", () => {

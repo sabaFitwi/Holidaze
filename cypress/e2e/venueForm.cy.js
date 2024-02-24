@@ -1,24 +1,32 @@
 describe("Create Venue Form", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/create"); // Adjust URL as needed
+    // Set the isVenueManager flag in the local storage
+    localStorage.setItem("isVenueManager", "true");
+
+    cy.visit("http://localhost:3000/create");
   });
 
-  it("allows users to fill out and submit the form", () => {
-    cy.fixture("venuedata").then((data) => {
-      cy.get("#name").type(data.name);
-      cy.get("#description").type(data.description);
-      cy.get("#wifi").check();
-      cy.get("#parking").check();
-      cy.get("#breakfast").check();
-      cy.get("#pets").check();
-      cy.get("#media").type(data.image);
-      cy.get("#address").type(data.address);
-      cy.get("#city").type(data.city);
-      cy.get("#zip").type(data.zip);
-      cy.get("#country").type(data.country);
-      cy.get("#price").type(data.price);
-      cy.get("#maxGuests").type(data.maxGuests);
-      cy.contains("Submit").click();
-    });
+  it("allows venue managers to fill out the form and redirect to the profile page", () => {
+    // Fill out the form fields
+    cy.get("#name").type("Sample Venue");
+    cy.get("#description").type("This is a sample venue description");
+    cy.get("#price").type("100");
+    cy.get("#maxGuests").type("50");
+    cy.get("#rating").type("4.5");
+    cy.get("#address").type("123 Sample Address");
+    cy.get("#city").type("Sample City");
+    cy.get("#zip").type("12345");
+    cy.get("#country").type("Sample Country");
+    cy.get("#lat").type("40.7128");
+    cy.get("#lng").type("-74.0060");
+
+    // Select a continent from the dropdown
+    cy.get("#continent").select("North America");
+
+    // Check some amenities checkboxes using labels
+    cy.get('label[for="wifi"]').click();
+
+    // Click the submit button
+    cy.contains("Submit").click();
   });
 });
