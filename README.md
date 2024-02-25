@@ -84,8 +84,6 @@ Installed dependencies
 
 `npm i`
 
-
-
 ## Testing E2E CYPRESS
 
 The project includes Create venue, login and logout tests.  
