@@ -93,7 +93,15 @@ const CreateVenueForm = () => {
         },
       }));
     } else {
-      // Handle other regular fields
+      if (name === "rating") {
+        const ratingValue = parseFloat(value);
+        if (ratingValue > 5) {
+          setError("Rating cannot exceed 5");
+        } else {
+          setError("");
+        }
+      }
+
       setFormData((prevData) => ({
         ...prevData,
         [name]:
@@ -260,16 +268,19 @@ const CreateVenueForm = () => {
             <label htmlFor="rating" className="block text-sm font-medium">
               Rating:
             </label>
-            <Input
-              data-cy="rating"
-              type="number"
-              id="rating"
-              name="rating"
-              value={formData.rating}
-              onChange={handleChange}
-              className="mt-1 p-2 border rounded w-full"
-              step="0.1"
-            />
+            <div>
+              <Input
+                data-cy="rating"
+                type="number"
+                id="rating"
+                name="rating"
+                value={formData.rating}
+                onChange={handleChange}
+                className="mt-1 p-2 border rounded w-full "
+                step="0.1"
+              />
+            </div>
+            {error && <span className="text-red-600 text-sm ">{error}</span>}
           </div>
 
           <div className="mb-4">
