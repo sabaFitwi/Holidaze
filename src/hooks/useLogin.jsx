@@ -83,7 +83,7 @@ const useLogin = () => {
       localStorage.setItem("isVenueManager", profileCall.venueManager);
       localStorage.setItem("UserData", JSON.stringify(profileCall));
 
-      navigate("/profile");
+      navigate("/");
       window.location.reload();
     } else {
       setLoginStatus("failure");

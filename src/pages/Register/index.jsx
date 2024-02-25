@@ -177,12 +177,15 @@ const Register = () => {
           </form>
 
           {registrationStatus === "success" && (
-            <div className="fixed w-full mx-auto inset-0 flex items-center justify-center">
-              <div className="bg-black opacity-80  dark:opacity-100 p-6 rounded-md max-w-md w-full shadow-md">
-                <p className="p text-green-400 text-center  mb-4">
+            <div className="fixe w-full mx-auto inset-0 flex items-center justify-center">
+              <div className="bg-gray-100 opacity-80  dark:opacity-100 p-6 rounded-md max-w-md w-full shadow-md">
+                <span className="p text-primary text-center  mb-4">
                   Registration successful!
-                </p>
-                <Link to="/login" className="button">
+                </span>{" "}
+                <Link
+                  to="/login"
+                  className="px-4 text-center shadow text-primary border"
+                >
                   Go to Login
                 </Link>
               </div>

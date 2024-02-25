@@ -119,7 +119,6 @@ const useRegister = () => {
       if (data.success) {
         setRegistrationStatus("success");
         console.log(data.success);
-        // Navigate or perform any actions after successful registration
       } else {
         console.error("Registration failed:", data.error);
         setRegistrationStatus("failure");

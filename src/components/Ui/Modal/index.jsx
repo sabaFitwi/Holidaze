@@ -15,6 +15,7 @@ const ConfirmModal = ({
   inputPlaceholder,
   inputValue,
   onInputChange,
+  className,
 }) => {
   return (
     <Modal
@@ -35,10 +36,7 @@ const ConfirmModal = ({
           />
         )}
         <div className="flex justify-between">
-          <button
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-            onClick={onConfirm}
-          >
+          <button className={className} onClick={onConfirm}>
             {confirmText}
           </button>
           <button

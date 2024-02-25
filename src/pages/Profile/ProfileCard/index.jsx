@@ -4,6 +4,7 @@ import { FaUser } from "react-icons/fa";
 import useAvatar from "../../../hooks/useAvatar";
 import { profileUrl } from "../../../api";
 import ConfirmModal from "../../../components/Ui/Modal";
+import { RiImageEditLine } from "react-icons/ri";
 
 const ProfileCard = () => {
   const { profileData, updateAvatar } = useAvatar();
@@ -94,12 +95,15 @@ const ProfileCard = () => {
               <button className="whitespace-nowrap text">
                 {profileData.email}
               </button>
-              <button
-                className="whitespace-nowrap text pl-3 hover:text-primary"
-                onClick={() => setIsModalOpen(true)}
-              >
-                Edit profile
-              </button>
+              <div className="flex justify-start items-center px-2  hover:bg-gray-500">
+                <RiImageEditLine />
+                <button
+                  className="whitespace-nowrap text pl-3 hover:text-primary"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  Edit profile
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -116,6 +120,7 @@ const ProfileCard = () => {
         inputPlaceholder="Enter avatar URL"
         inputValue={newAvatar}
         onInputChange={handleAvatarChange}
+        className="bg-primary text-white px-4 py-2 rounded hover:bg-red-600 "
       />
     </div>
   );

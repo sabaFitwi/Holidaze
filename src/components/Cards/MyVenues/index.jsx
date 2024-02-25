@@ -125,6 +125,7 @@ function VenuesCards() {
         confirmText="Delete Permanently"
         cancelText="Cancel"
         showInput={false}
+        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 "
       />
       {showSuccess && (
         <div className="fixed max-w-[450px] h-[260] mx-auto inset-0 flex items-center justify-center">

@@ -54,7 +54,6 @@ const UpdateVenue = () => {
   const { updateItem } = usePut();
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
-  //const [isModalOpen, setIsModalOpen] = useState(true);
 
   const navigate = useNavigate();
 

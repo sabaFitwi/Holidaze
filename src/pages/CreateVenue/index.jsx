@@ -4,6 +4,8 @@ import Input from "../../components/Ui/Input";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import SEO from "../../components/SEO";
 import { useNavigate } from "react-router-dom";
+import { createVenueUrl } from "../../api";
+import Headers from "../../hooks/useHeader";
 
 const CreateVenueForm = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +13,7 @@ const CreateVenueForm = () => {
     description: "",
     media: "",
     price: 0,
-    maxGuests: 0,
+    maxGuests: 1,
     rating: 0,
     meta: {
       wifi: false,
@@ -31,11 +33,11 @@ const CreateVenueForm = () => {
   });
   const continentOptions = [
     "Asia",
+    "Europe",
     "Africa",
     "North America",
     "South America",
     "Antarctica",
-    "Europe",
     "Australia",
   ];
 
@@ -107,19 +109,11 @@ const CreateVenueForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const accessToken = localStorage.getItem("Token");
-      const response = await fetch(
-        "https://api.noroff.dev/api/v1/holidaze/venues",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify(formData),
-        },
-      );
-
+      const response = await fetch(createVenueUrl, {
+        method: "POST",
+        headers: Headers("application/json"),
+        body: JSON.stringify(formData),
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
