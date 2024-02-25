@@ -64,7 +64,13 @@ const CreateVenueForm = () => {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    if (type === "checkbox" && name.startsWith("meta.")) {
+    if (name === "maxGuests" && type === "number") {
+      const newValue = Math.max(1, parseInt(value));
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: newValue,
+      }));
+    } else if (type === "checkbox" && name.startsWith("meta.")) {
       const metaField = name.split(".")[1];
       setFormData((prevData) => ({
         ...prevData,
@@ -93,10 +99,14 @@ const CreateVenueForm = () => {
         },
       }));
     } else {
+      // Handle other regular fields
       if (name === "rating") {
+        // Check if rating exceeds 5
         const ratingValue = parseFloat(value);
         if (ratingValue > 5) {
           setError("Rating cannot exceed 5");
+          // Exit early if rating exceeds 5
+          return;
         } else {
           setError("");
         }
