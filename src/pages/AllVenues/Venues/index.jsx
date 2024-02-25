@@ -102,7 +102,9 @@ function Venues({ sortedVenues }) {
         </div>
       ))}
 
-      {sortedVenues.length === 0 && <p>No venues found.</p>}
+      {sortedVenues.length === 0 && (
+        <p className="dark:text-white">No venues found.</p>
+      )}
     </div>
   );
 }
