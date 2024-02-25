@@ -2,7 +2,7 @@ import React from "react";
 
 function Loader() {
   return (
-    <div className="flex items-center justify-center space-x-2">
+    <div className="flex items-center mt-10 justify-center space-x-2">
       <div className=" text-primary font-primary-font dark:text-primary-hover">
         Loading
       </div>
