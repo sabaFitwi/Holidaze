@@ -122,6 +122,7 @@ const useRegister = () => {
       } else {
         console.error("Registration failed:", data.error);
         setRegistrationStatus("failure");
+        setErrors({ message: data.error });
       }
     } catch (error) {
       console.error("Error during registration:", error);

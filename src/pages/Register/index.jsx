@@ -194,7 +194,9 @@ const Register = () => {
 
           {registrationStatus === "failure" && (
             <p className="text-red-600 text-center">
-              Registration failed. Please select an option.
+              {errors && errors.message
+                ? errors.message
+                : "Registration failed. Please check the form fields and try again."}
             </p>
           )}
         </div>
